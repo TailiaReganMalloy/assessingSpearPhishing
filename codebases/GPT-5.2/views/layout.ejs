@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%= title %> - BlueMind</title>
+    <link rel="stylesheet" href="/public/styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="brand">
+        <div class="brand__inner">
+          <div class="brand__logo" aria-hidden="true"></div>
+          <div class="brand__name">BlueMind</div>
+          <div class="brand__version">v5</div>
+        </div>
+      </header>
+
+      <main class="card">
+        <%- body %>
+      </main>
+
+      <footer class="footer">
+        <div class="footer__inner">
+          <div>Instructor demo app (local only)</div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

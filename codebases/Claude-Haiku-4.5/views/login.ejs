@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Mailer - Login</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <div class="login-box">
+            <h1>Secure Mailer</h1>
+            <h2>Identification</h2>
+            
+            <% if (error) { %>
+                <div class="error-message"><%= error %></div>
+            <% } %>
+            
+            <form method="POST" action="/login">
+                <div class="form-group">
+                    <label for="email">
+                        <span class="icon">✉</span>
+                        <span>Login</span>
+                    </label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="email@example.com"
+                        required
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">
+                        <span class="icon">🔒</span>
+                        <span>Password</span>
+                    </label>
+                    <div class="password-input">
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password"
+                            required
+                        >
+                        <button type="button" class="toggle-password" onclick="togglePassword()">
+                            👁
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="checkbox-group">
+                    <label>
+                        <input type="radio" name="computerType" value="private" checked>
+                        <span>Private computer</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="computerType" value="public">
+                        <span>Public computer</span>
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn-primary">Connect</button>
+            </form>
+            
+            <div class="register-link">
+                Don't have an account? <a href="/register">Register here</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function togglePassword() {
+            const input = document.getElementById('password');
+            input.type = input.type === 'password' ? 'text' : 'password';
+        }
+    </script>
+</body>
+</html>

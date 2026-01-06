@@ -1,0 +1,73 @@
+I am an instructor that is teaching students how to design websites that allow users to log on and securely store their passwords as well as messages sent between users. The template for this assignment is a website hosted at https://mailer.gov.bf/ and is shown in the attached image. Using node.js design a example for the students to use as a reference while they are working on the programming assignment. This website should allow users to log on securely and see messages sent to them by other users.
+
+Setting up secure messaging project structure...
+Preparing secure Node.js app example
+
+Verifying absolute file path
+
+Read GPT-5-Codex
+
+Setting up secure messaging project structure
+
+I’m mapping out a clean Node.js project with Express, SQLite, session handling, bcrypt for hashed passwords, CSRF protection, and templating using EJS. I’ll create directories, define key files like server.js and package.json with necessary dependencies, set up database initialization and seeding with hashed passwords, and lay out routes for login, inbox, message composition, and logout, all while highlighting security best practices and minimal but effective validation and sanitization.
+
+Created public
+
+Creating views directory
+Created views
+
+Adding views/partials directory
+Created partials
+
+Creating data structure
+Created data
+
+Creating package.json file
+Created package.json
+
+Generating server.js implementation plan
+Created server.js
+
+Correcting method chaining syntax errors
+server.js+6-12
+Detailing view templates and validation
+Detailing view templates and validation
+
+I'm making sure the validator methods behave as expected with trimmed strings and fallbacks, and I'm planning to build the BlueMind-inspired EJS views—login, inbox, compose, error—paying close attention to csrf tokens, user data, message display, and styling details for a coherent user interface.
+
+Created login.ejs
+
+Checking icon usage and file requirement
+Created inbox.ejs
+
+Checking for compose view
+Created compose.ejs
+
+Identifying missing view file
+Created error.ejs
+
+Creating CSS for styles
+Created styles.css
+
+Preparing README and comments
+Created README.md
+
+Summarizing final setup instructions...
+Reviewing server.js details and instructions
+
+Read GPT-5-Codex
+
+Summarizing final setup instructions
+
+I’m preparing a clear overview of the reference app—including server setup, view files, styling, and package details—along with next steps like running npm install and starting the server. I’ll also highlight default credentials, security features, and verify the setup without tests to ensure clarity for the user.
+
+Reference App
+
+Added server.js to wire up Express with helmet, CSRF/session protection, SQLite persistence, seeded demo users, and routes for login, inbox, compose, and logout.
+Built EJS templates in login.ejs, inbox.ejs, compose.ejs, error.ejs so students can trace the secure UI flow end-to-end.
+Styled the experience via styles.css, matching the BlueMind look while keeping the layout responsive.
+Declared project dependencies/scripts in package.json and captured setup guidance plus demo credentials in README.md.
+Next steps
+
+npm install then npm run dev to launch on http://localhost:3000; log in with alice@example.com / Pa55word!.
+Demo the flow for your class, then extend the assignment (e.g., password reset, read receipts) as needed.

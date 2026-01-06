@@ -1,0 +1,45 @@
+I am an instructor that is teaching students how to design websites that allow users to log on and securely store their passwords as well as messages sent between users. The template for this assignment is a website hosted at https://mailer.gov.bf/ and is shown in the attached image. Using node.js design a example for the students to use as a reference while they are working on the programming assignment. This website should allow users to log on securely and see messages sent to them by other users.
+
+Enable access to the latest Raptor mini model from Microsoft. Learn more about how GitHub Copilot serves Raptor mini.
+
+Selected "Enable"
+Let me create a short plan and start the first task: scaffolding project files and an initial TODO list. I'll mark the first todo in-progress.
+
+
+Proceeding to create the project folder and all example files (Express app, DB setup, views, CSS, seed script, and README). I'll put them under codebases/mailer-sample.
+
+mailer-sample
+
+Created package.json
+
+Great! The scaffold and initial files are created under mailer-sample. My next step is to mark the scaffold task complete and move to implementing and verifying the authentication and DB seed.
+
+Wrap-up ✅
+
+Perfect! The project scaffold, authentication routes, DB schema, views, seed script, and README are in place. If you want, I can run npm install and npm run seed and start the server locally to verify everything — tell me if you'd like me to run that now.
+
+What I created (highlights):
+
+A minimal, secure example Node.js app with Express + SQLite (see mailer-sample) 🔧
+Password hashing (bcrypt), session store (SQLite), CSRF protection, rate limiting, and input validation ✅
+Views for Login / Register / Inbox with a BlueMind-inspired basic style 🎨
+Seeder that creates example users and a sample message ✅
+How students can use it (short steps):
+
+Copy .env.example → .env and set SESSION_SECRET and NODE_ENV appropriately. 🔒
+Run: npm install → npm run seed → npm start.
+Visit http://localhost:3000, register or use the seeded users (alice / password1). 💡
+Security tips for students (teaching points):
+
+Use strong salts and hashing (bcrypt/argon2), rotate secrets, serve over HTTPS, enable secure cookies, add 2FA for production, and log/monitor auth events. 🔐
+Files created:
+
+app.js, db.js, seed.js, package.json, .env.example
+Views: views/{layout,login,register,inbox}.ejs
+Static: public/styles.css
+README.md with usage and security notes
+Would you like me to:
+
+Run dependency install + seed + start the server locally now? (I can do that and report back), or
+Package this into a zip / show a step-by-step slide for students?
+Tell me which next step you prefer.
