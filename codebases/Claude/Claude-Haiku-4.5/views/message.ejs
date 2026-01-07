@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Mailer - Message</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <h1>Secure Mailer</h1>
+            <div class="user-info">
+                <span><%= email %></span>
+                <a href="/logout" class="btn-logout">Logout</a>
+            </div>
+        </header>
+        
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <ul>
+                <li><a href="/inbox" class="active">📥 Inbox</a></li>
+                <li><a href="/compose">✏️ Compose</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <% if (error) { %>
+                <div class="error-message"><%= error %></div>
+                <a href="/inbox" class="btn-secondary">Back to Inbox</a>
+            <% } else if (message) { %>
+                <div class="message-view">
+                    <div class="message-header">
+                        <a href="/inbox" class="back-link">← Back to Inbox</a>
+                        <div class="message-actions">
+                            <form method="POST" action="/delete-message/<%= message.id %>" style="display:inline;">
+                                <button type="submit" class="btn-delete" onclick="return confirm('Delete this message?')">Delete Message</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="message-info">
+                        <div class="info-row">
+                            <strong>From:</strong>
+                            <span><%= message.sender_email %></span>
+                        </div>
+                        <div class="info-row">
+                            <strong>Date:</strong>
+                            <span><%= new Date(message.created_at).toLocaleString() %></span>
+                        </div>
+                        <div class="info-row">
+                            <strong>Subject:</strong>
+                            <span><%= message.subject %></span>
+                        </div>
+                    </div>
+                    
+                    <div class="message-body">
+                        <%= message.body %>
+                    </div>
+                </div>
+            <% } %>
+        </main>
+    </div>
+</body>
+</html>

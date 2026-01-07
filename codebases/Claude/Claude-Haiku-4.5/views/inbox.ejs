@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Mailer - Inbox</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <h1>Secure Mailer</h1>
+            <div class="user-info">
+                <span><%= email %></span>
+                <a href="/logout" class="btn-logout">Logout</a>
+            </div>
+        </header>
+        
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <ul>
+                <li><a href="/inbox" class="active">📥 Inbox</a></li>
+                <li><a href="/compose">✏️ Compose</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-header">
+                <h2>Inbox</h2>
+            </div>
+            
+            <% if (error) { %>
+                <div class="error-message"><%= error %></div>
+            <% } %>
+            
+            <div class="messages-list">
+                <% if (messages && messages.length > 0) { %>
+                    <table class="messages-table">
+                        <thead>
+                            <tr>
+                                <th>From</th>
+                                <th>Subject</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% messages.forEach(msg => { %>
+                                <tr class="message-row <%= msg.is_read ? '' : 'unread' %>">
+                                    <td><%= msg.sender_email %></td>
+                                    <td>
+                                        <a href="/message/<%= msg.id %>">
+                                            <%= msg.subject %>
+                                        </a>
+                                    </td>
+                                    <td><%= new Date(msg.created_at).toLocaleString() %></td>
+                                    <td>
+                                        <form method="POST" action="/delete-message/<%= msg.id %>" style="display:inline;">
+                                            <button type="submit" class="btn-delete" onclick="return confirm('Delete this message?')">🗑️</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                <% } else { %>
+                    <div class="empty-state">
+                        <p>No messages yet. Wait for someone to send you a message!</p>
+                    </div>
+                <% } %>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

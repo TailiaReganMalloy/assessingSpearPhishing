@@ -1,0 +1,24 @@
+<% layout('layout') -%>
+
+<section class="panel">
+  <div class="panel__header">
+    <h1 class="panel__title">Message</h1>
+    <div class="panel__actions">
+      <a class="linkbtn" href="/inbox">Back</a>
+      <a class="linkbtn" href="/compose">Compose</a>
+      <form method="post" action="/logout">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <button class="linkbtn" type="submit">Log out</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="meta">
+    <div><strong>From:</strong> <%= message.sender_email %></div>
+    <div><strong>To:</strong> <%= message.recipient_email %></div>
+    <div><strong>Received:</strong> <%= message.created_at %></div>
+    <div><strong>Subject:</strong> <%= message.subject %></div>
+  </div>
+
+  <div class="body"><%= message.body %></div>
+</section>

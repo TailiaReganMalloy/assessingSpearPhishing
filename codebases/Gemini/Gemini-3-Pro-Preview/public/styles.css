@@ -1,0 +1,190 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #051042; /* Deep blue background */
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 450px;
+}
+
+.logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.logo svg {
+    margin-right: 10px;
+}
+
+.logo .version {
+    font-size: 14px;
+    font-weight: normal;
+    margin-top: 8px;
+    margin-left: 4px;
+    color: #ccc;
+}
+
+.login-card {
+    background: white;
+    padding: 24px 32px; /* Top/Bottom padding adjusted */
+    border-radius: 4px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Red top border effect in image */
+.login-card::before {
+    content: '';
+    display: block;
+    height: 6px;
+    background-color: #fca5a5; /* Light red/pink strip */
+    margin: -24px -32px 24px -32px; /* Negate padding to stretch full width */
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    font-size: 22px;
+    color: #000;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+.form-group label {
+    flex: 0 0 100px;
+    font-weight: 500;
+    color: #444;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.form-group label .icon {
+    margin-right: 8px;
+    color: #666;
+}
+
+.form-group input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color: #555;
+    padding: 5px;
+}
+
+.password-input-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.eye-icon {
+    cursor: pointer;
+    color: #999;
+    font-size: 16px;
+}
+
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #555;
+}
+
+.radio-option input {
+    display: none; /* Hide default radio */
+}
+
+.radio-control {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    margin-right: 10px;
+    position: relative;
+}
+
+/* Custom Radio Styling */
+.radio-option input:checked + .radio-control {
+    border-color: #0088ff;
+    background-color: #0088ff;
+}
+
+.radio-option input:checked + .radio-control::after {
+    content: '✓'; /* Simple check representation, or just white dot */
+    position: absolute;
+    color: white;
+    font-size: 12px;
+    top: -1px;
+    left: 2px;
+}
+/* Actually image has check for blue, empty for red circle maybe? 
+   Let's stick to simple browser default or close approx.
+   The image shows a blue filled check for private, red ring for public.
+*/
+
+.auth-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #008cdb; /* Bright blue */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+    max-width: 200px;
+    display: block;
+    margin: 0 auto;
+}
+
+.auth-button:hover {
+    background-color: #0077ba;
+}
+
+.error-message {
+    background-color: #ffebee;
+    color: #c62828;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 14px;
+}

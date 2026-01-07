@@ -1,0 +1,234 @@
+# Secure Mailer - Requirements & Dependencies
+
+## System Requirements
+- Node.js 14.0.0 or higher
+- npm 6.0.0 or higher
+- macOS, Windows, or Linux
+
+## Node.js Packages
+
+All dependencies are listed in package.json and can be installed with:
+```bash
+npm install
+```
+
+### Core Dependencies
+
+#### Express.js (4.18.2)
+- **Purpose**: Web application framework
+- **Usage**: Building server routes and middleware
+- **Key Features**: 
+  - Routing system
+  - Middleware support
+  - Request/response handling
+
+#### Express-Session (1.17.3)
+- **Purpose**: Session management middleware
+- **Usage**: Maintaining user login state
+- **Key Features**:
+  - Server-side session storage
+  - Cookie-based session IDs
+  - Session expiration
+
+#### bcryptjs (2.4.3)
+- **Purpose**: Password hashing library
+- **Usage**: Securely hashing and comparing passwords
+- **Key Features**:
+  - Salted hashing
+  - Configurable work factor (10 rounds)
+  - Protection against rainbow tables
+
+#### SQLite3 (5.1.6)
+- **Purpose**: Lightweight SQL database
+- **Usage**: Storing users and messages
+- **Key Features**:
+  - File-based database (mailer.db)
+  - ACID compliance
+  - No server setup required
+
+#### EJS (3.1.8)
+- **Purpose**: Embedded JavaScript templating engine
+- **Usage**: Rendering HTML views with dynamic data
+- **Key Features**:
+  - Template interpolation
+  - Conditional rendering
+  - Template inheritance
+
+#### Body-Parser (1.20.2)
+- **Purpose**: Middleware for parsing request bodies
+- **Usage**: Processing form data and JSON
+- **Key Features**:
+  - URL-encoded form parsing
+  - JSON parsing
+  - Size limits
+
+#### Helmet (7.0.0)
+- **Purpose**: Security middleware
+- **Usage**: Setting secure HTTP headers
+- **Key Features**:
+  - XSS protection
+  - CSRF protection
+  - Clickjacking protection
+  - Content Security Policy
+
+#### Express-Validator (7.0.0)
+- **Purpose**: Input validation and sanitization
+- **Usage**: Validating user input
+- **Key Features**:
+  - Email validation
+  - String length validation
+  - Custom validators
+  - Sanitization
+
+## Installation Steps
+
+### 1. Navigate to Project Directory
+```bash
+cd Claude-Haiku-4.5
+```
+
+### 2. Install Dependencies
+```bash
+npm install
+```
+
+This will create a `node_modules` folder with all required packages.
+
+### 3. Verify Installation
+```bash
+npm list
+```
+
+You should see:
+```
+secure-mailer-app@1.0.0
+├── bcryptjs@2.4.3
+├── body-parser@1.20.2
+├── ejs@3.1.8
+├── express@4.18.2
+├── express-session@1.17.3
+├── express-validator@7.0.0
+├── helmet@7.0.0
+└── sqlite3@5.1.6
+```
+
+### 4. Start the Server
+```bash
+npm start
+```
+
+## Security Packages Explanation
+
+### Why bcryptjs?
+- **NEVER** use plain MD5, SHA1, or SHA256 for passwords
+- bcryptjs uses strong salting and multiple rounds
+- Intentionally slow to prevent brute force attacks
+- Example: 10 rounds = 1024 iterations
+
+### Why SQLite3?
+- Easy to use for educational purposes
+- No server setup required
+- Supports parameterized queries to prevent SQL injection
+- Sufficient for demonstration and small-scale applications
+
+### Why Helmet?
+- Automatically sets secure HTTP headers
+- Protection against common vulnerabilities
+- No configuration needed for basic security
+
+### Why Express-Validator?
+- Centralized input validation
+- Chain-based API for readable validation rules
+- Built-in sanitization functions
+- Clear error messages
+
+## Package.json Explained
+
+```json
+{
+  "name": "secure-mailer-app",
+  "version": "1.0.0",
+  "description": "A secure email/messaging application",
+  "main": "server.js",           // Entry point
+  "scripts": {
+    "start": "node server.js",   // Run: npm start
+    "dev": "node server.js"      // Run: npm run dev
+  },
+  "dependencies": {
+    "express": "^4.18.2",        // ^ means compatible versions
+    "bcryptjs": "^2.4.3",        // Will auto-update patch version
+    // ...
+  }
+}
+```
+
+## Troubleshooting Installation
+
+### "npm: command not found"
+**Solution**: Install Node.js from https://nodejs.org/
+
+### "Cannot find module 'express'"
+**Solution**: Run `npm install` in the project directory
+
+### "SQLite3 compilation error"
+**Solution**: 
+- On macOS: Install Xcode Command Line Tools: `xcode-select --install`
+- On Windows: Install Python and Microsoft Visual C++ Build Tools
+- On Linux: Install build-essential: `sudo apt-get install build-essential python3`
+
+### "Port 3000 is already in use"
+**Solution**: 
+- Change PORT in server.js, or
+- Kill the process: `lsof -ti:3000 | xargs kill -9`
+
+## Update Dependencies
+
+To check for outdated packages:
+```bash
+npm outdated
+```
+
+To update all packages:
+```bash
+npm update
+```
+
+⚠️ **Note**: Major version updates may require code changes. Test thoroughly.
+
+## Production Considerations
+
+For production deployment, consider:
+1. Using `npm ci` instead of `npm install`
+2. Set `NODE_ENV=production`
+3. Use a production database (PostgreSQL, MySQL)
+4. Use a process manager (PM2)
+5. Set up HTTPS with a reverse proxy (Nginx)
+6. Use environment variables for secrets
+7. Enable rate limiting
+8. Set up proper logging and monitoring
+
+## Additional Resources
+
+- **npm Registry**: https://www.npmjs.com/
+- **Node.js Documentation**: https://nodejs.org/docs/
+- **Package Vulnerabilities**: https://www.npmjs.com/advisories
+
+## Maintenance
+
+### Regular Updates
+Check for security updates:
+```bash
+npm audit
+```
+
+Fix vulnerabilities:
+```bash
+npm audit fix
+```
+
+### Clean Installation
+To start fresh (if you have issues):
+```bash
+rm -rf node_modules package-lock.json
+npm install
+```

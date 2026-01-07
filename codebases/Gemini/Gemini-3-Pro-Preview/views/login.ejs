@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind - Login</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <!-- Simple SVG Logo placeholder or just text -->
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00bfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+            <span>BlueMind</span>
+            <span class="version">v5</span>
+        </div>
+        
+        <div class="login-card">
+            <h1>Identification</h1>
+            
+            <% if (error) { %>
+                <div class="error-message"><%= error %></div>
+            <% } %>
+
+            <form action="/login" method="POST">
+                <div class="form-group">
+                    <label for="email"><span class="icon">✉️</span> Login</label>
+                    <input type="email" id="email" name="email" placeholder="email@bluemind.net" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password"><span class="icon">🔒</span> Password</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="password" name="password" placeholder="********" required>
+                        <span class="eye-icon">👁️</span>
+                    </div>
+                </div>
+
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="computer_type" value="private" checked>
+                        <span class="radio-control"></span>
+                        <span class="radio-label">Private computer</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="computer_type" value="public">
+                        <span class="radio-control"></span>
+                        <span class="radio-label">Public computer</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="auth-button">Connect</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

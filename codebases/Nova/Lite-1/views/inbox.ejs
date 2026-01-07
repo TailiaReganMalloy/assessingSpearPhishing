@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inbox</title>
+</head>
+<body>
+    <h1>Inbox</h1>
+    <form action="/messages/send" method="POST">
+        <input type="text" name="recipient" placeholder="Recipient" required>
+        <textarea name="content" placeholder="Message" required></textarea>
+        <button type="submit">Send</button>
+    </form>
+    <ul>
+        <% messages.forEach(message => { %>
+            <li>From: <%= message.sender.username %> - <%= message.content %></li>
+        <% }) %>
+    </ul>
+    <a href="/auth/logout">Logout</a>
+</body>
+</html>

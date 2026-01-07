@@ -1,0 +1,30 @@
+<% layout('layout') -%>
+
+<section class="panel">
+  <h1 class="panel__title">Create Account</h1>
+
+  <% if (error) { %>
+    <div class="alert" role="alert"><%= error %></div>
+  <% } %>
+
+  <form method="post" action="/register" class="form">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+    <label class="field">
+      <span class="field__label">Email</span>
+      <input class="field__input" type="email" name="email" autocomplete="username" placeholder="email@bluemind.net" required />
+    </label>
+
+    <label class="field">
+      <span class="field__label">Password</span>
+      <input class="field__input" type="password" name="password" autocomplete="new-password" placeholder="At least 10 chars" required />
+      <div class="hint">10+ chars, upper + lower + number</div>
+    </label>
+
+    <button class="btn" type="submit">Create</button>
+  </form>
+
+  <div class="muted">
+    Already have an account? <a href="/login">Log in</a>
+  </div>
+</section>
