@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind - Sent Messages</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="app-page">
+    <%- include('partials/header') %>
+
+    <div class="app-container">
+        <%- include('partials/sidebar') %>
+
+        <main class="main-content">
+            <div class="content-header">
+                <h1>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="header-icon">
+                        <line x1="22" y1="2" x2="11" y2="13"/>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                    </svg>
+                    Sent Messages
+                </h1>
+                <a href="/messages/compose" class="btn-compose">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 5v14M5 12h14"/>
+                    </svg>
+                    Compose
+                </a>
+            </div>
+
+            <div class="message-list">
+                <% if (messages.length === 0) { %>
+                    <div class="empty-state">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="empty-icon">
+                            <line x1="22" y1="2" x2="11" y2="13"/>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                        </svg>
+                        <h3>No sent messages</h3>
+                        <p>You haven't sent any messages yet.</p>
+                        <a href="/messages/compose" class="btn-primary">Send a Message</a>
+                    </div>
+                <% } else { %>
+                    <table class="messages-table">
+                        <thead>
+                            <tr>
+                                <th class="col-status"></th>
+                                <th class="col-sender">To</th>
+                                <th class="col-subject">Subject</th>
+                                <th class="col-date">Date</th>
+                                <th class="col-actions">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% messages.forEach(function(msg) { %>
+                                <tr class="read">
+                                    <td class="col-status">
+                                        <% if (msg.is_read) { %>
+                                            <span class="read-check" title="Read">✓</span>
+                                        <% } %>
+                                    </td>
+                                    <td class="col-sender">
+                                        <span class="sender-name"><%= msg.recipient_name %></span>
+                                        <span class="sender-email"><%= msg.recipient_email %></span>
+                                    </td>
+                                    <td class="col-subject">
+                                        <a href="/messages/view/<%= msg.id %>"><%= msg.subject %></a>
+                                    </td>
+                                    <td class="col-date">
+                                        <%= new Date(msg.created_at).toLocaleDateString('en-US', { 
+                                            month: 'short', 
+                                            day: 'numeric',
+                                            hour: '2-digit',
+                                            minute: '2-digit'
+                                        }) %>
+                                    </td>
+                                    <td class="col-actions">
+                                        <form action="/messages/delete/<%= msg.id %>" method="POST" class="delete-form">
+                                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                            <button type="submit" class="btn-delete" title="Delete" onclick="return confirm('Delete this message?')">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                                                </svg>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                <% } %>
+            </div>
+        </main>
+    </div>
+
+    <%- include('partials/footer') %>
+</body>
+</html>

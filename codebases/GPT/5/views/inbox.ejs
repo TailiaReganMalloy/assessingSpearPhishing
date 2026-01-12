@@ -1,0 +1,47 @@
+<% const errList = (errors || []).map(e => e.msg); %>
+<% const content = `
+  <div class=\"container\">
+    <div class=\"grid two\">
+      <section>
+        <h2>Inbox</h2>
+        <ul class=\"messages\">
+          <% if (!messages.length) { %>
+            <li class=\"muted\">No messages yet.</li>
+          <% } %>
+          <% messages.forEach(m => { %>
+            <li>
+              <div class=\"meta\"><strong><%= m.sender %></strong> · <%= new Date(m.created_at).toLocaleString() %></div>
+              <div class=\"text\"><%= m.text %></div>
+            </li>
+          <% }) %>
+        </ul>
+      </section>
+      <section>
+        <h2>Send a message</h2>
+        <% if (errList.length) { %>
+          <div class=\"alert\">
+            <ul>
+              <% errList.forEach(e => { %><li><%= e %></li><% }) %>
+            </ul>
+          </div>
+        <% } %>
+        <form method=\"post\" action=\"/messages\">
+          <input type=\"hidden\" name=\"_csrf\" value=\"<%= csrfToken %>\" />
+          <label>To</label>
+          <select name=\"to\" required>
+            <% users.forEach(u => { %>
+              <option value=\"<%= u.username %>\"><%= u.username %></option>
+            <% }) %>
+          </select>
+          <label>Message</label>
+          <textarea name=\"text\" rows=\"5\" maxlength=\"2000\" required></textarea>
+          <div class=\"row\" style=\"margin-top:6px\">
+            <button class=\"btn\" type=\"submit\">Send</button>
+          </div>
+        </form>
+        <p class=\"muted\">Messages are encrypted at rest using AES‑256‑GCM.</p>
+      </section>
+    </div>
+  </div>
+`; %>
+<%- include('layout', { title: 'Inbox', content }) %>

@@ -1,0 +1,29 @@
+<%- include('layout.ejs') -%>
+
+<div class="messages-container">
+    <h2>Your Messages</h2>
+    <% if (messages.length === 0) { %>
+        <p>You have no messages yet.</p>
+    <% } else { %>
+        <ul class="messages-list">
+            <% messages.forEach(message => { %>
+                <li class="message-item">
+                    <div class="message-header">
+                        <span class="sender">From: <%= message.sender.username %></span>
+                        <span class="date"><%= message.createdAt.toLocaleString() %></span>
+                    </div>
+                    <div class="message-content">
+                        <%= message.content %>
+                    </div>
+                    <div class="message-actions">
+                        <% if (!message.read) { %>
+                            <span class="unread-badge">Unread</span>
+                        <% } %>
+                        <button class="mark-read-btn">Mark as Read</button>
+                    </div>
+                </li>
+            <% }); %>
+        </ul>
+    <% } %>
+    <a href="/compose" class="compose-btn">Compose New Message</a>
+</div>

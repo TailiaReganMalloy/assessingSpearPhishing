@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureMail - Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="dashboard-container">
+    <nav class="navbar">
+        <h1>SecureMail</h1>
+        <div class="navbar-user">
+            <span>Welcome, <%= user.email %></span>
+            <a href="/logout">Logout</a>
+        </div>
+    </nav>
+
+    <div class="dashboard-content">
+        <div class="dashboard-header">
+            <h2>Your Messages</h2>
+            <a href="/compose" class="btn-compose">📝 Compose Message</a>
+        </div>
+
+        <!-- Inbox -->
+        <div class="message-section">
+            <h3>📥 Inbox</h3>
+            <div class="message-list">
+                <% if (messages.length === 0) { %>
+                    <div class="empty-state">
+                        <p>No messages in your inbox</p>
+                    </div>
+                <% } else { %>
+                    <% messages.forEach(message => { %>
+                        <div class="message-item <%= !message.is_read ? 'unread' : '' %>">
+                            <div class="message-info">
+                                <a href="/message/<%= message.id %>" class="message-subject">
+                                    <%= message.subject %>
+                                </a>
+                                <div class="message-meta">
+                                    From: <%= message.sender_email %>
+                                </div>
+                            </div>
+                            <div class="message-date">
+                                <%= new Date(message.created_at).toLocaleDateString() %>
+                            </div>
+                        </div>
+                    <% }); %>
+                <% } %>
+            </div>
+        </div>
+
+        <!-- Sent Messages -->
+        <div class="message-section">
+            <h3>📤 Sent Messages</h3>
+            <div class="message-list">
+                <% if (sentMessages.length === 0) { %>
+                    <div class="empty-state">
+                        <p>No sent messages</p>
+                    </div>
+                <% } else { %>
+                    <% sentMessages.forEach(message => { %>
+                        <div class="message-item">
+                            <div class="message-info">
+                                <a href="/message/<%= message.id %>" class="message-subject">
+                                    <%= message.subject %>
+                                </a>
+                                <div class="message-meta">
+                                    To: <%= message.recipient_email %>
+                                </div>
+                            </div>
+                            <div class="message-date">
+                                <%= new Date(message.created_at).toLocaleDateString() %>
+                            </div>
+                        </div>
+                    <% }); %>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <!-- Educational Comment for Students -->
+    <!-- 
+    Dashboard Security Considerations:
+    1. User session is validated before displaying any content
+    2. Only messages for the authenticated user are displayed
+    3. XSS prevention: EJS automatically escapes output with <%= %>
+    4. Logout link destroys session to prevent unauthorized access
+    5. Each message link includes ID that's validated on the server
+    6. Unread messages are visually distinguished for better UX
+    -->
+</body>
+</html>

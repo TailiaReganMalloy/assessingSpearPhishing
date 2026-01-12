@@ -1,0 +1,40 @@
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Dashboard - Secure Messaging App&lt;/title&gt;
+    &lt;style&gt;
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1, h2 { color: #007bff; }
+        a { margin-right: 10px; text-decoration: none; color: #007bff; }
+        ul { list-style-type: none; padding: 0; }
+        li { background: #f8f9fa; margin: 10px 0; padding: 10px; border-radius: 5px; border-left: 4px solid #007bff; }
+        .error { color: red; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Welcome, &lt;%= email %&gt;!&lt;/h1&gt;
+    &lt;p&gt;Computer type: &lt;%= computer %&gt;&lt;/p&gt;
+    &lt;a href="/send"&gt;Send a Message&lt;/a&gt;
+    &lt;a href="/logout"&gt;Logout&lt;/a&gt;
+    
+    &lt;h2&gt;Your Messages&lt;/h2&gt;
+    &lt;% if (typeof error !== 'undefined') { %&gt;
+        &lt;p class="error"&gt;&lt;%= error %&gt;&lt;/p&gt;
+    &lt;% } %&gt;
+    &lt;% if (messages.length === 0) { %&gt;
+        &lt;p&gt;No messages yet.&lt;/p&gt;
+    &lt;% } else { %&gt;
+        &lt;ul&gt;
+            &lt;% messages.forEach(function(msg) { %&gt;
+                &lt;li&gt;
+                    &lt;strong&gt;From: &lt;%= msg.from_email %&gt;&lt;/strong&gt;&lt;br&gt;
+                    &lt;%= msg.message %&gt;&lt;br&gt;
+                    &lt;small&gt;&lt;%= new Date(msg.timestamp).toLocaleString() %&gt;&lt;/small&gt;
+                &lt;/li&gt;
+            &lt;% }); %&gt;
+        &lt;/ul&gt;
+    &lt;% } %&gt;
+&lt;/body&gt;
+&lt;/html&gt;

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - SecureMail</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <style>
+    .dashboard {
+      max-width: 900px;
+      margin: 40px auto;
+      background: white;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    .messages {
+      margin-bottom: 30px;
+    }
+    .message {
+      background: #f5f5f5;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border-left: 4px solid #1976d2;
+    }
+    .send-form label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    .send-form input[type="email"],
+    .send-form textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+    }
+    .send-form textarea {
+      height: 120px;
+      resize: vertical;
+    }
+    .no-messages {
+      text-align: center;
+      color: #666;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <div class="header">
+      <h1>Welcome, <%= user.email %>!</h1>
+      <a href="/logout" style="color: #1976d2; text-decoration: none; font-weight: bold;">Logout</a>
+    </div>
+    <div class="messages">
+      <h3>Messages received:</h3>
+      <% if (messages.length === 0) { %>
+        <p class="no-messages">No messages yet. Send some to other users!</p>
+      <% } else { %>
+        <% messages.forEach(msg => { %>
+          <div class="message">
+            <strong>From:</strong> <%= msg.from_email %> <br>
+            <strong>Time:</strong> <%= new Date(msg.timestamp).toLocaleString() %> <br>
+            <em><%= msg.message %></em>
+          </div>
+        <% }); %>
+      <% } %>
+    </div>
+    <h3>Send a new message:</h3>
+    <form class="send-form" method="POST" action="/send">
+      <label for="to_email">To email:</label>
+      <input type="email" id="to_email" name="to_email" required placeholder="recipient@example.com">
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" required placeholder="Type your message here..."></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+</body>
+</html>

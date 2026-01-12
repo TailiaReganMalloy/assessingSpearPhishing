@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlueMind v5 - Login</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="login-page">
+  <div class="login-container">
+    <!-- BlueMind Logo and Version -->
+    <div class="logo-section">
+      <div class="logo">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 5 L35 15 L35 25 L20 35 L5 25 L5 15 Z" fill="#00A8E8"/>
+          <circle cx="20" cy="20" r="8" fill="#003D7A"/>
+          <path d="M20 12 L20 28 M12 20 L28 20" stroke="white" stroke-width="2"/>
+        </svg>
+      </div>
+      <h1 class="brand-name">BlueMind</h1>
+      <span class="version">v5</span>
+    </div>
+
+    <!-- Login Form -->
+    <div class="form-container">
+      <h2 class="form-title">Identification</h2>
+
+      <% if (error) { %>
+        <div class="error-message">
+          <%= error %>
+        </div>
+      <% } %>
+
+      <form action="/login" method="POST" class="login-form">
+        <!-- Email Field -->
+        <div class="form-group">
+          <label for="email">
+            <svg class="field-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 6L10 11L18 6M2 6V14C2 14.5304 2.21071 15.0391 2.58579 15.4142C2.96086 15.7893 3.46957 16 4 16H16C16.5304 16 17.0391 15.7893 17.4142 15.4142C17.7893 15.0391 18 14.5304 18 14V6M2 6C2 5.46957 2.21071 4.96086 2.58579 4.58579C2.96086 4.21071 3.46957 4 4 4H16C16.5304 4 17.0391 4.21071 17.4142 4.58579C17.7893 4.96086 18 5.46957 18 6Z" stroke="#666" stroke-width="1.5"/>
+            </svg>
+            Login
+          </label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            placeholder="email@bluemind.net"
+            required
+            autocomplete="email"
+          >
+        </div>
+
+        <!-- Password Field -->
+        <div class="form-group">
+          <label for="password">
+            <svg class="field-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 9V6C5 4.93913 5.42143 3.92172 6.17157 3.17157C6.92172 2.42143 7.93913 2 9 2H11C12.0609 2 13.0783 2.42143 13.8284 3.17157C14.5786 3.92172 15 4.93913 15 6V9M4 9H16C17.1046 9 18 9.89543 18 11V16C18 17.1046 17.1046 18 16 18H4C2.89543 18 2 17.1046 2 16V11C2 9.89543 2.89543 9 4 9Z" stroke="#666" stroke-width="1.5"/>
+            </svg>
+            Password
+          </label>
+          <div class="password-container">
+            <input 
+              type="password" 
+              id="password" 
+              name="password" 
+              placeholder="********"
+              required
+              autocomplete="current-password"
+            >
+            <button type="button" class="toggle-password" onclick="togglePassword()">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 6C8.34315 6 7 7.34315 7 9C7 10.6569 8.34315 12 10 12C11.6569 12 13 10.6569 13 9C13 7.34315 11.6569 6 10 6ZM10 6V4M10 12V14M17 9C17 9 14.3137 13 10 13C5.68629 13 3 9 3 9C3 9 5.68629 5 10 5C14.3137 5 17 9 17 9Z" stroke="#666" stroke-width="1.5"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Computer Type Selection -->
+        <div class="form-group computer-type">
+          <label class="radio-label">
+            <input 
+              type="radio" 
+              name="computerType" 
+              value="private"
+              checked
+            >
+            <span class="radio-custom"></span>
+            <span class="radio-text">Private computer</span>
+          </label>
+          <label class="radio-label">
+            <input 
+              type="radio" 
+              name="computerType" 
+              value="public"
+            >
+            <span class="radio-custom"></span>
+            <span class="radio-text">Public computer</span>
+          </label>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn-primary">Connect</button>
+      </form>
+
+      <!-- Additional Links -->
+      <div class="form-footer">
+        <p>Don't have an account? <a href="/register">Register here</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function togglePassword() {
+      const passwordInput = document.getElementById('password');
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SecureMail - Login</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+  <div class="login-container">
+    <div class="logo">📧 SecureMail VS</div>
+    <h2>Identification</h2>
+    <% if (typeof error !== 'undefined' && error) { %>
+      <div class="error"><%= error %></div>
+    <% } %>
+    <form method="POST" action="/login">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required placeholder="user@example.com">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required>
+      <div class="radio-group">
+        <label><input type="radio" name="computer" value="public" checked> Public computer</label>
+        <label><input type="radio" name="computer" value="private"> Private computer</label>
+      </div>
+      <button type="submit">Connect</button>
+    </form>
+    <a href="/register">Register new account</a>
+  </div>
+</body>
+</html>

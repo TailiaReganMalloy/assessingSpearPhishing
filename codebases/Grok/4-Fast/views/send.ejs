@@ -1,0 +1,35 @@
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Send Message - Secure Messaging App&lt;/title&gt;
+    &lt;style&gt;
+        body { font-family: Arial, sans-serif; max-width: 500px; margin: 50px auto; padding: 20px; }
+        h1 { color: #007bff; text-align: center; }
+        label { display: block; margin: 10px 0 5px; }
+        input[type="email"], textarea { width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box; }
+        textarea { height: 100px; resize: vertical; }
+        button { background-color: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; width: 100%; }
+        button:hover { background-color: #0056b3; }
+        .error { color: red; text-align: center; }
+        a { text-decoration: none; color: #007bff; display: block; text-align: center; margin-top: 10px; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Send a Message&lt;/h1&gt;
+    &lt;a href="/dashboard"&gt;Back to Dashboard&lt;/a&gt;
+    &lt;% if (typeof error !== 'undefined') { %&gt;
+        &lt;p class="error"&gt;&lt;%= error %&gt;&lt;/p&gt;
+    &lt;% } %&gt;
+    &lt;form method="POST" action="/send"&gt;
+        &lt;label for="to_email"&gt;To Email:&lt;/label&gt;
+        &lt;input type="email" id="to_email" name="to_email" required placeholder="recipient@example.com"&gt;
+        
+        &lt;label for="message"&gt;Message:&lt;/label&gt;
+        &lt;textarea id="message" name="message" required placeholder="Enter your message here..."&gt;&lt;/textarea&gt;
+        
+        &lt;button type="submit"&gt;Send Message&lt;/button&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;

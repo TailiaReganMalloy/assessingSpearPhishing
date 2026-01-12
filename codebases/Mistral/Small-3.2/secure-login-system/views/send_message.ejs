@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Send Message - BlueMind</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <% include partials/header %>
+
+    <div class="messages-container">
+      <div class="sidebar">
+        <h3>Messages</h3>
+        <a href="/messages" class="btn-back">Back to Messages</a>
+      </div>
+
+      <div class="send-message-form">
+        <h2>Send Message</h2>
+
+        <% if (message && message.length > 0) { %>
+          <div class="alert alert-danger">
+            <%= message %>
+          </div>
+        <% } %>
+
+        <form action="/messages/send" method="POST">
+          <div class="form-group">
+            <label for="recipientEmail">Recipient Email</label>
+            <input type="email" id="recipientEmail" name="recipientEmail" required>
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" required>
+          </div>
+
+          <div class="form-group">
+            <label for="content">Message</label>
+            <textarea id="content" name="content" rows="10" required></textarea>
+          </div>
+
+          <button type="submit" class="btn-send">Send Message</button>
+        </form>
+      </div>
+    </div>
+
+    <% include partials/footer %>
+  </div>
+
+  <script src="/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureMail - Login</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <h1>
+                <div class="logo-icon"></div>
+                SecureMail
+            </h1>
+        </div>
+
+        <h2 class="form-title">Identification</h2>
+
+        <% if (error) { %>
+            <div class="alert alert-error">
+                <%= error %>
+            </div>
+        <% } %>
+
+        <% if (success) { %>
+            <div class="alert alert-success">
+                <%= success %>
+            </div>
+        <% } %>
+
+        <form action="/login" method="POST" class="login-form">
+            <div class="form-group">
+                <label for="email">📧 Login</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    placeholder="email@securemmail.net"
+                    required
+                    autocomplete="email"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">🔒 Password</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    placeholder="••••••••"
+                    required
+                    autocomplete="current-password"
+                >
+            </div>
+
+            <div class="computer-type">
+                <div class="radio-option">
+                    <input 
+                        type="radio" 
+                        id="private" 
+                        name="computer_type" 
+                        value="private" 
+                        checked
+                    >
+                    <label for="private">☑️ Private computer</label>
+                </div>
+                <div class="radio-option">
+                    <input 
+                        type="radio" 
+                        id="public" 
+                        name="computer_type" 
+                        value="public"
+                    >
+                    <label for="public">⭕ Public computer</label>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Connect</button>
+        </form>
+
+        <div class="form-links">
+            <p>Don't have an account? <a href="/register">Register here</a></p>
+        </div>
+    </div>
+
+    <!-- Educational Comment for Students -->
+    <!-- 
+    Security Notes:
+    1. Form uses POST method to avoid exposing credentials in URL
+    2. Input type="password" hides password entry
+    3. autocomplete attributes help browsers manage credentials securely
+    4. Server-side validation is crucial (never trust client-side only)
+    5. HTTPS is required in production to encrypt data in transit
+    -->
+</body>
+</html>

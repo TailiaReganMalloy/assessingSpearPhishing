@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5</title>
+    <style>
+        body {
+            background-color: #1a1d23;
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            background-color: #2f4f7f;
+            padding: 1em;
+            text-align: center;
+        }
+        .login-panel {
+            background-color: #ffffff;
+            padding: 2em;
+            border: 1px solid #cccccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin: 0 auto;
+        }
+        .login-panel h2 {
+            color: #333333;
+            margin-bottom: 1em;
+        }
+        .login-panel input {
+            padding: 1em;
+            margin-bottom: 1em;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+        }
+        .login-panel button {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 1em 2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .login-panel button:hover {
+            background-color: #0069d9;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="logo.png" alt="BlueMind Logo">
+        <h1>BlueMind</h1>
+    </div>
+    <div class="login-panel">
+        <h2>Identification</h2>
+        <input type="text" placeholder="Login" required>
+        <input type="password" placeholder="Password" required>
+        <input type="radio" id="private" name="computer" value="private" checked>
+        <label for="private">Private computer</label>
+        <input type="radio" id="public" name="computer" value="public">
+        <label for="public">Public computer</label>
+        <button>Connect</button>
+    </div>
+</body>
+</html>

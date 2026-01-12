@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %> · Secure Messages Demo</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand">Secure<span>Box</span></div>
+      <nav>
+        <% if (currentUser) { %>
+          <span class="user">Signed in as <strong><%= currentUser.username %></strong></span>
+          <form class="inline" method="post" action="/logout">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+            <button class="link" type="submit">Logout</button>
+          </form>
+        <% } %>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <%- body || '' %>
+    <%- typeof content !== 'undefined' ? content : '' %>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">Example app for teaching secure auth & messaging.</div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,1207 @@
+/**
+ * BlueMind Secure Messaging - Styles
+ * Educational Example demonstrating modern UI design
+ */
+
+/* =============================================================================
+   CSS Variables & Reset
+   ============================================================================= */
+
+:root {
+    --primary-blue: #00A3E0;
+    --primary-dark: #0077B6;
+    --bg-dark: #1a1f3c;
+    --bg-darker: #141729;
+    --card-bg: #ffffff;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --text-light: #999999;
+    --border-color: #e0e0e0;
+    --error-red: #e74c3c;
+    --error-bg: #fdeaea;
+    --success-green: #27ae60;
+    --success-bg: #e8f8f0;
+    --warning-orange: #f39c12;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 6px 30px rgba(0, 0, 0, 0.15);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background-color: var(--bg-dark);
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-blue);
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* =============================================================================
+   Login Page
+   ============================================================================= */
+
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+    padding: 20px;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 450px;
+}
+
+/* Logo Section */
+.logo-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    width: 50px;
+    height: 50px;
+}
+
+.logo-text {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--primary-blue);
+    letter-spacing: -0.5px;
+}
+
+.version {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* Login Card */
+.login-card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 40px;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.login-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--error-red) 0%, var(--error-red) 100%);
+}
+
+.form-title {
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    color: var(--text-primary);
+    margin-bottom: 30px;
+}
+
+/* Form Elements */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    padding-left: 30px;
+}
+
+.input-icon {
+    position: absolute;
+    left: 0;
+    top: 28px;
+    width: 20px;
+    height: 20px;
+    color: var(--text-light);
+}
+
+.input-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 12px 15px 12px 30px;
+    font-size: 16px;
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+    background: transparent;
+    transition: var(--transition);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-bottom-color: var(--primary-blue);
+}
+
+.form-group input::placeholder {
+    color: var(--text-light);
+}
+
+/* Password Input with Toggle */
+.password-input {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    color: var(--text-light);
+    transition: var(--transition);
+}
+
+.toggle-password:hover {
+    color: var(--text-secondary);
+}
+
+.eye-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Radio Options */
+.computer-type {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-secondary);
+    padding-left: 30px;
+}
+
+.radio-option input[type="radio"] {
+    display: none;
+}
+
+.radio-custom {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--primary-blue);
+    border-radius: 50%;
+    position: relative;
+    transition: var(--transition);
+}
+
+.radio-custom.public {
+    border-color: var(--error-red);
+}
+
+.radio-option input[type="radio"]:checked + .radio-custom::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background: var(--primary-blue);
+    border-radius: 50%;
+}
+
+.radio-option input[type="radio"]:checked + .radio-custom.public::after {
+    background: var(--error-red);
+}
+
+/* Connect Button */
+.btn-connect {
+    width: 100%;
+    padding: 14px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    background: var(--primary-blue);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 10px;
+}
+
+.btn-connect:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 163, 224, 0.3);
+}
+
+.btn-connect:active {
+    transform: translateY(0);
+}
+
+.btn-danger {
+    background: var(--error-red);
+}
+
+.btn-danger:hover {
+    background: #c0392b;
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+}
+
+/* Error & Success Banners */
+.error-banner {
+    background: var(--error-bg);
+    color: var(--error-red);
+    padding: 12px 15px;
+    border-radius: 6px;
+    font-size: 14px;
+    margin-bottom: 20px;
+    border-left: 4px solid var(--error-red);
+}
+
+.success-banner {
+    background: var(--success-bg);
+    color: var(--success-green);
+    padding: 12px 15px;
+    border-radius: 6px;
+    font-size: 14px;
+    margin-bottom: 20px;
+    border-left: 4px solid var(--success-green);
+}
+
+/* Register Link */
+.register-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.register-link a {
+    color: var(--primary-blue);
+    font-weight: 500;
+}
+
+/* Password Requirements */
+.password-requirements {
+    font-size: 12px;
+    color: var(--text-light);
+    padding-left: 30px;
+    margin-top: -10px;
+}
+
+.password-requirements ul {
+    margin-top: 5px;
+    padding-left: 20px;
+}
+
+.password-requirements li {
+    margin-bottom: 3px;
+}
+
+/* Educational Note */
+.edu-note {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 30px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 13px;
+}
+
+.edu-note strong {
+    display: block;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.edu-note ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.edu-note li {
+    margin-bottom: 5px;
+}
+
+/* =============================================================================
+   App Pages (Inbox, Compose, etc.)
+   ============================================================================= */
+
+.app-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #f5f7fa;
+}
+
+/* App Header */
+.app-header {
+    background: var(--bg-dark);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.logo-icon-small {
+    width: 35px;
+    height: 35px;
+}
+
+.logo-text-small {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--primary-blue);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.user-info {
+    text-align: right;
+}
+
+.user-name {
+    display: block;
+    color: white;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.user-email {
+    display: block;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 12px;
+}
+
+.logout-form {
+    margin: 0;
+}
+
+.btn-logout {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-logout:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.btn-logout svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* App Container */
+.app-container {
+    display: flex;
+    flex: 1;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background: white;
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0 15px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    color: var(--text-secondary);
+    border-radius: 8px;
+    transition: var(--transition);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.nav-item:hover {
+    background: #f5f7fa;
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+.nav-item.active {
+    background: rgba(0, 163, 224, 0.1);
+    color: var(--primary-blue);
+}
+
+.nav-item svg {
+    width: 20px;
+    height: 20px;
+}
+
+.nav-item.compose-btn {
+    background: var(--primary-blue);
+    color: white;
+    margin-bottom: 20px;
+}
+
+.nav-item.compose-btn:hover {
+    background: var(--primary-dark);
+    color: white;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    padding: 20px 15px;
+    border-top: 1px solid var(--border-color);
+}
+
+.edu-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-light);
+}
+
+.edu-badge svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.content-header h1 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.header-icon {
+    width: 28px;
+    height: 28px;
+    color: var(--primary-blue);
+}
+
+.unread-badge {
+    background: var(--error-red);
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-left: 5px;
+}
+
+.btn-compose {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--primary-blue);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.btn-compose:hover {
+    background: var(--primary-dark);
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+.btn-compose svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* Message List */
+.message-list {
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.messages-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.messages-table th {
+    text-align: left;
+    padding: 15px 20px;
+    background: #f8f9fa;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.messages-table td {
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+}
+
+.messages-table tr:last-child td {
+    border-bottom: none;
+}
+
+.messages-table tr.unread {
+    background: rgba(0, 163, 224, 0.03);
+}
+
+.messages-table tr.unread .col-subject a {
+    font-weight: 600;
+}
+
+.messages-table tr:hover {
+    background: #f8f9fa;
+}
+
+.col-status {
+    width: 30px;
+    text-align: center;
+}
+
+.unread-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: var(--primary-blue);
+    border-radius: 50%;
+}
+
+.read-check {
+    color: var(--success-green);
+    font-size: 14px;
+}
+
+.col-sender {
+    width: 200px;
+}
+
+.sender-name {
+    display: block;
+    font-weight: 500;
+    color: var(--text-primary);
+    font-size: 14px;
+}
+
+.sender-email {
+    display: block;
+    font-size: 12px;
+    color: var(--text-light);
+}
+
+.col-subject a {
+    color: var(--text-primary);
+    font-size: 14px;
+}
+
+.col-subject a:hover {
+    color: var(--primary-blue);
+}
+
+.col-date {
+    width: 150px;
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.col-actions {
+    width: 60px;
+    text-align: center;
+}
+
+.delete-form {
+    margin: 0;
+    display: inline;
+}
+
+.btn-delete {
+    background: none;
+    border: none;
+    color: var(--text-light);
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+.btn-delete:hover {
+    color: var(--error-red);
+    background: var(--error-bg);
+}
+
+.btn-delete svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.empty-icon {
+    width: 80px;
+    height: 80px;
+    color: var(--text-light);
+    margin-bottom: 20px;
+}
+
+.empty-state h3 {
+    font-size: 20px;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+.empty-state p {
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    display: inline-block;
+    background: var(--primary-blue);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    text-decoration: none;
+}
+
+.btn-secondary {
+    display: inline-block;
+    background: transparent;
+    color: var(--primary-blue);
+    padding: 12px 24px;
+    border-radius: 6px;
+    border: 1px solid var(--primary-blue);
+    font-weight: 500;
+    transition: var(--transition);
+    margin-left: 10px;
+}
+
+.btn-secondary:hover {
+    background: rgba(0, 163, 224, 0.1);
+    text-decoration: none;
+}
+
+/* =============================================================================
+   Compose Page
+   ============================================================================= */
+
+.compose-container {
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 30px;
+}
+
+.compose-form {
+    max-width: 700px;
+}
+
+.compose-form .form-group {
+    margin-bottom: 20px;
+}
+
+.compose-form label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    padding-left: 0;
+}
+
+.compose-form input,
+.compose-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    transition: var(--transition);
+    font-family: inherit;
+}
+
+.compose-form input:focus,
+.compose-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(0, 163, 224, 0.1);
+}
+
+.compose-form textarea {
+    resize: vertical;
+    min-height: 200px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.btn-send {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--primary-blue);
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-send:hover {
+    background: var(--primary-dark);
+}
+
+.btn-send svg {
+    width: 18px;
+    height: 18px;
+}
+
+.btn-cancel {
+    display: inline-block;
+    background: transparent;
+    color: var(--text-secondary);
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.btn-cancel:hover {
+    background: #f5f7fa;
+    text-decoration: none;
+}
+
+.compose-note {
+    margin-top: 30px;
+    background: #f8f9fa;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+}
+
+.compose-note strong {
+    color: var(--text-primary);
+}
+
+/* =============================================================================
+   Message View
+   ============================================================================= */
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+    font-size: 14px;
+    transition: var(--transition);
+}
+
+.back-link:hover {
+    color: var(--primary-blue);
+    text-decoration: none;
+}
+
+.back-link svg {
+    width: 18px;
+    height: 18px;
+}
+
+.message-view {
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.message-header {
+    padding: 30px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.message-subject {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+}
+
+.message-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.meta-row {
+    display: flex;
+    font-size: 14px;
+}
+
+.meta-label {
+    width: 60px;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.meta-value {
+    color: var(--text-primary);
+}
+
+.meta-value strong {
+    font-weight: 500;
+}
+
+.message-body {
+    padding: 30px;
+    min-height: 200px;
+}
+
+.message-body pre {
+    font-family: inherit;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--text-primary);
+}
+
+.message-actions {
+    padding: 20px 30px;
+    background: #f8f9fa;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    gap: 15px;
+}
+
+.btn-reply {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--primary-blue);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.btn-reply:hover {
+    background: var(--primary-dark);
+    text-decoration: none;
+}
+
+.btn-reply svg {
+    width: 18px;
+    height: 18px;
+}
+
+.delete-form.inline {
+    display: inline;
+}
+
+.btn-delete-msg {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--error-red);
+    padding: 10px 20px;
+    border: 1px solid var(--error-red);
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-delete-msg:hover {
+    background: var(--error-bg);
+}
+
+.btn-delete-msg svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* =============================================================================
+   Error Page
+   ============================================================================= */
+
+.error-card {
+    text-align: center;
+}
+
+.error-content {
+    padding: 20px 0;
+}
+
+.error-icon {
+    width: 60px;
+    height: 60px;
+    color: var(--warning-orange);
+    margin-bottom: 20px;
+}
+
+.error-card h1 {
+    font-size: 28px;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+.error-message {
+    color: var(--text-secondary);
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.error-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Logout Page */
+.logout-message {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-bottom: 25px;
+}
+
+.logout-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.btn-cancel-full {
+    display: block;
+    text-align: center;
+    padding: 14px 30px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    background: #f5f7fa;
+    border-radius: 6px;
+    transition: var(--transition);
+}
+
+.btn-cancel-full:hover {
+    background: #e9ecef;
+    text-decoration: none;
+}
+
+/* =============================================================================
+   App Footer
+   ============================================================================= */
+
+.app-footer {
+    background: var(--bg-dark);
+    color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+    padding: 20px;
+    font-size: 13px;
+}
+
+.security-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 8px;
+    font-size: 12px;
+}
+
+.lock-icon {
+    width: 14px;
+    height: 14px;
+}
+
+/* =============================================================================
+   Responsive Design
+   ============================================================================= */
+
+@media (max-width: 768px) {
+    .app-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 15px;
+    }
+
+    .sidebar-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 0;
+    }
+
+    .nav-item {
+        padding: 10px 15px;
+    }
+
+    .nav-item.compose-btn {
+        margin-bottom: 0;
+    }
+
+    .sidebar-footer {
+        display: none;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .content-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    .messages-table {
+        font-size: 13px;
+    }
+
+    .col-sender,
+    .col-date {
+        display: none;
+    }
+
+    .app-header {
+        padding: 15px;
+    }
+
+    .header-right {
+        gap: 10px;
+    }
+
+    .user-info {
+        display: none;
+    }
+
+    .message-header,
+    .message-body,
+    .message-actions {
+        padding: 20px;
+    }
+}

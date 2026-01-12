@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind - Compose Message</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="app-page">
+    <%- include('partials/header') %>
+
+    <div class="app-container">
+        <%- include('partials/sidebar') %>
+
+        <main class="main-content">
+            <div class="content-header">
+                <h1>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="header-icon">
+                        <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
+                        <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                    </svg>
+                    Compose Message
+                </h1>
+            </div>
+
+            <div class="compose-container">
+                <% if (error) { %>
+                    <div class="error-banner"><%= error %></div>
+                <% } %>
+                <% if (success) { %>
+                    <div class="success-banner"><%= success %></div>
+                <% } %>
+
+                <form action="/messages/send" method="POST" class="compose-form">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    
+                    <div class="form-group">
+                        <label for="recipient">To:</label>
+                        <input 
+                            type="email" 
+                            id="recipient" 
+                            name="recipient" 
+                            placeholder="recipient@bluemind.net"
+                            value="<%= replyTo %>"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject:</label>
+                        <input 
+                            type="text" 
+                            id="subject" 
+                            name="subject" 
+                            placeholder="Enter subject"
+                            value="<%= subject %>"
+                            required
+                            maxlength="200"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="body">Message:</label>
+                        <textarea 
+                            id="body" 
+                            name="body" 
+                            placeholder="Write your message here..."
+                            required
+                            rows="10"
+                            maxlength="10000"
+                        ></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-send">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="22" y1="2" x2="11" y2="13"/>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                            </svg>
+                            Send Message
+                        </button>
+                        <a href="/inbox" class="btn-cancel">Cancel</a>
+                    </div>
+                </form>
+
+                <!-- Demo users hint -->
+                <div class="edu-note compose-note">
+                    <strong>📧 Demo Recipients:</strong>
+                    <ul>
+                        <li>alice@bluemind.net</li>
+                        <li>bob@bluemind.net</li>
+                        <li>charlie@bluemind.net</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <%- include('partials/footer') %>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BlueMind - Login</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <!-- Logo Section -->
+        <div class="logo-section">
+            <div class="logo">
+                <svg class="logo-icon" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M30 5L52 17.5V42.5L30 55L8 42.5V17.5L30 5Z" stroke="#00A3E0" stroke-width="2" fill="none"/>
+                    <path d="M30 15L42 22V36L30 43L18 36V22L30 15Z" stroke="#00A3E0" stroke-width="2" fill="none"/>
+                    <path d="M30 25L36 28.5V35.5L30 39L24 35.5V28.5L30 25Z" fill="#00A3E0"/>
+                </svg>
+                <span class="logo-text">BlueMind</span>
+            </div>
+            <div class="version">v5</div>
+        </div>
+
+        <!-- Login Form -->
+        <div class="login-card">
+            <% if (error) { %>
+                <div class="error-banner"><%= error %></div>
+            <% } %>
+            
+            <h1 class="form-title">Identification</h1>
+            
+            <form action="/auth/login" method="POST" class="login-form">
+                <!-- CSRF Token - Hidden field to prevent cross-site request forgery -->
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                
+                <div class="form-group">
+                    <div class="input-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="4" width="20" height="16" rx="2"/>
+                            <path d="M22 6L12 13L2 6"/>
+                        </svg>
+                    </div>
+                    <label for="email">Login</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="email@bluemind.net"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <div class="input-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2"/>
+                            <circle cx="12" cy="16" r="1"/>
+                            <path d="M7 11V7a5 5 0 0110 0v4"/>
+                        </svg>
+                    </div>
+                    <label for="password">Password</label>
+                    <div class="password-input">
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            placeholder="••••••••"
+                            autocomplete="current-password"
+                            required
+                        >
+                        <button type="button" class="toggle-password" onclick="togglePassword()">
+                            <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="computer-type">
+                    <label class="radio-option">
+                        <input type="radio" name="computerType" value="private" checked>
+                        <span class="radio-custom"></span>
+                        Private computer
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="computerType" value="public">
+                        <span class="radio-custom public"></span>
+                        Public computer
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-connect">Connect</button>
+            </form>
+
+            <div class="register-link">
+                <p>Don't have an account? <a href="/auth/register">Register here</a></p>
+            </div>
+        </div>
+
+        <!-- Educational Note -->
+        <div class="edu-note">
+            <strong>🔒 Security Features Demonstrated:</strong>
+            <ul>
+                <li>Passwords hashed with bcrypt (never stored in plain text)</li>
+                <li>CSRF token protection against cross-site request forgery</li>
+                <li>Rate limiting to prevent brute force attacks</li>
+                <li>Account lockout after failed attempts</li>
+                <li>Secure session cookies (httpOnly, sameSite, secure)</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+        }
+    </script>
+</body>
+</html>

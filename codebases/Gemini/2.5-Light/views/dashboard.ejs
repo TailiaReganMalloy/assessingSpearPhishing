@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }
+        .container { background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h1, h2 { color: #333; }
+        .messages { margin-top: 20px; }
+        .message { border: 1px solid #eee; padding: 10px; margin-bottom: 10px; border-radius: 4px; }
+        .message strong { color: #007bff; }
+        .send-message-form { margin-top: 20px; }
+        .send-message-form input[type="text"],
+        .send-message-form textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .send-message-form button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .send-message-form button:hover { background-color: #218838; }
+        .logout-button {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+        .logout-button:hover { background-color: #c82333; }
+        .user-list { margin-top: 20px; }
+        .user-list select { padding: 8px; border-radius: 4px; border: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dashboard</h1>
+        <p>Welcome, <%= user.username %>!</p>
+        <a href="/logout" class="logout-button">Logout</a>
+
+        <div class="messages">
+            <h2>Your Messages</h2>
+            <% if (messages.length > 0) { %>
+                <% messages.forEach(message => { %>
+                    <div class="message">
+                        <strong><%= message.sender.username %>:</strong>
+                        <p><%= message.content %></p>
+                        <small><%= new Date(message.timestamp).toLocaleString() %></small>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <p>You have no new messages.</p>
+            <% } %>
+        </div>
+
+        <div class="send-message-form">
+            <h2>Send a Message</h2>
+            <form action="/send-message" method="POST">
+                <div class="user-list">
+                    <label for="receiver">To:</label>
+                    <select id="receiver" name="receiverUsername" required>
+                        <option value="">--Select User--</option>
+                        <% users.forEach(user => { %>
+                            <option value="<%= user.username %>"><%= user.username %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                <textarea id="content" name="content" rows="4" placeholder="Enter your message..." required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

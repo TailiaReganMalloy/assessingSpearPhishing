@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Identification</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <!-- Mock BlueMind logo using container and text -->
+            <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 5L10 25V75L50 95L90 75V25L50 5Z" stroke="white" stroke-width="8"/>
+                    <path d="M50 30L35 40V60L50 70L65 60V40L50 30Z" stroke="white" stroke-width="4"/>
+                </svg>
+                <h1 style="margin: 0; font-size: 42px; font-weight: normal;">BlueMind</h1>
+            </div>
+            <span>v5</span>
+        </div>
+        <div class="login-card">
+            <h2>Identification</h2>
+            <form action="/login" method="POST">
+                <div class="form-group">
+                    <i class="fa-regular fa-envelope"></i>
+                    <label>Login</label>
+                    <input type="text" name="username" placeholder="email@bluemind.net" required>
+                </div>
+                <div class="form-group">
+                    <i class="fa-solid fa-lock"></i>
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="********" required>
+                    <i class="fa-regular fa-eye eye-icon"></i>
+                </div>
+                
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="computer_type" value="private" checked>
+                        <span>Private computer</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="computer_type" value="public">
+                        <span>Public computer</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-connect">Connect</button>
+            </form>
+            <p style="margin-top: 20px; font-size: 14px; color: #666;">Don't have an account? <a href="/register" style="color: #0091ff; text-decoration: none;">Register here</a></p>
+        </div>
+    </div>
+</body>
+</html>

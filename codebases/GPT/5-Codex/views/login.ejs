@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlueMind Secure Inbox</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="page page--login">
+  <header class="brand">
+    <div class="brand__icon" aria-hidden="true"></div>
+    <div class="brand__name">BlueMind</div>
+    <div class="brand__version">v5</div>
+  </header>
+
+  <main class="auth-card" aria-labelledby="auth-title">
+    <div class="auth-card__header"></div>
+    <div class="auth-card__body">
+      <h1 id="auth-title">Identification</h1>
+      <% if (error) { %>
+        <p class="auth-card__error" role="alert"><%= error %></p>
+      <% } %>
+      <form action="/login" method="POST" class="form">
+        <label for="email">Login</label>
+        <div class="form__input-group">
+          <span class="form__icon" aria-hidden="true">@</span>
+          <input id="email" name="email" type="email" placeholder="email@bluemind.net" required autocomplete="username">
+        </div>
+
+        <label for="password">Password</label>
+        <div class="form__input-group">
+          <span class="form__icon" aria-hidden="true">*</span>
+          <input id="password" name="password" type="password" placeholder="********" required autocomplete="current-password">
+        </div>
+
+        <fieldset class="radio-group">
+          <legend>Device</legend>
+          <label class="radio-option">
+            <input type="radio" name="device" value="private" checked>
+            <span>Private computer</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="device" value="public">
+            <span>Public computer</span>
+          </label>
+        </fieldset>
+
+        <button type="submit" class="button">Connect</button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>

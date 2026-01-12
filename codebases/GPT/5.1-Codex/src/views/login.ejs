@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body class="page page--login">
+    <div class="brandmark">
+      <div class="brandmark__icon">
+        <span class="hex"></span>
+      </div>
+      <div>
+        <p class="brandmark__title">BlueShell</p>
+        <p class="brandmark__tag">vault</p>
+      </div>
+    </div>
+
+    <main class="login-panel" aria-labelledby="identification-heading">
+      <div class="login-panel__header"></div>
+      <section class="login-panel__body">
+        <h1 id="identification-heading">Identification</h1>
+
+        <% if (notice) { %>
+          <div class="alert alert--info" role="status"><%= notice %></div>
+        <% } %>
+
+        <% if (errors && errors.length) { %>
+          <div class="alert alert--danger" role="alert">
+            <ul>
+              <% errors.forEach((error) => { %>
+                <li><%= error.msg %></li>
+              <% }) %>
+            </ul>
+          </div>
+        <% } %>
+
+        <form method="POST" action="/login" class="login-form">
+          <label class="input-label" for="email">Login</label>
+          <div class="input-field">
+            <span class="input-field__icon" aria-hidden="true">@</span>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              placeholder="email@blueshell.local"
+              value="<%= formValues && formValues.email ? formValues.email : '' %>"
+              required
+              autocomplete="username"
+            />
+          </div>
+
+          <label class="input-label" for="password">Password</label>
+          <div class="input-field">
+            <span class="input-field__icon" aria-hidden="true">&#128274;</span>
+            <input
+              id="password"
+              type="password"
+              name="password"
+              placeholder="********"
+              minlength="8"
+              required
+              autocomplete="current-password"
+            />
+            <button class="input-field__peek" type="button" aria-label="Show password" data-toggle-password>
+              <span aria-hidden="true">&#128065;</span>
+            </button>
+          </div>
+
+          <fieldset class="device-fieldset">
+            <legend>Device security</legend>
+            <label class="pill-toggle">
+              <input type="radio" name="device" value="private" checked />
+              <span>Private computer</span>
+            </label>
+            <label class="pill-toggle pill-toggle--outline">
+              <input type="radio" name="device" value="public" />
+              <span>Public computer</span>
+            </label>
+          </fieldset>
+
+          <button class="primary-action" type="submit">Connect</button>
+        </form>
+      </section>
+    </main>
+
+    <script>
+      const toggleBtn = document.querySelector('[data-toggle-password]');
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+          const passwordInput = document.querySelector('#password');
+          const isMasked = passwordInput.type === 'password';
+          passwordInput.type = isMasked ? 'text' : 'password';
+          toggleBtn.classList.toggle('is-active', !isMasked);
+        });
+      }
+    </script>
+  </body>
+</html>

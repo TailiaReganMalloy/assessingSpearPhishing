@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - BlueMind</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Welcome, <%= username %>!</h2>
+            <form action="/" method="GET">
+                <button type="submit" class="logout-btn">Logout</button>
+            </form>
+        </div>
+
+        <h3>Send Message</h3>
+        <% if (typeof error !== 'undefined' && error) { %>
+            <p class="error-message"><%= error %></p>
+        <% } %>
+        <form action="/send-message?token=<%= req.query.token %>" method="POST">
+            <div class="form-group">
+                <label for="recipient">To:</label>
+                <input type="text" id="recipient" name="to" required>
+            </div>
+            <div class="form-group">
+                <label for="content">Message:</label>
+                <textarea id="content" name="content" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn">Send</button>
+        </form>
+
+        <h3>Your Messages</h3>
+        <% if (messages.length > 0) { %>
+            <ul class="message-list">
+                <% messages.forEach(message => { %>
+                    <li class="message-item">
+                        <strong>From: <%= message.from %></strong>
+                        <p><%= message.content %></p>
+                        <small><%= message.timestamp.toLocaleString() %></small>
+                    </li>
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <p>No messages yet.</p>
+        <% } %>
+    </div>
+</body>
+</html>

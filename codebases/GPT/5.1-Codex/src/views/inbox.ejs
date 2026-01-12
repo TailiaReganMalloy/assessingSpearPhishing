@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body class="page page--inbox">
+    <header class="inbox-header">
+      <div class="brandmark brandmark--mini">
+        <div class="brandmark__icon">
+          <span class="hex"></span>
+        </div>
+        <div>
+          <p class="brandmark__title">BlueShell</p>
+          <p class="brandmark__tag">vault</p>
+        </div>
+      </div>
+      <div class="header-meta">
+        <div>
+          <p class="welcome">Welcome back, <strong><%= user && user.name ? user.name : 'Agent' %></strong></p>
+          <p class="email"><%= user && user.email ? user.email : '' %></p>
+        </div>
+        <form method="POST" action="/logout">
+          <button class="text-button" type="submit">Sign out</button>
+        </form>
+      </div>
+    </header>
+
+    <main class="inbox-layout">
+      <section class="inbox-card">
+        <header>
+          <p class="eyebrow">Secure messages</p>
+          <h1>Your private inbox</h1>
+          <p class="subtitle">
+            Messages refresh automatically every time you land on this page. Use this sample UI to practice secure user flows.
+          </p>
+        </header>
+
+        <% if (error) { %>
+          <div class="alert alert--danger" role="alert"><%= error %></div>
+        <% } %>
+
+        <% if (!error && messages && messages.length === 0) { %>
+          <div class="empty-state">
+            <p>No messages yet, but your inbox is ready.</p>
+          </div>
+        <% } %>
+
+        <ul class="message-list">
+          <% (messages || []).forEach((message) => { %>
+            <li class="message-list__item">
+              <div class="message-meta">
+                <p class="message-subject"><%= message.subject %></p>
+                <span class="message-time" title="<%= message.sentAbsolute %>"><%= message.sentRelative %></span>
+              </div>
+              <p class="message-from">From <strong><%= message.sender_name %></strong></p>
+              <p class="message-body"><%= message.body %></p>
+            </li>
+          <% }) %>
+        </ul>
+      </section>
+
+      <aside class="tips-panel">
+        <h2>Teaching ideas</h2>
+        <ol>
+          <li>Discuss why bcrypt hashing protects stored passwords.</li>
+          <li>Walk through JWT verification before serving inbox data.</li>
+          <li>Highlight rate limiting on the login route.</li>
+          <li>Extend the app to support message composition.</li>
+        </ol>
+      </aside>
+    </main>
+  </body>
+</html>

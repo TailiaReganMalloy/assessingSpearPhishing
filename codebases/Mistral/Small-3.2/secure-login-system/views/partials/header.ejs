@@ -1,0 +1,13 @@
+<header>
+  <div class="logo">
+    <img src="/images/logo.png" alt="BlueMind Logo">
+    <span class="logo-text">BlueMind</span>
+  </div>
+
+  <% if (user) { %>
+    <div class="user-info">
+      <span>Welcome, <%= user.email %></span>
+      <a href="/logout" class="logout">Logout</a>
+    </div>
+  <% } %>
+</header>

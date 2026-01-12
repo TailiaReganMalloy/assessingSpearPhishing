@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "from": "user1@example.com",
+    "to": "email@bluemind.net",
+    "subject": "Welcome!",
+    "body": "Welcome to the secure messaging application."
+  },
+  {
+    "id": 2,
+    "from": "user2@example.com",
+    "to": "email@bluemind.net",
+    "subject": "Project Update",
+    "body": "The project is going well. We are on track to meet the deadline."
+  }
+]

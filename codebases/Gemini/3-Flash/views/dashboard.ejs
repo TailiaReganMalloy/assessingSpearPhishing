@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Dashboard</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body style="display: block; padding: 50px;">
+    <div class="dashboard-container" style="margin: 0 auto;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #001053; padding-bottom: 10px; margin-bottom: 20px;">
+            <h1 style="margin: 0; color: #001053;"><i class="fa-solid fa-cube"></i> BlueMind Mail</h1>
+            <div>
+                <span>Logged in as <strong><%= email %></strong></span> | 
+                <a href="/logout" style="color: #ff7a8a; text-decoration: none;">Logout</a>
+            </div>
+        </div>
+
+        <h3>Your Messages</h3>
+        <% if (messages.length === 0) { %>
+            <p>No messages yet.</p>
+        <% } else { %>
+            <% messages.forEach(msg => { %>
+                <div class="message-box">
+                    <div class="message-header">From: <%= msg.sender_email %></div>
+                    <div class="message-time"><%= new Date(msg.timestamp).toLocaleString() %></div>
+                    <div style="margin-top: 10px;"><%= msg.content %></div>
+                </div>
+            <% }) %>
+        <% } %>
+
+        <div class="compose-box">
+            <h3>Send a Message</h3>
+            <form action="/send" method="POST">
+                <div style="margin-bottom: 10px;">
+                    <label>To:</label>
+                    <select name="receiver_id" required style="padding: 5px; width: 200px;">
+                        <% usersList.forEach(user => { %>
+                            <option value="<%= user.id %>"><%= user.email %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <textarea name="content" placeholder="Type your message here..." required style="width: 100%; height: 100px; padding: 10px; border: 1px solid #ddd;"></textarea>
+                </div>
+                <button type="submit" class="btn-connect" style="width: auto; padding: 10px 30px;">Send Message</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

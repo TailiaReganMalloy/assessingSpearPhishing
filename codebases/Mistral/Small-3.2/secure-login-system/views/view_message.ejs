@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= message.subject %> - BlueMind</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <% include partials/header %>
+
+    <div class="messages-container">
+      <div class="sidebar">
+        <h3>Messages</h3>
+        <a href="/messages" class="btn-back">Back to Messages</a>
+      </div>
+
+      <div class="message-view">
+        <div class="message-header">
+          <h2><%= message.subject %></h2>
+          <div class="message-meta">
+            <span class="message-sender">From: <%= message.sender.email %></span>
+            <span class="message-date"><%= message.createdAt.toLocaleString() %></span>
+          </div>
+        </div>
+
+        <div class="message-content">
+          <%= message.content %>
+        </div>
+
+        <a href="/messages" class="btn-back">Back to Messages</a>
+      </div>
+    </div>
+
+    <% include partials/footer %>
+  </div>
+
+  <script src="/js/script.js"></script>
+</body>
+</html>

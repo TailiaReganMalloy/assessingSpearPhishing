@@ -1,0 +1,27 @@
+<% const errorsList = (errors || []).map(e => e.msg); %>
+<% const body = `
+  <div class=\"container login-card\">
+    <div class=\"card\">
+      <h1 class=\"title\">Create Account</h1>
+      <% if (errorsList.length) { %>
+        <div class=\"alert\">
+          <ul>
+            <% errorsList.forEach(e => { %><li><%= e %></li><% }) %>
+          </ul>
+        </div>
+      <% } %>
+      <form method=\"post\" action=\"/register\">
+        <input type=\"hidden\" name=\"_csrf\" value=\"<%= csrfToken %>\" />
+        <label>Username</label>
+        <input type=\"text\" name=\"username\" minlength=\"3\" maxlength=\"32\" required />
+        <label>Password</label>
+        <input type=\"password\" name=\"password\" minlength=\"8\" required />
+        <div class=\"row\" style=\"margin-top:6px\">
+          <button class=\"btn\" type=\"submit\">Create account</button>
+        </div>
+      </form>
+      <div class=\"muted\">Already registered? <a href=\"/login\">Sign in</a>.</div>
+    </div>
+  </div>
+`; %>
+<%- include('layout', { title: 'Register', body }) %>

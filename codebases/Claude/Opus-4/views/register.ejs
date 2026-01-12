@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureMail - Register</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <h1>
+                <div class="logo-icon"></div>
+                SecureMail
+            </h1>
+        </div>
+
+        <h2 class="form-title">Create Account</h2>
+
+        <% if (error) { %>
+            <div class="alert alert-error">
+                <%= error %>
+            </div>
+        <% } %>
+
+        <form action="/register" method="POST" class="register-form">
+            <div class="form-group">
+                <label for="email">📧 Email Address</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    placeholder="your.email@example.com"
+                    required
+                    autocomplete="email"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">🔒 Password</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    placeholder="Minimum 8 characters"
+                    required
+                    autocomplete="new-password"
+                    minlength="8"
+                >
+                <small style="color: #666; font-size: 12px;">
+                    Password must be at least 8 characters long
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">🔒 Confirm Password</label>
+                <input 
+                    type="password" 
+                    id="confirmPassword" 
+                    name="confirmPassword" 
+                    placeholder="Re-enter your password"
+                    required
+                    autocomplete="new-password"
+                >
+            </div>
+
+            <button type="submit" class="submit-btn">Create Account</button>
+        </form>
+
+        <div class="form-links">
+            <p>Already have an account? <a href="/login">Login here</a></p>
+        </div>
+    </div>
+
+    <!-- Educational Comment for Students -->
+    <!-- 
+    Security Best Practices for Registration:
+    1. Enforce minimum password length (8 characters shown here)
+    2. Consider adding password strength requirements
+    3. Implement rate limiting to prevent automated registrations
+    4. Validate email format on both client and server side
+    5. Hash passwords with bcrypt before storing (never store plain text)
+    6. Consider implementing email verification for production apps
+    7. Add CAPTCHA for production to prevent bot registrations
+    -->
+
+    <script>
+        // Client-side password validation (educational purposes)
+        // Note: Always validate on the server side as well!
+        document.querySelector('.register-form').addEventListener('submit', function(e) {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                e.preventDefault();
+                alert('Passwords do not match!');
+            }
+        });
+    </script>
+</body>
+</html>

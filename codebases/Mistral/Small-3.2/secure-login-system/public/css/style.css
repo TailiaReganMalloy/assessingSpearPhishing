@@ -1,0 +1,370 @@
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #1a1a2e;
+  color: #ffffff;
+  line-height: 1.6;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  background-color: #16213e;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 40px;
+  width: auto;
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logout {
+  color: #ffffff;
+  text-decoration: none;
+  border: 1px solid #ffffff;
+  padding: 5px 10px;
+  border-radius: 3px;
+}
+
+.logout:hover {
+  background-color: #ffffff;
+  color: #16213e;
+}
+
+/* Login/Register Styles */
+.login-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.login-card {
+  background-color: #16213e;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.login-card h2 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #ffffff;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #333;
+  border-radius: 4px;
+  background-color: #1a1a2e;
+  color: #ffffff;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 35px;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+.computer-type {
+  margin: 1.5rem 0;
+  display: flex;
+  gap: 1rem;
+}
+
+.computer-type label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.computer-type input {
+  display: none;
+}
+
+.computer-type i {
+  font-size: 1.2rem;
+}
+
+.computer-type input:checked + i.fa-check-circle {
+  color: #4a90e2;
+}
+
+.computer-type input:checked + i.fa-circle {
+  color: #ff5722;
+}
+
+.btn-connect {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #4a90e2;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.btn-connect:hover {
+  background-color: #3a7bc8;
+}
+
+.login-link {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.login-link a {
+  color: #4a90e2;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+/* Messages Styles */
+.messages-container {
+  display: flex;
+  flex: 1;
+  padding: 1rem;
+}
+
+.sidebar {
+  width: 200px;
+  padding: 1rem;
+  background-color: #16213e;
+  border-radius: 8px;
+  margin-right: 1rem;
+}
+
+.sidebar h3 {
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+}
+
+.btn-send, .btn-back {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #4a90e2;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.btn-send:hover, .btn-back:hover {
+  background-color: #3a7bc8;
+}
+
+.messages-list {
+  flex: 1;
+  background-color: #16213e;
+  border-radius: 8px;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.no-messages {
+  text-align: center;
+  padding: 2rem;
+  color: #888;
+}
+
+.message-item {
+  padding: 1rem;
+  border-bottom: 1px solid #333;
+  transition: background-color 0.3s;
+}
+
+.message-item:hover {
+  background-color: #1a1a2e;
+}
+
+.message-item.unread {
+  font-weight: bold;
+  background-color: #1a1a2e;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.message-sender {
+  font-weight: bold;
+}
+
+.message-date {
+  color: #888;
+  font-size: 0.8rem;
+}
+
+.message-subject {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.message-preview {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+/* Send Message Styles */
+.send-message-form {
+  flex: 1;
+  background-color: #16213e;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.send-message-form h2 {
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+}
+
+.send-message-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.send-message-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+}
+
+.send-message-form input[type="email"],
+.send-message-form input[type="text"],
+.send-message-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #333;
+  border-radius: 4px;
+  background-color: #1a1a2e;
+  color: #ffffff;
+}
+
+.send-message-form textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+.send-message-form .btn-send {
+  margin-top: 1rem;
+}
+
+/* View Message Styles */
+.message-view {
+  flex: 1;
+  background-color: #16213e;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.message-header {
+  margin-bottom: 1.5rem;
+}
+
+.message-header h2 {
+  color: #ffffff;
+}
+
+.message-meta {
+  display: flex;
+  justify-content: space-between;
+  color: #888;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.message-content {
+  background-color: #1a1a2e;
+  padding: 1.5rem;
+  border-radius: 4px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  border-left: 4px solid #4a90e2;
+}
+
+/* Footer Styles */
+footer {
+  background-color: #16213e;
+  text-align: center;
+  padding: 1rem;
+  margin-top: auto;
+}
+
+footer p {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+/* Alert Styles */
+.alert {
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
+
+.alert-danger {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+}

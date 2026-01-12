@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind - Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="login-body">
+    <div class="login-container">
+        <div class="bluemind-logo">
+            <h1>BlueMind</h1>
+            <span class="version">v5</span>
+        </div>
+
+        <div class="login-box">
+            <h2>Identification</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">
+                        <span class="icon">✉</span>
+                        Login
+                    </label>
+                    <input type="email" id="email" name="email" placeholder="email@bluemind.net" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">
+                        <span class="icon">🔒</span>
+                        Password
+                    </label>
+                    <div class="password-container">
+                        <input type="password" id="password" name="password" placeholder="••••••••" required>
+                        <button type="button" class="toggle-password" onclick="togglePassword()">👁</button>
+                    </div>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <div class="radio-option">
+                        <input type="radio" id="private" name="computer_type" value="private" checked>
+                        <label for="private">Private computer</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="public" name="computer_type" value="public">
+                        <label for="public">Public computer</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="connect-btn">Connect</button>
+
+                <div id="errorMessage" class="error-message"></div>
+            </form>
+
+            <div class="login-footer">
+                <p>Don't have an account? <a href="/register">Register here</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+            } else {
+                passwordInput.type = 'password';
+            }
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = '';
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const privateComputer = document.getElementById('private').checked;
+
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email,
+                        password,
+                        privateComputer
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    window.location.href = '/dashboard';
+                } else {
+                    errorDiv.textContent = data.message || 'Login failed';
+                }
+            } catch (error) {
+                errorDiv.textContent = 'An error occurred. Please try again.';
+                console.error('Login error:', error);
+            }
+        });
+    </script>
+</body>
+</html>

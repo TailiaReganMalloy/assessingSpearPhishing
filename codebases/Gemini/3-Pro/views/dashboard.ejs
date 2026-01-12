@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - BlueMind</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body style="align-items: flex-start; padding-top: 50px;">
+    <div class="dashboard-container">
+        <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2>Welcome, <%= user %></h2>
+            <a href="/logout" style="color: #ff7c7c; text-decoration: none; font-weight: bold;">Logout</a>
+        </header>
+
+        <h3>My Messages</h3>
+        <div class="messages-list">
+            <% if (messages.length === 0) { %>
+                <p>No messages yet.</p>
+            <% } else { %>
+                <% messages.forEach(msg => { %>
+                    <div class="message">
+                        <div class="message-sender">From: <%= msg.sender_name %></div>
+                        <div class="message-time"><%= msg.timestamp %></div>
+                        <div class="message-content" style="margin-top: 5px;">
+                            <%= msg.content %>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } %>
+        </div>
+
+        <div class="send-form">
+            <h3>Send a Message</h3>
+            <form action="/send-message" method="POST">
+                <div style="margin-bottom: 10px;">
+                    <label>To (Email):</label>
+                    <input type="text" name="receiver_username" placeholder="recipient@bluemind.net" required style="width: 100%; padding: 8px; margin-top: 5px;">
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <label>Message:</label>
+                    <textarea name="content" placeholder="Type your message here..." required></textarea>
+                </div>
+                <button type="submit" class="btn-connect" style="width: auto; padding: 10px 30px;">Send Message</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

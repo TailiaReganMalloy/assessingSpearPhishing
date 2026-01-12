@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureMail - Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="dashboard-page">
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <h1>SecureMail</h1>
+            </div>
+
+            <div class="user-info">
+                <div class="user-avatar">👤</div>
+                <div class="user-details">
+                    <p id="userEmail" class="user-email"></p>
+                    <button class="btn-logout" onclick="logout()">Logout</button>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <button class="nav-item active" onclick="switchView('inbox')">
+                    📬 Inbox
+                </button>
+                <button class="nav-item" onclick="switchView('compose')">
+                    ✍️ Compose
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Inbox View -->
+            <section id="inboxView" class="view-section active">
+                <div class="section-header">
+                    <h2>Messages</h2>
+                    <div class="view-controls">
+                        <span id="messageCount" class="message-count">0 messages</span>
+                        <button onclick="refreshMessages()" class="btn-refresh">↻ Refresh</button>
+                    </div>
+                </div>
+
+                <div id="messagesList" class="messages-list">
+                    <div class="empty-state">
+                        <p>No messages yet. Check back soon!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Compose View -->
+            <section id="composeView" class="view-section">
+                <div class="section-header">
+                    <h2>Compose Message</h2>
+                </div>
+
+                <form id="composeForm" class="compose-form">
+                    <div class="form-field">
+                        <label for="recipientSelect">Send to:</label>
+                        <select id="recipientSelect" name="recipientId" required>
+                            <option value="">Select a recipient...</option>
+                        </select>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="messageSubject">Subject:</label>
+                        <input 
+                            type="text" 
+                            id="messageSubject" 
+                            name="subject" 
+                            placeholder="Message subject"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-field">
+                        <label for="messageBody">Message:</label>
+                        <textarea 
+                            id="messageBody" 
+                            name="body" 
+                            placeholder="Type your message here..."
+                            required
+                        ></textarea>
+                    </div>
+
+                    <div id="composeError" class="error-message"></div>
+                    <div id="composeSuccess" class="success-message"></div>
+
+                    <button type="submit" class="btn-primary">Send Message</button>
+                </form>
+            </section>
+
+            <!-- Message Detail Modal -->
+            <div id="messageModal" class="modal hidden">
+                <div class="modal-content">
+                    <button class="modal-close" onclick="closeMessageModal()">✕</button>
+                    
+                    <div class="message-detail">
+                        <div class="message-header">
+                            <h3 id="modalSubject"></h3>
+                            <p id="modalFrom" class="message-from"></p>
+                            <p id="modalDate" class="message-date"></p>
+                        </div>
+
+                        <div class="message-body" id="modalBody"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>

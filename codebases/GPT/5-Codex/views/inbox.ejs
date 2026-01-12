@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlueMind Secure Inbox</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="page page--inbox">
+  <header class="inbox-header">
+    <div class="brand">
+      <div class="brand__icon" aria-hidden="true"></div>
+      <div class="brand__name">BlueMind</div>
+      <div class="brand__version">v5</div>
+    </div>
+    <div class="inbox-header__meta">
+      <span class="inbox-header__welcome">Signed in as <%= user.display_name %></span>
+      <form action="/logout" method="POST">
+        <button type="submit" class="button button--secondary">Sign out</button>
+      </form>
+    </div>
+  </header>
+
+  <main class="inbox">
+    <h1 class="inbox__title">Inbox</h1>
+    <% if (!messages.length) { %>
+      <p class="inbox__empty">No messages yet. Check back later!</p>
+    <% } else { %>
+      <ul class="message-list">
+        <% messages.forEach((message) => { %>
+          <li class="message-list__item">
+            <div class="message-list__meta">
+              <span class="message-list__subject"><%= message.subject %></span>
+              <span class="message-list__sender">From <%= message.sender_name %></span>
+              <time class="message-list__time" datetime="<%= message.created_at %>">
+                <%= new Date(message.created_at).toLocaleString() %>
+              </time>
+            </div>
+            <p class="message-list__body"><%= message.body %></p>
+          </li>
+        <% }); %>
+      </ul>
+    <% } %>
+  </main>
+</body>
+</html>
