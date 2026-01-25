@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= pageTitle || 'BlueMind Portal' %></title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="login-body">
+  <div class="login-shell">
+    <header class="brand-lockup">
+      <div class="logo-icon" aria-hidden="true">
+        <span class="hex"></span>
+      </div>
+      <div>
+        <p class="brand-name">BlueMind</p>
+        <p class="brand-tag">v5</p>
+      </div>
+    </header>
+
+    <section class="auth-panel" aria-labelledby="auth-title">
+      <div class="panel-header"></div>
+      <div class="panel-body">
+        <h1 id="auth-title">Identification</h1>
+        <p class="auth-subtitle">Enter your credentials to reach your secure mailbox.</p>
+        <% const notice = (typeof flash !== 'undefined' && flash) ? flash : null; %>
+        <% if (notice) { %>
+          <div class="alert <%= notice.type === 'error' ? 'alert-error' : 'alert-info' %>" role="alert">
+            <%= notice.message %>
+          </div>
+        <% } %>
+        <form class="auth-form" method="POST" action="/login" novalidate>
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <label class="field-group">
+            <span class="field-label">Login</span>
+            <div class="field-control">
+              <span class="field-icon" aria-hidden="true">✉️</span>
+              <input type="email" name="email" placeholder="email@bluemind.net" required autocomplete="username">
+            </div>
+          </label>
+          <label class="field-group">
+            <span class="field-label">Password</span>
+            <div class="field-control">
+              <span class="field-icon" aria-hidden="true">🔒</span>
+              <input type="password" name="password" placeholder="••••••••" required autocomplete="current-password">
+              <span class="field-hint" aria-hidden="true">👁</span>
+            </div>
+          </label>
+          <fieldset class="device-choice">
+            <legend>Trusted device</legend>
+            <label>
+              <input type="radio" name="deviceType" value="private" checked>
+              <span>Private computer</span>
+            </label>
+            <label>
+              <input type="radio" name="deviceType" value="public">
+              <span>Public computer</span>
+            </label>
+          </fieldset>
+          <button type="submit" class="primary-btn">Connect</button>
+        </form>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

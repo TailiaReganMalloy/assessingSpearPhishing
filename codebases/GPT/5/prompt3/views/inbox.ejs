@@ -1,0 +1,22 @@
+<% layout('layout') -%>
+<section>
+  <h2>Your Inbox</h2>
+  <% if (!messages || messages.length === 0) { %>
+    <p>No messages yet.</p>
+  <% } else { %>
+    <ul class="list">
+      <% messages.forEach(m => { %>
+        <li class="message <%= m.read_at ? 'read' : 'unread' %>">
+          <div class="meta">From <strong><%= m.sender_name %></strong> &lt;<%= m.sender_email %>&gt; — <%= new Date(m.created_at).toLocaleString() %></div>
+          <div class="content"><%= m.content %></div>
+          <% if (!m.read_at) { %>
+            <form method="post" action="/messages/<%= m.id %>/read">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <button class="btn small" type="submit">Mark as read</button>
+            </form>
+          <% } %>
+        </li>
+      <% }) %>
+    </ul>
+  <% } %>
+</section>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header with BlueMind logo -->
+    <header class="header">
+        <div class="logo-container">
+            <div class="hexagon-logo"></div>
+            <h1>BlueMind</h1>
+        </div>
+        <div class="user-info">
+            <span id="welcomeMessage">Welcome, <span id="usernameDisplay"></span>!</span>
+            <button id="logoutBtn" class="logout-btn">Logout</button>
+        </div>
+    </header>
+
+    <main class="dashboard-container">
+        <nav class="sidebar">
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-link active" data-view="inbox">Inbox</a></li>
+                <li><a href="#" class="nav-link" data-view="compose">Compose</a></li>
+                <li><a href="#" class="nav-link" data-view="sent">Sent Messages</a></li>
+            </ul>
+        </nav>
+
+        <section class="main-content">
+            <!-- Inbox View -->
+            <div id="inboxView" class="view active">
+                <h2>Inbox</h2>
+                <div id="messagesContainer" class="messages-list">
+                    <div class="loading">Loading messages...</div>
+                </div>
+            </div>
+
+            <!-- Compose View -->
+            <div id="composeView" class="view">
+                <h2>Compose Message</h2>
+                <form id="composeForm" class="compose-form">
+                    <div class="form-group">
+                        <label for="recipient">Recipient Username</label>
+                        <input type="text" id="recipient" name="recipientUsername" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="messageContent">Message</label>
+                        <textarea id="messageContent" name="content" rows="6" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="send-btn">Send Message</button>
+                </form>
+            </div>
+
+            <!-- Sent Messages View -->
+            <div id="sentView" class="view">
+                <h2>Sent Messages</h2>
+                <div id="sentMessagesContainer" class="messages-list">
+                    <div class="loading">Loading sent messages...</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Message Detail Modal -->
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="messageDetail">
+                <h3 id="messageSubject"></h3>
+                <div class="message-meta">
+                    From: <span id="messageSender"></span> | 
+                    To: <span id="messageRecipient"></span> | 
+                    Date: <span id="messageDate"></span>
+                </div>
+                <div id="messageBody"></div>
+                <button id="deleteMessageBtn" class="delete-btn">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

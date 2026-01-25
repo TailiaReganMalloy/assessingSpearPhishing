@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #0D1B2A; /* Dark blue background */
+            color: white;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background-color: #1B263B; /* Dark navy-blue background */
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .hexagon {
+            width: 25px;
+            height: 25px;
+            background-color: #415A77;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            margin-right: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logout-btn {
+            background-color: #E09F3E;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .logout-btn:hover {
+            background-color: #c88a2c;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        
+        .welcome-message {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #415A77;
+        }
+        
+        .tab {
+            padding: 12px 24px;
+            cursor: pointer;
+            background-color: #1B263B;
+            border: 1px solid #415A77;
+            border-bottom: none;
+            border-radius: 6px 6px 0 0;
+            margin-right: 5px;
+        }
+        
+        .tab.active {
+            background-color: #415A77;
+        }
+        
+        .tab-content {
+            display: none;
+            background-color: #1B263B;
+            padding: 20px;
+            border-radius: 0 6px 6px 6px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .message-list {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        
+        .message-item {
+            background-color: #2C3E50;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #415A77;
+        }
+        
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .message-sender {
+            font-weight: bold;
+            color: #E0E1DD;
+        }
+        
+        .message-date {
+            color: #A9A9A9;
+            font-size: 0.9em;
+        }
+        
+        .message-subject {
+            font-size: 1.2em;
+            margin-bottom: 8px;
+            color: #E0E1DD;
+        }
+        
+        .message-content {
+            color: #CCCCCC;
+            line-height: 1.5;
+        }
+        
+        .unread {
+            border-left-color: #E09F3E;
+        }
+        
+        .compose-form {
+            background-color: #2C3E50;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #E0E1DD;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #415A77;
+            background-color: #1B263B;
+            color: white;
+        }
+        
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .send-btn {
+            background-color: #415A77;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .send-btn:hover {
+            background-color: #354a5f;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .pagination button {
+            background-color: #415A77;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            margin: 0 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .pagination button:hover:not(:disabled) {
+            background-color: #354a5f;
+        }
+        
+        .pagination button:disabled {
+            background-color: #2C3E50;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <div class="hexagon">B</div>
+            <span>BlueMind</span>
+        </div>
+        <div class="user-info">
+            <span>Welcome, <span id="usernameDisplay"></span>!</span>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h1 class="welcome-message">Welcome to BlueMind v5 Messaging System</h1>
+        
+        <div class="tabs">
+            <div class="tab active" onclick="showTab('inbox')">Inbox</div>
+            <div class="tab" onclick="showTab('sent')">Sent Messages</div>
+            <div class="tab" onclick="showTab('compose')">Compose</div>
+        </div>
+        
+        <!-- Inbox Tab -->
+        <div id="inbox" class="tab-content active">
+            <h2>Inbox</h2>
+            <div id="inboxMessages" class="message-list">
+                <p>Loading messages...</p>
+            </div>
+            <div class="pagination" id="inboxPagination"></div>
+        </div>
+        
+        <!-- Sent Messages Tab -->
+        <div id="sent" class="tab-content">
+            <h2>Sent Messages</h2>
+            <div id="sentMessages" class="message-list">
+                <p>Loading messages...</p>
+            </div>
+            <div class="pagination" id="sentPagination"></div>
+        </div>
+        
+        <!-- Compose Tab -->
+        <div id="compose" class="tab-content">
+            <h2>Compose New Message</h2>
+            <div class="compose-form">
+                <div class="form-group">
+                    <label for="recipient">Recipient:</label>
+                    <select id="recipient">
+                        <option value="">Select a recipient</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject:</label>
+                    <input type="text" id="subject" placeholder="Enter subject">
+                </div>
+                <div class="form-group">
+                    <label for="messageContent">Message:</label>
+                    <textarea id="messageContent" placeholder="Type your message here..."></textarea>
+                </div>
+                <button class="send-btn" onclick="sendMessage()">Send Message</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get auth token from storage
+        let authToken = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
+        
+        if (!authToken) {
+            window.location.href = '/';
+            exit();
+        }
+        
+        // Verify token and get user info
+        async function loadUserInfo() {
+            try {
+                const response = await fetch('/api/auth/verify', {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+                
+                if (response.ok) {
+                    const userData = await response.json();
+                    document.getElementById('usernameDisplay').textContent = userData.user.username;
+                } else {
+                    logout();
+                }
+            } catch (error) {
+                console.error('Error verifying token:', error);
+                logout();
+            }
+        }
+        
+        // Load users for recipient dropdown
+        async function loadRecipients() {
+            // In a real app, this would fetch from an API
+            // For now, we'll simulate with some dummy users
+            const recipients = [
+                { id: '1', username: 'john_doe' },
+                { id: '2', username: 'jane_smith' },
+                { id: '3', username: 'admin' }
+            ];
+            
+            const select = document.getElementById('recipient');
+            select.innerHTML = '<option value="">Select a recipient</option>';
+            
+            recipients.forEach(user => {
+                const option = document.createElement('option');
+                option.value = user.id;
+                option.textContent = user.username;
+                select.appendChild(option);
+            });
+        }
+        
+        // Load inbox messages
+        async function loadInbox(page = 1) {
+            try {
+                const response = await fetch(`/api/messages/received?page=${page}&limit=5`, {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    displayMessages(data.messages, 'inboxMessages');
+                    renderPagination(data.totalPages, page, 'inboxPagination', 'loadInbox');
+                } else {
+                    console.error('Error loading inbox:', await response.text());
+                }
+            } catch (error) {
+                console.error('Error loading inbox:', error);
+            }
+        }
+        
+        // Load sent messages
+        async function loadSent(page = 1) {
+            try {
+                const response = await fetch(`/api/messages/sent?page=${page}&limit=5`, {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    displayMessages(data.messages, 'sentMessages', true);
+                    renderPagination(data.totalPages, page, 'sentPagination', 'loadSent');
+                } else {
+                    console.error('Error loading sent messages:', await response.text());
+                }
+            } catch (error) {
+                console.error('Error loading sent messages:', error);
+            }
+        }
+        
+        // Display messages in the specified container
+        function displayMessages(messages, containerId, isSent = false) {
+            const container = document.getElementById(containerId);
+            
+            if (messages.length === 0) {
+                container.innerHTML = '<p>No messages found.</p>';
+                return;
+            }
+            
+            container.innerHTML = '';
+            
+            messages.forEach(message => {
+                const messageElement = document.createElement('div');
+                messageElement.className = `message-item ${!isSent && !message.read ? 'unread' : ''}`;
+                
+                const sender = isSent ? `To: ${message.recipient?.username || 'Unknown'}` : `From: ${message.sender?.username || 'Unknown'}`;
+                const date = new Date(message.createdAt).toLocaleString();
+                
+                messageElement.innerHTML = `
+                    <div class="message-header">
+                        <div class="message-sender">${sender}</div>
+                        <div class="message-date">${date}</div>
+                    </div>
+                    <div class="message-subject">${message.subject}</div>
+                    <div class="message-content">${message.content}</div>
+                `;
+                
+                container.appendChild(messageElement);
+            });
+        }
+        
+        // Render pagination controls
+        function renderPagination(totalPages, currentPage, containerId, loadFunction) {
+            const container = document.getElementById(containerId);
+            
+            if (totalPages <= 1) {
+                container.innerHTML = '';
+                return;
+            }
+            
+            let paginationHTML = '';
+            
+            // Previous button
+            paginationHTML += `<button onclick="${loadFunction}(${Math.max(1, currentPage - 1)})" ${currentPage <= 1 ? 'disabled' : ''}>Previous</button>`;
+            
+            // Page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === currentPage) {
+                    paginationHTML += `<button style="background-color: #E09F3E;" onclick="${loadFunction}(${i})">${i}</button>`;
+                } else {
+                    paginationHTML += `<button onclick="${loadFunction}(${i})">${i}</button>`;
+                }
+            }
+            
+            // Next button
+            paginationHTML += `<button onclick="${loadFunction}(${Math.min(totalPages, currentPage + 1)})" ${currentPage >= totalPages ? 'disabled' : ''}>Next</button>`;
+            
+            container.innerHTML = paginationHTML;
+        }
+        
+        // Send a new message
+        async function sendMessage() {
+            const recipientId = document.getElementById('recipient').value;
+            const subject = document.getElementById('subject').value;
+            const content = document.getElementById('messageContent').value;
+            
+            if (!recipientId || !subject || !content) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/messages/send', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify({
+                        recipientId,
+                        subject,
+                        content
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    alert('Message sent successfully!');
+                    document.getElementById('recipient').value = '';
+                    document.getElementById('subject').value = '';
+                    document.getElementById('messageContent').value = '';
+                } else {
+                    alert('Error sending message: ' + data.error);
+                }
+            } catch (error) {
+                console.error('Error sending message:', error);
+                alert('An error occurred while sending the message');
+            }
+        }
+        
+        // Show specified tab
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+            
+            // Load content based on tab
+            if (tabName === 'inbox') {
+                loadInbox();
+            } else if (tabName === 'sent') {
+                loadSent();
+            } else if (tabName === 'compose') {
+                loadRecipients();
+            }
+        }
+        
+        // Logout function
+        function logout() {
+            localStorage.removeItem('authToken');
+            sessionStorage.removeItem('authToken');
+            window.location.href = '/';
+        }
+        
+        // Initialize the page
+        window.onload = function() {
+            loadUserInfo();
+            loadInbox();
+        };
+    </script>
+</body>
+</html>

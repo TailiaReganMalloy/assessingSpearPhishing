@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BlueMind v5 - Inbox</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="page">
+    <main class="auth-shell">
+      <header class="brand">
+        <div class="brand-mark"></div>
+        <div>
+          <h1>BlueMind</h1>
+          <span>v5</span>
+        </div>
+      </header>
+
+      <section class="card inbox-card">
+        <div class="card-accent"></div>
+        <div class="inbox-header">
+          <div>
+            <h2>Secure Inbox</h2>
+            <p class="subtitle">Signed in as <%= currentUser.displayName %> (<%= currentUser.email %>)</p>
+          </div>
+          <form method="POST" action="/logout">
+            <button class="ghost" type="submit">Log out</button>
+          </form>
+        </div>
+
+        <div class="message-list">
+          <% if (messages.length === 0) { %>
+          <p class="empty">No messages yet.</p>
+          <% } %>
+
+          <% messages.forEach((message) => { %>
+          <article class="message">
+            <div class="message-header">
+              <h3><%= message.subject %></h3>
+              <span class="timestamp"><%= new Date(message.created_at).toLocaleString() %></span>
+            </div>
+            <p class="meta">From: <%= message.from_name %> &lt;<%= message.from_email %>&gt;</p>
+            <p><%= message.body %></p>
+          </article>
+          <% }) %>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

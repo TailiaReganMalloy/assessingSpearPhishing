@@ -1,0 +1,62 @@
+<%- include('partials/header', { title: 'Inbox' }) %>
+
+<section class="dashboard">
+  <div class="dashboard-header">
+    <div>
+      <h1>Inbox</h1>
+      <p class="muted">Signed in as <strong><%= currentUser.email %></strong></p>
+    </div>
+    <div class="cta-block">
+      <span class="badge">Secure login</span>
+      <span class="badge badge-outline">Password hashing</span>
+    </div>
+  </div>
+
+  <div class="dashboard-grid">
+    <div class="panel">
+      <h2>Messages</h2>
+      <% if (messages.length === 0) { %>
+        <p class="muted">No messages yet.</p>
+      <% } %>
+      <ul class="message-list">
+        <% messages.forEach((message) => { %>
+          <li>
+            <a class="message-link" href="/message/<%= message.id %>">
+              <div>
+                <div class="message-subject"><%= message.subject %></div>
+                <div class="message-meta">From <%= message.sender_name %> · <%= message.sender_email %></div>
+              </div>
+              <span class="message-time"><%= message.created_at %></span>
+            </a>
+          </li>
+        <% }) %>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>Send a message</h2>
+      <form action="/send" method="post" class="message-form">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <label>
+          Recipient
+          <select name="recipientId" required>
+            <% users.forEach((user) => { %>
+              <option value="<%= user.id %>"><%= user.name %> (<%= user.email %>)</option>
+            <% }) %>
+          </select>
+        </label>
+        <label>
+          Subject
+          <input type="text" name="subject" required />
+        </label>
+        <label>
+          Message
+          <textarea name="body" rows="6" required></textarea>
+        </label>
+        <button class="primary-button" type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

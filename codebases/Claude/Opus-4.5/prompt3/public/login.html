@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind - Educational Demo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-form">
+            <div class="header">
+                <div class="logo">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 0L35 10L35 30L20 40L5 30L5 10L20 0Z" fill="#00BFFF"/>
+                        <path d="M20 8L28 13L28 27L20 32L12 27L12 13L20 8Z" fill="#ffffff"/>
+                    </svg>
+                    <span class="brand-name">BlueMind</span>
+                    <span class="version">v5</span>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h1>Identification</h1>
+                
+                <div class="educational-notice">
+                    🎓 <strong>Educational Demo</strong> - This is a reference implementation for learning secure authentication
+                </div>
+                
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="email">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+                            </svg>
+                            Login
+                        </label>
+                        <input type="email" id="email" name="email" placeholder="email@bluemind.net" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                            </svg>
+                            Password
+                        </label>
+                        <div class="password-container">
+                            <input type="password" id="password" name="password" placeholder="********" required>
+                            <button type="button" class="toggle-password" onclick="togglePassword()">
+                                <svg id="eyeIcon" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                                    <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="computer-type">
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="computer_type" value="private" checked>
+                                <span class="radio-custom"></span>
+                                Private computer
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="computer_type" value="public">
+                                <span class="radio-custom"></span>
+                                Public computer
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="connect-btn">Connect</button>
+                </form>
+                
+                <div class="demo-accounts">
+                    <h3>Demo Accounts (for educational purposes):</h3>
+                    <ul>
+                        <li><strong>alice@example.com</strong> / securePass123!</li>
+                        <li><strong>bob@example.com</strong> / anotherSecurePass456!</li>
+                        <li><strong>charlie@example.com</strong> / yetAnotherPass789!</li>
+                    </ul>
+                </div>
+                
+                <div id="errorMessage" class="error-message" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="login.js"></script>
+</body>
+</html>

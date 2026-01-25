@@ -1,0 +1,28 @@
+{
+  "name": "secure-messaging-demo",
+  "version": "1.0.0",
+  "description": "Example Node.js app showcasing secure authentication and messaging",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "db:seed": "node src/scripts/seed.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "connect-sqlite3": "^0.9.0",
+    "csurf": "^1.11.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-ejs-layouts": "^2.6.1",
+    "express-session": "^1.18.0",
+    "ejs": "^3.1.10",
+    "helmet": "^7.1.0",
+    "sqlite": "^5.2.4",
+    "sqlite3": "^5.1.7"
+  }
+}

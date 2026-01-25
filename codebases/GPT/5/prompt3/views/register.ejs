@@ -1,0 +1,18 @@
+<% layout('layout') -%>
+<div class="card narrow">
+  <h2>Create Account</h2>
+  <form method="post" action="/register">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label for="name">Name</label>
+    <input id="name" name="name" type="text" placeholder="Jane Doe" required />
+
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" placeholder="jane@example.com" required />
+
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" placeholder="At least 8 characters" required minlength="8" />
+
+    <button class="btn primary" type="submit">Register</button>
+  </form>
+  <p class="help">Already have an account? <a href="/login">Login</a></p>
+</div>

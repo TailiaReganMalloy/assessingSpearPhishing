@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Send Message</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo-container">
+            <div class="hexagon-icon"></div>
+            <h1>BlueMind</h1>
+        </div>
+        <div class="user-info">
+            Welcome, <%= user.login %>!
+            <a href="/logout" class="logout-link">Logout</a>
+        </div>
+    </div>
+
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <h3>Navigation</h3>
+            <ul>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/send-message">Send Message</a></li>
+            </ul>
+        </div>
+        
+        <div class="main-content">
+            <h2>Send Message</h2>
+            
+            <% if (error) { %>
+                <div class="error-message"><%= error %></div>
+            <% } %>
+            
+            <% if (success) { %>
+                <div class="success-message"><%= success %></div>
+            <% } %>
+            
+            <form action="/send-message" method="POST">
+                <div class="form-group">
+                    <label for="to">Recipient</label>
+                    <input type="text" id="to" name="to" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="content">Message</label>
+                    <textarea id="content" name="content" rows="5" required></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

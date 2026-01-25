@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/styles.css" rel="stylesheet">
+</head>
+<body class="login-body">
+    <div class="login-container">
+        <div class="login-card">
+            <!-- BlueMind Logo and Version -->
+            <div class="text-center mb-4">
+                <div class="bluemind-logo">
+                    <img src="/bluemind-icon.svg" alt="BlueMind" width="48" height="48">
+                    <h2 class="bluemind-title">BlueMind</h2>
+                    <span class="version-badge">v5</span>
+                </div>
+            </div>
+
+            <!-- Flash messages -->
+            <% if (messages.error && messages.error.length > 0) { %>
+                <% messages.error.forEach(function(message) { %>
+                    <div class="alert alert-danger" role="alert">
+                        <%= message %>
+                    </div>
+                <% }); %>
+            <% } %>
+
+            <h3 class="text-center mb-4">Create Account</h3>
+
+            <form method="POST" action="/auth/register">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                
+                <div class="mb-3">
+                    <label for="email" class="form-label">
+                        <i class="bi bi-envelope"></i> Email Address
+                    </label>
+                    <input type="email" 
+                           class="form-control" 
+                           id="email" 
+                           name="email" 
+                           placeholder="your.email@example.com" 
+                           required
+                           autocomplete="username">
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">
+                        <i class="bi bi-lock"></i> Password
+                    </label>
+                    <input type="password" 
+                           class="form-control" 
+                           id="password" 
+                           name="password" 
+                           placeholder="Enter a strong password" 
+                           required
+                           autocomplete="new-password">
+                    <div class="form-text">
+                        Password must be at least 8 characters with uppercase, lowercase, number, and special character.
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="confirmPassword" class="form-label">
+                        <i class="bi bi-lock-fill"></i> Confirm Password
+                    </label>
+                    <input type="password" 
+                           class="form-control" 
+                           id="confirmPassword" 
+                           name="confirmPassword" 
+                           placeholder="Repeat your password" 
+                           required
+                           autocomplete="new-password">
+                </div>
+
+                <button type="submit" class="btn btn-connect w-100 mb-3">
+                    Create Account
+                </button>
+            </form>
+
+            <div class="text-center">
+                <p class="mb-0">
+                    Already have an account? 
+                    <a href="/auth/login" class="text-decoration-none">Login here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

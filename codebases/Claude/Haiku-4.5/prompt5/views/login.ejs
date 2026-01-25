@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Messaging - Login</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <div class="login-box">
+            <div class="logo-section">
+                <h1>SecureMsg</h1>
+                <p>v1.0 - Educational Platform</p>
+            </div>
+
+            <div class="login-form-container">
+                <h2>Identification</h2>
+
+                <% if (error) { %>
+                    <div class="alert alert-error">
+                        <%= error %>
+                    </div>
+                <% } %>
+
+                <form method="POST" action="/login" class="login-form">
+                    <div class="form-group">
+                        <label for="email">
+                            <span class="icon">✉</span> Login
+                        </label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            placeholder="email@example.com"
+                            required
+                            autocomplete="email"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">
+                            <span class="icon">🔒</span> Password
+                        </label>
+                        <div class="password-input-group">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password"
+                                required
+                                autocomplete="current-password"
+                            >
+                            <button type="button" class="toggle-password" onclick="togglePassword()">
+                                👁
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="computerType" value="private" checked>
+                            <span>Private computer</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="computerType" value="public">
+                            <span>Public computer</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-login">Connect</button>
+                </form>
+
+                <div class="auth-links">
+                    <p>Don't have an account? <a href="/register">Create one here</a></p>
+                </div>
+            </div>
+
+            <div class="security-info">
+                <p><strong>🔐 Security Notice:</strong> This is an educational platform demonstrating secure authentication practices. Never share your password.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword() {
+            const input = document.getElementById('password');
+            const button = document.querySelector('.toggle-password');
+            if (input.type === 'password') {
+                input.type = 'text';
+                button.textContent = '🙈';
+            } else {
+                input.type = 'password';
+                button.textContent = '👁';
+            }
+        }
+    </script>
+</body>
+</html>

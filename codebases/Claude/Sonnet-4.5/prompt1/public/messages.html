@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind - Messages</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="messages-container">
+        <header class="messages-header">
+            <div class="header-content">
+                <div class="logo-small">
+                    <svg width="30" height="30" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 5L8 15L12 25L20 30L28 25L32 15L20 5Z" fill="#00B8FF" stroke="#00B8FF" stroke-width="2"/>
+                        <circle cx="20" cy="20" r="5" fill="white"/>
+                    </svg>
+                    <span>BlueMind v5</span>
+                </div>
+                <div class="user-info">
+                    <span id="userEmail"></span>
+                    <button onclick="logout()" class="btn-logout">Logout</button>
+                </div>
+            </div>
+        </header>
+        
+        <main class="messages-main">
+            <div class="messages-sidebar">
+                <button onclick="showCompose()" class="btn-compose">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"/>
+                    </svg>
+                    New Message
+                </button>
+                
+                <div class="message-list" id="messageList">
+                    <div class="loading">Loading messages...</div>
+                </div>
+            </div>
+            
+            <div class="messages-content">
+                <div id="messageView" class="message-view">
+                    <div class="empty-state">
+                        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 16a4 4 0 014-4h40a4 4 0 014 4v32a4 4 0 01-4 4H12a4 4 0 01-4-4V16z" fill="#E5E7EB"/>
+                            <path d="M8 16l24 16 24-16" stroke="#6B7280" stroke-width="2"/>
+                        </svg>
+                        <p>Select a message to read</p>
+                    </div>
+                </div>
+                
+                <div id="composeView" class="compose-view" style="display: none;">
+                    <h2>New Message</h2>
+                    <form id="composeForm">
+                        <div class="form-group">
+                            <label for="recipient">To:</label>
+                            <select id="recipient" name="recipient" required>
+                                <option value="">Select recipient...</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject:</label>
+                            <input type="text" id="subject" name="subject" placeholder="Enter subject">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="content">Message:</label>
+                            <textarea id="content" name="content" rows="10" required placeholder="Type your message here..."></textarea>
+                        </div>
+                        
+                        <div class="compose-actions">
+                            <button type="submit" class="btn-send">Send</button>
+                            <button type="button" onclick="hideCompose()" class="btn-cancel">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        let currentUser = null;
+        let messages = [];
+        let users = [];
+        
+        // Load user info and messages on page load
+        async function init() {
+            try {
+                // Get current user
+                const userResponse = await fetch('/api/user');
+                if (!userResponse.ok) {
+                    window.location.href = '/';
+                    return;
+                }
+                currentUser = await userResponse.json();
+                document.getElementById('userEmail').textContent = currentUser.email;
+                
+                // Load messages
+                await loadMessages();
+                
+                // Load users for compose
+                await loadUsers();
+            } catch (error) {
+                console.error('Initialization error:', error);
+                window.location.href = '/';
+            }
+        }
+        
+        async function loadMessages() {
+            try {
+                const response = await fetch('/api/messages');
+                messages = await response.json();
+                displayMessageList();
+            } catch (error) {
+                console.error('Error loading messages:', error);
+            }
+        }
+        
+        async function loadUsers() {
+            try {
+                const response = await fetch('/api/users');
+                users = await response.json();
+                
+                const select = document.getElementById('recipient');
+                select.innerHTML = '<option value="">Select recipient...</option>';
+                users.forEach(user => {
+                    const option = document.createElement('option');
+                    option.value = user.email;
+                    option.textContent = user.email;
+                    select.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error loading users:', error);
+            }
+        }
+        
+        function displayMessageList() {
+            const listContainer = document.getElementById('messageList');
+            
+            if (messages.length === 0) {
+                listContainer.innerHTML = '<div class="empty-list">No messages</div>';
+                return;
+            }
+            
+            listContainer.innerHTML = messages.map(msg => `
+                <div class="message-item ${!msg.read ? 'unread' : ''}" onclick="viewMessage(${msg.id})">
+                    <div class="message-item-header">
+                        <span class="sender">${msg.sender_email}</span>
+                        <span class="date">${formatDate(msg.sent_at)}</span>
+                    </div>
+                    <div class="message-item-subject">${msg.subject || 'No Subject'}</div>
+                    <div class="message-item-preview">${msg.content.substring(0, 50)}...</div>
+                </div>
+            `).join('');
+        }
+        
+        async function viewMessage(messageId) {
+            const message = messages.find(m => m.id === messageId);
+            if (!message) return;
+            
+            // Mark as read
+            if (!message.read) {
+                try {
+                    await fetch(`/api/messages/${messageId}/read`, { method: 'POST' });
+                    message.read = true;
+                    displayMessageList();
+                } catch (error) {
+                    console.error('Error marking message as read:', error);
+                }
+            }
+            
+            // Display message
+            document.getElementById('composeView').style.display = 'none';
+            const messageView = document.getElementById('messageView');
+            messageView.innerHTML = `
+                <div class="message-detail">
+                    <h2>${message.subject || 'No Subject'}</h2>
+                    <div class="message-meta">
+                        <span><strong>From:</strong> ${message.sender_email}</span>
+                        <span><strong>Date:</strong> ${formatDate(message.sent_at)}</span>
+                    </div>
+                    <div class="message-body">
+                        ${message.content.replace(/\n/g, '<br>')}
+                    </div>
+                </div>
+            `;
+            messageView.style.display = 'block';
+        }
+        
+        function showCompose() {
+            document.getElementById('messageView').style.display = 'none';
+            document.getElementById('composeView').style.display = 'block';
+            document.getElementById('composeForm').reset();
+        }
+        
+        function hideCompose() {
+            document.getElementById('composeView').style.display = 'none';
+            document.getElementById('messageView').style.display = 'block';
+        }
+        
+        document.getElementById('composeForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                recipientEmail: document.getElementById('recipient').value,
+                subject: document.getElementById('subject').value,
+                content: document.getElementById('content').value
+            };
+            
+            try {
+                const response = await fetch('/api/messages', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+                
+                if (response.ok) {
+                    alert('Message sent successfully!');
+                    hideCompose();
+                    await loadMessages();
+                } else {
+                    const error = await response.json();
+                    alert('Error: ' + error.error);
+                }
+            } catch (error) {
+                console.error('Error sending message:', error);
+                alert('Failed to send message');
+            }
+        });
+        
+        async function logout() {
+            try {
+                await fetch('/api/logout', { method: 'POST' });
+                window.location.href = '/';
+            } catch (error) {
+                console.error('Logout error:', error);
+            }
+        }
+        
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diff = now - date;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            
+            if (days === 0) {
+                return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+            } else if (days === 1) {
+                return 'Yesterday';
+            } else if (days < 7) {
+                return date.toLocaleDateString('en-US', { weekday: 'short' });
+            } else {
+                return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            }
+        }
+        
+        // Initialize on page load
+        init();
+    </script>
+</body>
+</html>

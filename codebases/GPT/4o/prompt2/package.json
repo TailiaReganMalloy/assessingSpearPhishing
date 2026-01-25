@@ -1,0 +1,15 @@
+{
+  "name": "secure-auth-messaging",
+  "version": "1.0.0",
+  "description": "A Node.js project demonstrating secure user authentication, encrypted password storage, and a messaging system between users.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.0.0"
+  }
+}

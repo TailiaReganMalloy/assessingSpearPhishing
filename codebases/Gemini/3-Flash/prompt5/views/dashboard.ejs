@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind - Messages</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>Welcome, <%= user.email %></h1>
+        <hr>
+        <h3>Your Messages</h3>
+        <div class="messages-list">
+            <% user.messages.forEach(msg => { %>
+                <div class="message">
+                    <p class="from">From: <%= msg.from %></p>
+                    <p class="subject">Subject: <%= msg.subject %></p>
+                    <p class="body"><%= msg.body %></p>
+                </div>
+            <% }); %>
+        </div>
+        <a href="/logout" class="logout-link">Logout</a>
+    </div>
+</body>
+</html>

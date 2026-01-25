@@ -1,0 +1,53 @@
+<section class="login">
+  <div class="login__card">
+    <header class="login__header">
+      <img src="/images/logo.svg" alt="BlueMind" class="login__logo" />
+      <span class="login__version">v5</span>
+    </header>
+    <h1 class="login__title">Identification</h1>
+
+    <% if (error) { %>
+      <p class="alert"><%= error %></p>
+    <% } %>
+
+    <form method="post" action="/login" class="login__form">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      <label class="field">
+        <span class="field__label">Login</span>
+        <input
+          type="email"
+          name="email"
+          autocomplete="email"
+          required
+          value="<%= email %>"
+          placeholder="email@bluemind.net"
+          class="field__input"
+        />
+      </label>
+      <label class="field field--password">
+        <span class="field__label">Password</span>
+        <input
+          type="password"
+          name="password"
+          autocomplete="current-password"
+          required
+          class="field__input"
+        />
+      </label>
+
+      <fieldset class="choice">
+        <legend class="choice__legend">Device type</legend>
+        <label class="choice__option">
+          <input type="radio" name="device" value="private" checked />
+          <span>Private computer</span>
+        </label>
+        <label class="choice__option">
+          <input type="radio" name="device" value="public" />
+          <span>Public computer</span>
+        </label>
+      </fieldset>
+
+      <button type="submit" class="button">Connect</button>
+    </form>
+  </div>
+</section>

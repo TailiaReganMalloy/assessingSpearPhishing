@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BlueMind v5</title>
+    <style>
+        body {
+            background-color: #0a192f;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .header {
+            background-color: #0a192f;
+            width: 100%;
+            padding: 15px;
+            text-align: center;
+        }
+        .header h1 {
+            color: white;
+            margin: 0;
+        }
+        .login-panel {
+            background-color: white;
+            color: #333;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            padding: 30px;
+            width: 350px;
+            text-align: center;
+        }
+        .login-panel h2 {
+            margin-bottom: 20px;
+            color: #0a192f;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .radio-group {
+            margin-bottom: 20px;
+        }
+        .radio-option {
+            margin-right: 10px;
+        }
+        .btn {
+            background-color: #0a192f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: #1a2a40;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>BlueMind</h1>
+    </div>
+    <div class="login-panel">
+        <h2>Identification</h2>
+        <form action="/login" method="POST">
+            <div class="form-group">
+                <label for="username">Login</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="radio-group">
+                <label class="radio-option">
+                    <input type="radio" name="isPrivate" value="true" checked> Private computer
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="isPrivate" value="false"> Public computer
+                </label>
+            </div>
+            <button type="submit" class="btn">Connect</button>
+        </form>
+    </div>
+</body>
+</html>

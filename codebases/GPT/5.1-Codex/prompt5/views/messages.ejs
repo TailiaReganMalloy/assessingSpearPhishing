@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BlueMind Demo • Inbox</title>
+    <link rel="stylesheet" href="/styles/main.css" />
+  </head>
+  <body class="page page--messages">
+    <header class="hero hero--compact">
+      <div class="hero__logo">
+        <div class="logo-mark">BM</div>
+        <div>
+          <p class="brand">BlueMind</p>
+          <p class="version">v5</p>
+        </div>
+      </div>
+      <div class="session-chip">
+        <p><strong><%= currentUser.displayName %></strong> (<%= currentUser.email %>)</p>
+        <form method="POST" action="/logout">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          <button type="submit" class="link">Logout</button>
+        </form>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <% if (flash) { %>
+        <div class="alert alert--<%= flash.type %>"><%= flash.message %></div>
+      <% } %>
+      <section class="inbox">
+        <header>
+          <h2>Inbox</h2>
+          <p>Messages delivered to this account during the exercise.</p>
+        </header>
+        <% if (!messages.length) { %>
+          <p class="empty">No secure messages yet.</p>
+        <% } %>
+        <ul class="message-list">
+          <% messages.forEach((message) => { %>
+            <li class="message-card">
+              <div class="message-card__meta">
+                <p class="message-card__subject"><%= message.subject %></p>
+                <p class="message-card__from">From <strong><%= message.senderName %></strong></p>
+                <p class="message-card__date"><%= formatDate(message.sentAt) %></p>
+              </div>
+              <p class="message-card__body"><%= message.body %></p>
+            </li>
+          <% }) %>
+        </ul>
+      </section>
+
+      <section class="composer">
+        <header>
+          <h2>Send secure message</h2>
+          <p>Use this to simulate phishing-resistant communication among learners.</p>
+        </header>
+        <form method="POST" action="/messages" class="form card">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          <label class="field">
+            <span>Recipient</span>
+            <select name="recipientId" required>
+              <option value="" disabled selected>Select a teammate</option>
+              <% recipients.forEach((recipient) => { %>
+                <option value="<%= recipient.id %>"><%= recipient.displayName %> — <%= recipient.email %></option>
+              <% }) %>
+            </select>
+          </label>
+          <label class="field">
+            <span>Subject</span>
+            <input type="text" name="subject" maxlength="120" placeholder="Security update" />
+          </label>
+          <label class="field">
+            <span>Message</span>
+            <textarea name="body" rows="6" placeholder="Write guidance or share indicators..." required></textarea>
+          </label>
+          <button type="submit" class="btn-primary">Send</button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Secure Messaging</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #f5f5f5;
+    }
+
+    .navbar {
+      background: linear-gradient(135deg, #001a4d 0%, #003d99 100%);
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar h1 {
+      font-size: 24px;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .user-name {
+      font-size: 14px;
+    }
+
+    .logout-btn {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 1px solid white;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .logout-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+
+    .main-content {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 30px;
+    }
+
+    .sidebar {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      height: fit-content;
+    }
+
+    .sidebar h3 {
+      color: #333;
+      margin-bottom: 15px;
+      font-size: 16px;
+      border-bottom: 2px solid #0078d4;
+      padding-bottom: 10px;
+    }
+
+    .sidebar button {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+
+    .btn-primary {
+      background: #0078d4;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #005a9e;
+    }
+
+    .btn-secondary {
+      background: #f0f0f0;
+      color: #333;
+    }
+
+    .btn-secondary:hover {
+      background: #e0e0e0;
+    }
+
+    .btn-secondary.active {
+      background: #0078d4;
+      color: white;
+    }
+
+    .content-area {
+      background: white;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .content-area h2 {
+      color: #333;
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+
+    .message-list {
+      list-style: none;
+    }
+
+    .message-item {
+      border-bottom: 1px solid #eee;
+      padding: 15px 0;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .message-item:hover {
+      background: #f9f9f9;
+      padding: 15px;
+      margin: 0 -15px;
+      border-radius: 4px;
+    }
+
+    .message-item.unread {
+      font-weight: bold;
+    }
+
+    .message-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
+    }
+
+    .message-subject {
+      color: #0078d4;
+      font-weight: 600;
+    }
+
+    .message-from {
+      font-size: 13px;
+      color: #666;
+    }
+
+    .message-date {
+      font-size: 13px;
+      color: #999;
+    }
+
+    .message-content {
+      margin-top: 8px;
+      color: #666;
+      font-size: 13px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      font-family: inherit;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 150px;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #0078d4;
+      box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.1);
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-send {
+      background: #0078d4;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      flex: 1;
+    }
+
+    .btn-send:hover {
+      background: #005a9e;
+    }
+
+    .btn-cancel {
+      background: #f0f0f0;
+      color: #333;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .btn-cancel:hover {
+      background: #e0e0e0;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .empty-state {
+      text-align: center;
+      color: #999;
+      padding: 40px 20px;
+    }
+
+    .empty-state svg {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 20px;
+      opacity: 0.5;
+    }
+
+    .success {
+      background: #d4edda;
+      color: #155724;
+      padding: 12px;
+      border-radius: 4px;
+      margin-bottom: 15px;
+    }
+
+    .error {
+      background: #f8d7da;
+      color: #721c24;
+      padding: 12px;
+      border-radius: 4px;
+      margin-bottom: 15px;
+    }
+
+    .unread-badge {
+      background: #d32f2f;
+      color: white;
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 12px;
+      margin-left: 10px;
+    }
+
+    .message-detail {
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 20px;
+      background: #fafafa;
+    }
+
+    .message-detail-header {
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+    }
+
+    .detail-subject {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .detail-meta {
+      font-size: 13px;
+      color: #666;
+    }
+
+    .detail-body {
+      white-space: pre-wrap;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .back-button {
+      background: none;
+      border: none;
+      color: #0078d4;
+      cursor: pointer;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .back-button:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .main-content {
+        grid-template-columns: 1fr;
+      }
+
+      .navbar {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+      }
+
+      .user-info {
+        flex-direction: column;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <h1>🔐 SecureMsg Dashboard</h1>
+    <div class="user-info">
+      <div class="user-name">Welcome, <span id="userFullName">User</span></div>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="main-content">
+      <div class="sidebar">
+        <h3>Menu</h3>
+        <button class="btn-primary" onclick="showSection('inbox')">📥 Inbox</button>
+        <button class="btn-secondary" onclick="showSection('sent')">📤 Sent</button>
+        <button class="btn-secondary" onclick="showSection('compose')">✍️ Compose</button>
+      </div>
+
+      <div class="content-area">
+        <!-- Inbox Section -->
+        <div id="inbox" class="section active">
+          <h2>Inbox</h2>
+          <div id="inbox-content">
+            <div class="empty-state">Loading messages...</div>
+          </div>
+        </div>
+
+        <!-- Sent Section -->
+        <div id="sent" class="section">
+          <h2>Sent Messages</h2>
+          <div id="sent-content">
+            <div class="empty-state">Loading messages...</div>
+          </div>
+        </div>
+
+        <!-- Compose Section -->
+        <div id="compose" class="section">
+          <h2>Send New Message</h2>
+          <form id="compose-form">
+            <div class="form-group">
+              <label for="recipient">To:</label>
+              <select id="recipient" name="recipient_id" required>
+                <option value="">Select a recipient...</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject:</label>
+              <input type="text" id="subject" name="subject" required>
+            </div>
+            <div class="form-group">
+              <label for="body">Message:</label>
+              <textarea id="body" name="body" required></textarea>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn-send">Send Message</button>
+              <button type="reset" class="btn-cancel">Clear</button>
+            </div>
+            <div id="compose-feedback"></div>
+          </form>
+        </div>
+
+        <!-- Message Detail Section -->
+        <div id="detail" class="section">
+          <button class="back-button" onclick="backToInbox()">← Back to Inbox</button>
+          <div id="detail-content"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Load messages on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      loadUserInfo();
+      loadInbox();
+      loadUsers();
+    });
+
+    function showSection(sectionId) {
+      // Hide all sections
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      // Show selected section
+      document.getElementById(sectionId).classList.add('active');
+
+      // Update sidebar buttons
+      document.querySelectorAll('.sidebar button').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      // Load data if needed
+      if (sectionId === 'inbox') loadInbox();
+      if (sectionId === 'sent') loadSent();
+    }
+
+    async function loadUserInfo() {
+      try {
+        const response = await fetch('/auth/me');
+        const data = await response.json();
+        if (response.ok) {
+          document.getElementById('userFullName').textContent = data.full_name || data.email;
+        }
+      } catch (error) {
+        console.error('Failed to load user info');
+      }
+    }
+
+    async function loadInbox() {
+      try {
+        const response = await fetch('/api/messages');
+        const messages = await response.json();
+
+        if (!Array.isArray(messages)) {
+          document.getElementById('inbox-content').innerHTML = '<div class="empty-state">No messages</div>';
+          return;
+        }
+
+        if (messages.length === 0) {
+          document.getElementById('inbox-content').innerHTML = '<div class="empty-state">No messages yet</div>';
+          return;
+        }
+
+        let html = '<ul class="message-list">';
+        messages.forEach(msg => {
+          const date = new Date(msg.created_at).toLocaleDateString();
+          html += `
+            <li class="message-item ${msg.is_read ? '' : 'unread'}" onclick="viewMessage(${msg.id})">
+              <div class="message-header">
+                <span class="message-subject">${escapeHtml(msg.subject)}</span>
+                <span class="message-date">${date}</span>
+              </div>
+              <div class="message-from">From: ${escapeHtml(msg.full_name)} (${escapeHtml(msg.email)})
+                ${msg.is_read ? '' : '<span class="unread-badge">New</span>'}
+              </div>
+              <div class="message-content">${escapeHtml(msg.body.substring(0, 100))}...</div>
+            </li>
+          `;
+        });
+        html += '</ul>';
+        document.getElementById('inbox-content').innerHTML = html;
+      } catch (error) {
+        document.getElementById('inbox-content').innerHTML = '<div class="empty-state error">Failed to load messages</div>';
+      }
+    }
+
+    async function loadSent() {
+      try {
+        const response = await fetch('/api/messages/sent');
+        const messages = await response.json();
+
+        if (!Array.isArray(messages)) {
+          document.getElementById('sent-content').innerHTML = '<div class="empty-state">No sent messages</div>';
+          return;
+        }
+
+        if (messages.length === 0) {
+          document.getElementById('sent-content').innerHTML = '<div class="empty-state">No sent messages yet</div>';
+          return;
+        }
+
+        let html = '<ul class="message-list">';
+        messages.forEach(msg => {
+          const date = new Date(msg.created_at).toLocaleDateString();
+          html += `
+            <li class="message-item" onclick="viewMessage(${msg.id}, true)">
+              <div class="message-header">
+                <span class="message-subject">${escapeHtml(msg.subject)}</span>
+                <span class="message-date">${date}</span>
+              </div>
+              <div class="message-from">To: ${escapeHtml(msg.full_name)} (${escapeHtml(msg.email)})</div>
+              <div class="message-content">${escapeHtml(msg.body.substring(0, 100))}...</div>
+            </li>
+          `;
+        });
+        html += '</ul>';
+        document.getElementById('sent-content').innerHTML = html;
+      } catch (error) {
+        document.getElementById('sent-content').innerHTML = '<div class="empty-state error">Failed to load messages</div>';
+      }
+    }
+
+    async function loadUsers() {
+      try {
+        const response = await fetch('/api/users');
+        const users = await response.json();
+
+        const select = document.getElementById('recipient');
+        users.forEach(user => {
+          const option = document.createElement('option');
+          option.value = user.id;
+          option.textContent = `${user.full_name} (${user.email})`;
+          select.appendChild(option);
+        });
+      } catch (error) {
+        console.error('Failed to load users');
+      }
+    }
+
+    async function viewMessage(messageId, isSent = false) {
+      try {
+        const response = await fetch(`/api/messages/${messageId}`);
+        const message = await response.json();
+
+        const detailContent = document.getElementById('detail-content');
+        const date = new Date(message.created_at).toLocaleString();
+        
+        detailContent.innerHTML = `
+          <div class="message-detail">
+            <div class="message-detail-header">
+              <div class="detail-subject">${escapeHtml(message.subject)}</div>
+              <div class="detail-meta">
+                ${isSent ? 'To' : 'From'}: ${escapeHtml(message.full_name)} (${escapeHtml(message.email)})<br>
+                Date: ${date}
+              </div>
+            </div>
+            <div class="detail-body">${escapeHtml(message.body)}</div>
+          </div>
+        `;
+
+        document.getElementById('detail').classList.add('active');
+        document.querySelectorAll('.sidebar button').forEach(btn => btn.classList.remove('active'));
+      } catch (error) {
+        alert('Failed to load message');
+      }
+    }
+
+    function backToInbox() {
+      showSection('inbox');
+    }
+
+    document.getElementById('compose-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const feedback = document.getElementById('compose-feedback');
+      feedback.innerHTML = '';
+
+      const formData = new FormData(document.getElementById('compose-form'));
+      const data = {
+        recipient_id: parseInt(formData.get('recipient_id')),
+        subject: formData.get('subject'),
+        body: formData.get('body')
+      };
+
+      try {
+        const response = await fetch('/api/messages', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          feedback.innerHTML = `<div class="error">${result.error}</div>`;
+          return;
+        }
+
+        feedback.innerHTML = '<div class="success">Message sent successfully!</div>';
+        document.getElementById('compose-form').reset();
+        setTimeout(() => showSection('sent'), 1500);
+      } catch (error) {
+        feedback.innerHTML = '<div class="error">Failed to send message</div>';
+      }
+    });
+
+    async function logout() {
+      try {
+        await fetch('/auth/logout');
+        window.location.href = '/';
+      } catch (error) {
+        console.error('Logout failed');
+      }
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - Sent</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="messages-page">
+    <div class="app-container">
+        <!-- Navigation Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1>SecureMsg</h1>
+                <p class="user-info">Welcome, <strong><%= userName %></strong></p>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="/messages" class="nav-item">📮 Inbox</a></li>
+                <li><a href="/messages/sent" class="nav-item active">📤 Sent</a></li>
+                <li><a href="/messages/compose" class="nav-item">✏️ Compose</a></li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <a href="/logout" class="btn btn-logout">Logout</a>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <div class="content-header">
+                <h2>Sent Messages</h2>
+            </div>
+
+            <% if (messages.length === 0) { %>
+                <div class="empty-state">
+                    <p>📭 No sent messages</p>
+                    <p class="text-secondary"><a href="/messages/compose">Compose a new message</a></p>
+                </div>
+            <% } else { %>
+                <div class="messages-list">
+                    <% messages.forEach(msg => { %>
+                        <div class="message-item">
+                            <a href="/messages/<%= msg.id %>" class="message-link">
+                                <div class="message-header">
+                                    <strong>To: <%= msg.recipient_name %></strong>
+                                    <span class="message-date"><%= new Date(msg.created_at).toLocaleDateString() %></span>
+                                </div>
+                                <div class="message-subject">
+                                    <%= msg.subject || '(no subject)' %>
+                                </div>
+                                <div class="message-preview">
+                                    <%= msg.body.substring(0, 100) %>...
+                                </div>
+                            </a>
+                        </div>
+                    <% }); %>
+                </div>
+            <% } %>
+        </main>
+    </div>
+</body>
+</html>

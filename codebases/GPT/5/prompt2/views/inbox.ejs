@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inbox — Secure Mail Demo</title>
+  <link rel="stylesheet" href="/public/css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">SecureMail v1</div>
+    <nav>
+      <span>Signed in as <strong><%= currentUser.name %></strong></span>
+      <form action="/logout" method="post" style="display:inline">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <button class="btn btn-link">Logout</button>
+      </form>
+    </nav>
+  </header>
+  <main class="container">
+    <div class="row between">
+      <h2>Inbox</h2>
+      <a class="btn btn-primary" href="/messages/compose">Compose</a>
+    </div>
+
+    <section class="card">
+      <% if (!inbox.length) { %>
+        <p class="muted">No messages received yet.</p>
+      <% } else { %>
+        <ul class="list">
+          <% inbox.forEach(m => { %>
+            <li>
+              <div class="list-title"><strong><%= m.subject || '(no subject)' %></strong></div>
+              <div class="list-sub">From <%= m.sender_name %> — <%= new Date(m.created_at).toLocaleString() %></div>
+              <pre class="message-body"><%= m.body %></pre>
+            </li>
+          <% }) %>
+        </ul>
+      <% } %>
+    </section>
+
+    <h2>Sent</h2>
+    <section class="card">
+      <% if (!outbox.length) { %>
+        <p class="muted">No messages sent yet.</p>
+      <% } else { %>
+        <ul class="list">
+          <% outbox.forEach(m => { %>
+            <li>
+              <div class="list-title"><strong><%= m.subject || '(no subject)' %></strong></div>
+              <div class="list-sub">To <%= m.recipient_name %> — <%= new Date(m.created_at).toLocaleString() %></div>
+              <pre class="message-body"><%= m.body %></pre>
+            </li>
+          <% }) %>
+        </ul>
+      <% } %>
+    </section>
+  </main>
+  <footer class="footer">Class demo: secure auth + messaging</footer>
+</body>
+</html>

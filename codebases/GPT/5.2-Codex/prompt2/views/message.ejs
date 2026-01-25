@@ -1,0 +1,19 @@
+<%- include('partials/header', { title: 'Message' }) %>
+
+<section class="dashboard">
+  <div class="panel">
+    <% if (!message) { %>
+      <h2>Message not found</h2>
+      <p class="muted">The message you are looking for is not available.</p>
+      <a class="link" href="/inbox">Back to inbox</a>
+    <% } else { %>
+      <h2><%= message.subject %></h2>
+      <p class="muted">From <%= message.sender_name %> · <%= message.sender_email %></p>
+      <p class="message-body"><%= message.body %></p>
+      <p class="muted">Received <%= message.created_at %></p>
+      <a class="link" href="/inbox">Back to inbox</a>
+    <% } %>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

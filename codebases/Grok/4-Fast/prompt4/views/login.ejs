@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Login Demo</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-box">
+            <img src="/images/logo.png" alt="Logo" class="logo"> <!-- Placeholder for logo -->
+            <h2>Identification</h2>
+            <form action="/login" method="POST">
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="email@domain.net" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="computer" value="public" checked> Public computer
+                    </label>
+                    <label>
+                        <input type="radio" name="computer" value="private"> Private computer
+                    </label>
+                </div>
+                <button type="submit" class="connect-btn">Connect</button>
+            </form>
+            <p class="register-link">Don't have an account? <a href="/register">Register here</a></p>
+        </div>
+    </div>
+</body>
+</html>

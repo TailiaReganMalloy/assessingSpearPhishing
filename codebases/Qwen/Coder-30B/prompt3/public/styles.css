@@ -1,0 +1,113 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0a2a4d; /* Dark blue background */
+    color: #333;
+    height: 100vh;
+}
+
+/* Header styles */
+.header {
+    background-color: #0a2a4d; /* Dark navy-blue background */
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Login container */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 60px); /* Account for header height */
+    background-color: #0a2a4d; /* Same dark blue background */
+}
+
+/* Login panel */
+.login-panel {
+    background-color: white;
+    border-radius: 8px;
+    padding: 30px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.panel-title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 25px;
+    font-size: 24px;
+}
+
+/* Form elements */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Radio buttons */
+.radio-group {
+    margin-bottom: 25px;
+}
+
+.radio-option {
+    margin-bottom: 10px;
+}
+
+.radio-option input[type="radio"] {
+    margin-right: 8px;
+}
+
+/* Connect button */
+.connect-button {
+    width: 100%;
+    padding: 14px;
+    background-color: #1e88e5; /* Bright blue */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.connect-button:hover {
+    background-color: #1565c0;
+}
+
+/* Error message */
+.error-message {
+    color: #d32f2f;
+    margin-top: 10px;
+    text-align: center;
+}

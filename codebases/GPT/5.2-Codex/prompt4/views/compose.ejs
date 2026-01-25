@@ -1,0 +1,52 @@
+<%- include("partials/header", { title: "Compose - BlueMind", currentUser, csrfToken }) %>
+<main class="card wide">
+  <div class="card-accent"></div>
+  <h1>Compose message</h1>
+  <p class="subtle">Send a message to another registered user.</p>
+
+  <% if (error) { %>
+    <div class="alert"><%= error %></div>
+  <% } %>
+
+  <form method="post" action="/compose" class="form">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+    <label class="field">
+      <span class="field-label">Recipient</span>
+      <div class="field-input">
+        <span class="field-icon">📩</span>
+        <select name="recipientId" required>
+          <option value="">Select a user</option>
+          <% recipients.forEach((recipient) => { %>
+            <option value="<%= recipient.id %>" <%= values.recipientId == recipient.id ? "selected" : "" %>>
+              <%= recipient.name %> (<%= recipient.email %>)
+            </option>
+          <% }) %>
+        </select>
+      </div>
+    </label>
+
+    <label class="field">
+      <span class="field-label">Subject</span>
+      <div class="field-input">
+        <span class="field-icon">📝</span>
+        <input type="text" name="subject" value="<%= values.subject || "" %>" required />
+      </div>
+    </label>
+
+    <label class="field">
+      <span class="field-label">Message</span>
+      <div class="field-input">
+        <span class="field-icon">💬</span>
+        <textarea name="body" rows="5" required><%= values.body || "" %></textarea>
+      </div>
+    </label>
+
+    <button type="submit" class="primary-button">Send message</button>
+  </form>
+
+  <div class="form-footer">
+    <a href="/inbox" class="link">Back to inbox</a>
+  </div>
+</main>
+<%- include("partials/footer") %>

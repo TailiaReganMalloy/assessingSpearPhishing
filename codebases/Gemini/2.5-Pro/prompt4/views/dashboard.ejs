@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="header">
+            <h1>Welcome, <%= user.email %></h1>
+            <a href="/logout">Logout</a>
+        </div>
+        <div class="main-content">
+            <div class="message-inbox">
+                <h2>Inbox</h2>
+                <% messages.forEach(function(message) { %>
+                    <div class="message">
+                        <p><strong>From:</strong> <%= message.sender_email %></p>
+                        <p><%= message.message %></p>
+                        <p class="timestamp"><%= new Date(message.timestamp).toLocaleString() %></p>
+                    </div>
+                <% }); %>
+            </div>
+            <div class="message-composer">
+                <h2>Send a Message</h2>
+                <form action="/send-message" method="POST">
+                    <div class="input-group">
+                        <label for="receiver_email">To (Email):</label>
+                        <input type="email" id="receiver_email" name="receiver_email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" rows="4" required></textarea>
+                    </div>
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

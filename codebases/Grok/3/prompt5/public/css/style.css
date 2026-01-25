@@ -1,0 +1,186 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #1e3a8a; /* Dark blue background */
+  color: #333;
+}
+
+.header {
+  background-color: #172554; /* Dark navy-blue */
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.icon {
+  margin-right: 10px;
+  font-size: 28px;
+}
+
+.user-info {
+  font-size: 16px;
+}
+
+.user-info a {
+  color: white;
+  text-decoration: none;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 60px);
+  padding: 20px;
+}
+
+.login-panel, .messages-panel {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px; /* Limit width for login panel */
+  text-align: center;
+}
+
+.messages-panel {
+  max-width: 800px; /* Wider for messages panel */
+  text-align: left;
+}
+
+h2 {
+  color: #1f2937; /* Dark gray */
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+h3 {
+  color: #1f2937;
+  margin-top: 30px;
+  font-size: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"], input[type="password"], textarea, select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.radio-group div {
+  display: flex;
+  align-items: center;
+}
+
+input[type="radio"] {
+  margin-right: 10px;
+}
+
+.connect-btn {
+  background-color: #3b82f6; /* Bright blue */
+  color: white;
+  font-weight: bold;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 16px;
+}
+
+.connect-btn:hover {
+  background-color: #2563eb;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 15px;
+}
+
+.register-link {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.register-link a {
+  color: #3b82f6;
+  text-decoration: none;
+}
+
+.message-list {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+}
+
+.message {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.message.sent {
+  background-color: #dbeafe;
+  margin-left: 20%;
+  margin-right: 5px;
+  text-align: right;
+}
+
+.message.received {
+  background-color: #f3f4f6;
+  margin-right: 20%;
+  margin-left: 5px;
+}
+
+.message p {
+  margin: 0 0 5px 0;
+}
+
+.message small {
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.send-message {
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+}

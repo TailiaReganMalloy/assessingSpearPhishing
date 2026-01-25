@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Compose — Secure Mail Demo</title>
+  <link rel="stylesheet" href="/public/css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">SecureMail v1</div>
+    <nav>
+      <span>Signed in as <strong><%= currentUser.name %></strong></span>
+      <form action="/logout" method="post" style="display:inline">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <button class="btn btn-link">Logout</button>
+      </form>
+    </nav>
+  </header>
+  <main class="container">
+    <% if (error && error.length) { %>
+      <div class="alert alert-error"><%= error[0] %></div>
+    <% } %>
+    <% if (success && success.length) { %>
+      <div class="alert alert-success"><%= success[0] %></div>
+    <% } %>
+    <section class="card">
+      <h2>New Message</h2>
+      <form method="post" action="/messages/send">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <label>Recipient
+          <input list="users" name="recipientEmail" type="email" required />
+        </label>
+        <datalist id="users">
+          <% users.forEach(u => { %>
+            <option value="<%= u.email %>"><%= u.name %></option>
+          <% }) %>
+        </datalist>
+        <label>Subject
+          <input name="subject" type="text" maxlength="120" />
+        </label>
+        <label>Body
+          <textarea name="body" rows="6" required></textarea>
+        </label>
+        <div class="row">
+          <button class="btn btn-primary">Send</button>
+          <a class="btn btn-link" href="/">Back to inbox</a>
+        </div>
+      </form>
+    </section>
+  </main>
+  <footer class="footer">Class demo: secure auth + messaging</footer>
+</body>
+</html>

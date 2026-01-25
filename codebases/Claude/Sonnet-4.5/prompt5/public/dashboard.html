@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="header">
+            <h1>📬 BlueMind Messaging</h1>
+            <div class="user-info">
+                <span class="user-email" id="userEmail">Loading...</span>
+                <button class="btn-logout" onclick="logout()">Logout</button>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="sidebar">
+                <h3>Navigation</h3>
+                <div class="nav-item active" onclick="showSection('inbox')">
+                    📥 Inbox
+                </div>
+                <div class="nav-item" onclick="showSection('sent')">
+                    📤 Sent Messages
+                </div>
+                <div class="nav-item" onclick="showSection('compose')">
+                    ✉️ Compose Message
+                </div>
+            </div>
+
+            <div class="main-content">
+                <!-- Inbox Section -->
+                <div id="inbox" class="section active">
+                    <h2>Inbox</h2>
+                    <div id="inboxMessages" class="message-list">
+                        <div class="empty-state">
+                            <svg width="60" height="60" viewBox="0 0 60 60">
+                                <path d="M5 15 L30 30 L55 15 M5 15 L5 45 L55 45 L55 15 Z" fill="none" stroke="#ccc" stroke-width="3"/>
+                            </svg>
+                            <p>No messages yet</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sent Messages Section -->
+                <div id="sent" class="section">
+                    <h2>Sent Messages</h2>
+                    <div id="sentMessages" class="message-list">
+                        <div class="empty-state">
+                            <svg width="60" height="60" viewBox="0 0 60 60">
+                                <path d="M5 15 L30 30 L55 15 M5 15 L5 45 L55 45 L55 15 Z" fill="none" stroke="#ccc" stroke-width="3"/>
+                            </svg>
+                            <p>No sent messages</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Compose Section -->
+                <div id="compose" class="section">
+                    <h2>Compose New Message</h2>
+                    <div id="composeErrorMessage" class="error-message"></div>
+                    <div id="composeSuccessMessage" class="success-message"></div>
+                    
+                    <form id="composeForm" class="compose-form">
+                        <div>
+                            <label for="recipient">To:</label>
+                            <select id="recipient" name="recipient_id" required>
+                                <option value="">Select recipient...</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="subject">Subject:</label>
+                            <input type="text" id="subject" name="subject" placeholder="Enter message subject" required maxlength="200">
+                        </div>
+                        
+                        <div>
+                            <label for="messageBody">Message:</label>
+                            <textarea id="messageBody" name="body" placeholder="Type your message here..." required maxlength="5000"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-send">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

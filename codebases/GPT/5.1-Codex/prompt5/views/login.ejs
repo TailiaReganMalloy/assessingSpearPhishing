@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BlueMind Demo • Identification</title>
+    <link rel="stylesheet" href="/styles/main.css" />
+    <script src="/scripts/login.js" defer></script>
+  </head>
+  <body class="page page--login">
+    <header class="hero">
+      <div class="hero__logo">
+        <div class="logo-mark">BM</div>
+        <div>
+          <p class="brand">BlueMind</p>
+          <p class="version">v5</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="panel">
+      <h1>Identification</h1>
+      <% if (flash) { %>
+        <div class="alert alert--<%= flash.type %>"><%= flash.message %></div>
+      <% } %>
+      <form method="POST" action="/login" class="form">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <label class="field">
+          <span>Login</span>
+          <input type="email" name="email" placeholder="email@bluemind.net" autocomplete="username" required />
+        </label>
+        <label class="field field--password">
+          <span>Password</span>
+          <input type="password" name="password" placeholder="••••••••" autocomplete="current-password" required />
+          <button class="password-toggle" type="button" aria-label="Toggle password visibility">👁</button>
+        </label>
+        <div class="device-choice">
+          <label>
+            <input type="radio" name="deviceType" value="private" <%= deviceType === 'private' ? 'checked' : '' %> />
+            <span>Private computer</span>
+          </label>
+          <label>
+            <input type="radio" name="deviceType" value="public" <%= deviceType === 'public' ? 'checked' : '' %> />
+            <span>Public computer</span>
+          </label>
+        </div>
+        <button type="submit" class="btn-primary">Connect</button>
+      </form>
+    </main>
+
+  </body>
+</html>

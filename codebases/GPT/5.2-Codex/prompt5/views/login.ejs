@@ -1,0 +1,54 @@
+<%- include("partials/head", { title: "Identification", bodyClass: "auth-bg" }) %>
+  <section class="card">
+    <div class="card-accent"></div>
+    <h1>Identification</h1>
+    <% if (error) { %>
+      <div class="alert" role="alert"><%= error %></div>
+    <% } %>
+    <form method="POST" action="/login" class="form">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      <label class="field">
+        <span class="field-label">Login</span>
+        <div class="field-input">
+          <span class="icon">✉️</span>
+          <input
+            type="email"
+            name="email"
+            placeholder="email@bluemind.net"
+            value="<%= formData.email %>"
+            autocomplete="username"
+            required
+          />
+        </div>
+      </label>
+
+      <label class="field">
+        <span class="field-label">Password</span>
+        <div class="field-input">
+          <span class="icon">🔒</span>
+          <input
+            type="password"
+            name="password"
+            placeholder="••••••••"
+            autocomplete="current-password"
+            required
+          />
+        </div>
+      </label>
+
+      <div class="radio-group">
+        <label>
+          <input type="radio" name="device" value="private" <%= formData.device === 'private' ? 'checked' : '' %> />
+          Private computer
+        </label>
+        <label>
+          <input type="radio" name="device" value="public" <%= formData.device === 'public' ? 'checked' : '' %> />
+          Public computer
+        </label>
+      </div>
+
+      <button type="submit" class="primary-button">Connect</button>
+    </form>
+    <p class="subtle demo-hint">Demo account: demo@bluemind.net / Password123!</p>
+  </section>
+<%- include("partials/footer") %>

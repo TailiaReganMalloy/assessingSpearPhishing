@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compose Message - BlueMind v5</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="dashboard-card">
+            <div class="dashboard-header">
+                <div class="dashboard-title">
+                    <div class="logo">
+                        <div class="logo-icon"></div>
+                        <span>Compose Message</span>
+                    </div>
+                </div>
+                <div class="user-info">
+                    <span class="user-email">👤 <%= userEmail %></span>
+                    <span class="security-badge">Encrypted Session</span>
+                    <form action="/logout" method="POST" style="display: inline;">
+                        <button type="submit" class="btn-secondary">Logout</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="dashboard-nav">
+                <a href="/dashboard" class="nav-link">📧 Messages</a>
+                <a href="/compose" class="nav-link active">✏️ Compose</a>
+            </div>
+            
+            <div class="dashboard-content">
+                <% if (error) { %>
+                    <div class="alert alert-error">
+                        <%= error %>
+                    </div>
+                <% } %>
+                
+                <% if (success) { %>
+                    <div class="alert alert-success">
+                        <%= success %>
+                    </div>
+                <% } %>
+                
+                <form action="/send-message" method="POST" class="compose-form">
+                    <div class="form-group">
+                        <label class="form-label">📧 To (Recipient Email)</label>
+                        <input type="email" name="recipient" class="form-input" 
+                               placeholder="recipient@example.com" required>
+                        <div style="font-size: 12px; color: #666; margin-top: 4px;">
+                            💡 Tip: The recipient must have an account on this system
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">📝 Subject</label>
+                        <input type="text" name="subject" class="form-input" 
+                               placeholder="Message subject" required maxlength="200">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">💬 Message</label>
+                        <textarea name="message" class="form-input" 
+                                  placeholder="Write your message here..." 
+                                  required maxlength="5000" rows="8"></textarea>
+                        <div style="font-size: 12px; color: #666; margin-top: 4px;">
+                            <span id="charCount">0</span>/5000 characters
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 10px; margin-top: 20px;">
+                        <button type="submit" class="btn-primary">📤 Send Message</button>
+                        <a href="/dashboard" class="btn-secondary" style="text-decoration: none; display: inline-block;">
+                            ❌ Cancel
+                        </a>
+                    </div>
+                </form>
+                
+                <div style="margin-top: 30px; padding: 15px; background: #e3f2fd; border-radius: 6px; border-left: 4px solid #2196F3;">
+                    <h4 style="margin: 0 0 10px 0; color: #1976D2;">🔒 Security Features</h4>
+                    <ul style="margin: 0; padding-left: 20px; font-size: 14px; color: #1565C0;">
+                        <li>All messages are stored securely with server-side validation</li>
+                        <li>User authentication required for all operations</li>
+                        <li>Session-based security with automatic logout</li>
+                        <li>Input validation and sanitization</li>
+                        <li>Rate limiting on authentication attempts</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Character counter
+        const messageTextarea = document.querySelector('textarea[name="message"]');
+        const charCount = document.getElementById('charCount');
+        
+        messageTextarea.addEventListener('input', function() {
+            const count = this.value.length;
+            charCount.textContent = count;
+            
+            if (count > 4500) {
+                charCount.style.color = '#f44336';
+            } else if (count > 4000) {
+                charCount.style.color = '#ff9800';
+            } else {
+                charCount.style.color = '#666';
+            }
+        });
+        
+        // Form validation
+        const form = document.querySelector('.compose-form');
+        form.addEventListener('submit', function(e) {
+            const recipient = document.querySelector('input[name="recipient"]').value;
+            const subject = document.querySelector('input[name="subject"]').value;
+            const message = document.querySelector('textarea[name="message"]').value;
+            
+            if (!recipient || !subject || !message) {
+                e.preventDefault();
+                alert('Please fill in all fields');
+                return false;
+            }
+            
+            if (message.length < 10) {
+                e.preventDefault();
+                alert('Message must be at least 10 characters long');
+                return false;
+            }
+            
+            // Confirm sending
+            if (!confirm(`Send message to ${recipient}?`)) {
+                e.preventDefault();
+                return false;
+            }
+        });
+        
+        // Auto-save draft (simple localStorage implementation)
+        function saveDraft() {
+            const draft = {
+                recipient: document.querySelector('input[name="recipient"]').value,
+                subject: document.querySelector('input[name="subject"]').value,
+                message: document.querySelector('textarea[name="message"]').value,
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem('messageDraft', JSON.stringify(draft));
+        }
+        
+        function loadDraft() {
+            const draft = localStorage.getItem('messageDraft');
+            if (draft) {
+                const data = JSON.parse(draft);
+                // Only load if draft is less than 1 hour old
+                const draftAge = Date.now() - new Date(data.timestamp).getTime();
+                if (draftAge < 3600000) { // 1 hour
+                    if (confirm('Load saved draft?')) {
+                        document.querySelector('input[name="recipient"]').value = data.recipient || '';
+                        document.querySelector('input[name="subject"]').value = data.subject || '';
+                        document.querySelector('textarea[name="message"]').value = data.message || '';
+                        messageTextarea.dispatchEvent(new Event('input'));
+                    }
+                }
+            }
+        }
+        
+        // Auto-save every 30 seconds
+        setInterval(saveDraft, 30000);
+        
+        // Save on input
+        document.querySelectorAll('input, textarea').forEach(input => {
+            input.addEventListener('input', saveDraft);
+        });
+        
+        // Load draft on page load
+        window.addEventListener('load', loadDraft);
+        
+        // Clear draft on successful send
+        form.addEventListener('submit', function() {
+            localStorage.removeItem('messageDraft');
+        });
+    </script>
+</body>
+</html>

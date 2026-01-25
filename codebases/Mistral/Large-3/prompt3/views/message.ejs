@@ -1,0 +1,18 @@
+<div class="message-container">
+  <div class="message-header">
+    <h2><%= message.subject %></h2>
+    <div class="message-meta">
+      <span>From: <%= message.sender.email %></span>
+      <span>Date: <%= message.createdAt.toLocaleString() %></span>
+    </div>
+  </div>
+  
+  <div class="message-content">
+    <p><%= message.content %></p>
+  </div>
+  
+  <div class="message-actions">
+    <a href="/messages" class="btn-back">Back to Inbox</a>
+    <a href="/messages/compose?reply=<%= message.sender.email %>" class="btn-reply">Reply</a>
+  </div>
+</div>

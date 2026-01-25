@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind - Inbox</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="logo-container">
+        <div class="logo-text">
+            <span><i class="fas fa-cube"></i> BlueMind</span>
+        </div>
+    </div>
+
+    <div class="inbox-container">
+        <div class="inbox-header">
+            <div>
+                <h3>Inbox</h3>
+                <small>Logged in as: <%= user %></small>
+            </div>
+            <div>
+                <a href="/compose" class="btn-connect" style="text-decoration: none; font-size: 14px; padding: 8px;">New Message</a>
+                <a href="/logout" style="color: red; margin-left: 10px; text-decoration: none;">Logout</a>
+            </div>
+        </div>
+
+        <div class="message-list">
+            <% if (messages.length === 0) { %>
+                <div style="padding: 20px; text-align: center; color: #777;">No messages received.</div>
+            <% } else { %>
+                <% messages.forEach(function(msg) { %>
+                    <div class="message-item">
+                        <div class="msg-sender"><%= msg.sender_email %> <span class="msg-date"><%= new Date(msg.timestamp).toLocaleString() %></span></div>
+                        <div class="msg-subject"><%= msg.subject %></div>
+                        <div style="margin-top: 5px; color: #555;"><%= msg.body %></div>
+                    </div>
+                <% }); %>
+            <% } %>
+        </div>
+    </div>
+
+</body>
+</html>

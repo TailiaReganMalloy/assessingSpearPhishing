@@ -1,0 +1,165 @@
+body {
+    background-color: #001f5c;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.login-container {
+    background-color: white;
+    padding: 0;
+    width: 450px;
+    border-radius: 4px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+.login-header {
+    height: 6px;
+    background-color: #ff9da1; /* Pink bar at the top */
+    border-radius: 4px 4px 0 0;
+}
+
+.login-content {
+    padding: 40px;
+    text-align: center;
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo span {
+    color: #0091ff;
+}
+
+h2 {
+    color: #333;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding: 5px 0;
+}
+
+.form-group label {
+    font-weight: bold;
+    font-size: 14px;
+    color: #555;
+    width: 100px;
+    display: flex;
+    align-items: center;
+}
+
+.form-group label i {
+    margin-right: 10px;
+}
+
+.form-group input {
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color: #333;
+    flex-grow: 1;
+    padding: 5px;
+}
+
+.options {
+    text-align: left;
+    margin: 20px 0;
+    padding-left: 100px;
+}
+
+.option {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #666;
+    display: flex;
+    align-items: center;
+}
+
+.option input {
+    margin-right: 10px;
+}
+
+.btn-connect {
+    background-color: #0091ff;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 4px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.btn-connect:hover {
+    background-color: #0076d1;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* Dashboard styles */
+.dashboard-container {
+    background-color: white;
+    padding: 30px;
+    width: 800px;
+    border-radius: 8px;
+}
+
+.message-box {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+.message-header {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #001f5c;
+}
+
+.message-time {
+    font-size: 12px;
+    color: #888;
+}
+
+.compose-box {
+    margin-top: 30px;
+    border-top: 2px solid #001f5c;
+    padding-top: 20px;
+}
+
+select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}

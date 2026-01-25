@@ -1,0 +1,5 @@
+<% const _title = typeof title !== 'undefined' ? title : 'Secure Mail Demo'; %>
+<% const csrfToken = typeof csrfToken !== 'undefined' ? csrfToken : '' %>
+<% const error = typeof error !== 'undefined' ? error : [] %>
+<% const success = typeof success !== 'undefined' ? success : [] %>
+<%- include('../layout', { title: _title, csrfToken, error, success, body: content }) %>

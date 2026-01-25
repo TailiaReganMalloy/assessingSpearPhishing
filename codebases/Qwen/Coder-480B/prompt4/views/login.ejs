@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Login</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Header bar with BlueMind logo -->
+    <header class="header-bar">
+        <div class="logo-container">
+            <div class="logo-icon">⬢</div>
+            <h1 class="logo-text">BlueMind</h1>
+        </div>
+    </header>
+
+    <!-- Login panel -->
+    <main class="main-content">
+        <div class="login-panel">
+            <h2 class="panel-title">Identification</h2>
+            
+            <% if (typeof error !== 'undefined' && error) { %>
+                <div class="error-message"><%= error %></div>
+            <% } %>
+            
+            <form action="/login" method="POST" class="login-form">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                
+                <div class="form-group">
+                    <label for="login">Login</label>
+                    <input type="text" id="login" name="login" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="computerType" value="private" checked>
+                        <span class="radio-label">Private computer</span>
+                    </label>
+                    
+                    <label class="radio-option">
+                        <input type="radio" name="computerType" value="public">
+                        <span class="radio-label">Public computer</span>
+                    </label>
+                </div>
+                
+                <button type="submit" class="connect-button">Connect</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

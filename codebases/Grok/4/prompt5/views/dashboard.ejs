@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Secure App</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Your Dashboard</h1>
+        <a href="/logout">Logout</a>
+        
+        <h2>Send Message</h2>
+        <form action="/send" method="POST">
+            <label for="receiverEmail">Receiver Email</label>
+            <input type="email" id="receiverEmail" name="receiverEmail" required>
+            
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required></textarea>
+            
+            <button type="submit">Send</button>
+        </form>
+        
+        <h2>Your Messages</h2>
+        <% if (messages.length === 0) { %>
+            <p>No messages yet.</p>
+        <% } else { %>
+            <ul>
+                <% messages.forEach(msg => { %>
+                    <li>
+                        <strong>From:</strong> <%= msg.sender %> <br>
+                        <strong>Message:</strong> <%= msg.message %> <br>
+                        <strong>Time:</strong> <%= msg.timestamp %>
+                    </li>
+                <% }); %>
+            </ul>
+        <% } %>
+    </div>
+</body>
+</html>

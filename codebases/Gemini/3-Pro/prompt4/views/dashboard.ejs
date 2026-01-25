@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - BlueMind</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { font-family: sans-serif; background: #f0f2f5; margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 20px; margin-bottom: 20px; }
+        .welcome { font-size: 20px; font-weight: bold; color: #333; }
+        .logout { color: #d9534f; text-decoration: none; }
+        
+        .section-title { font-size: 18px; margin-bottom: 15px; color: #555; border-bottom: 2px solid #0088ff; display: inline-block; padding-bottom: 5px; }
+        
+        .send-form { background: #f9f9f9; padding: 15px; border-radius: 4px; margin-bottom: 30px; }
+        .form-row { display: flex; gap: 10px; margin-bottom: 10px; }
+        input, textarea { padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        input { flex: 1; }
+        textarea { width: 100%; box-sizing: border-box; resize: vertical; min-height: 80px; }
+        button { background: #0088ff; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; }
+        
+        .message-list { list-style: none; padding: 0; }
+        .message-card { border: 1px solid #eee; padding: 15px; margin-bottom: 15px; border-radius: 4px; border-left: 4px solid #ccc; }
+        .message-card.received { border-left-color: #28a745; background: #faffff; }
+        .message-card.sent { border-left-color: #0088ff; background: #f0f8ff; }
+        
+        .meta { font-size: 12px; color: #777; margin-bottom: 8px; display: flex; justify-content: space-between; }
+        .content { font-size: 15px; line-height: 1.4; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="welcome">Welcome, <%= user.email %></div>
+            <a href="/logout" class="logout">Logout</a>
+        </div>
+
+        <div class="send-form">
+            <div class="section-title">Send New Message</div>
+            <form action="/send-message" method="POST">
+                <div class="form-row">
+                    <input type="email" name="receiver_email" placeholder="Recipient Email (e.g. valid-user@test.com)" required>
+                </div>
+                <div class="form-row">
+                    <textarea name="content" placeholder="Type your message here..." required></textarea>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+
+        <div class="section-title">Message History</div>
+        <ul class="message-list">
+            <% if (messages.length === 0) { %>
+                <li style="color: #888; text-align: center; padding: 20px;">No messages yet.</li>
+            <% } %>
+            
+            <% messages.forEach(msg => { %>
+                <% const isSent = msg.sender_id === user.userId; %>
+                <li class="message-card <%= isSent ? 'sent' : 'received' %>">
+                    <div class="meta">
+                        <span>
+                            <% if (isSent) { %>
+                                To: <strong><%= msg.receiver_email %></strong>
+                            <% } else { %>
+                                From: <strong><%= msg.sender_email %></strong>
+                            <% } %>
+                        </span>
+                        <span><%= new Date(msg.timestamp).toLocaleString() %></span>
+                    </div>
+                    <div class="content"><%= msg.content %></div>
+                </li>
+            <% }); %>
+        </ul>
+    </div>
+</body>
+</html>

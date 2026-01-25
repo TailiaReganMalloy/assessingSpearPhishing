@@ -1,0 +1,167 @@
+body {
+    background-color: #000a33; /* Dark Navy Blue */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: #333;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+}
+
+.logo-area {
+    margin-bottom: 30px;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    /* Hexagon shape roughly */
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%233e9eff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 4.9V17L12 22l-9-4.9V7z"/></svg>') no-repeat center;
+}
+
+.login-card {
+    background: white;
+    padding: 40px;
+    border-radius: 4px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    text-align: left;
+    position: relative;
+    border-top: 5px solid #ff8a8a; /* Pinkish top border from image */
+}
+
+.login-header {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #222;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    color: #444;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.form-label i {
+    color: #666;
+}
+
+.form-input-wrapper {
+    position: relative;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    font-size: 16px;
+    outline: none;
+    box-sizing: border-box; /* Important for padding */
+}
+
+.form-input:focus {
+    border-bottom-color: #0088ff;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 0;
+    top: 10px;
+    cursor: pointer;
+    color: #888;
+}
+
+.computer-type {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px 0 30px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.radio-option input[type="radio"] {
+    accent-color: #0088ff;
+    width: 18px;
+    height: 18px;
+}
+
+.btn-connect {
+    width: 100%;
+    padding: 12px;
+    background-color: #0088ff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-connect:hover {
+    background-color: #0066cc;
+}
+
+.version-text {
+    font-size: 12px;
+    color: #ccc;
+    margin-top: 5px;
+    align-self: flex-end;
+}
+
+/* Dashboard Styles */
+.dashboard-container {
+    max-width: 800px;
+    margin: 50px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    min-height: 80vh;
+}
+.message-list {
+    margin-top: 20px;
+    border: 1px solid #eee;
+}
+.message-item {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+.message-meta {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+/* Icons via Font Awesome CDN in the layout */

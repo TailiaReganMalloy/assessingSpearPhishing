@@ -1,0 +1,32 @@
+<%- include("partials/head", { title: "Inbox", bodyClass: "auth-bg" }) %>
+  <section class="card">
+    <div class="card-accent"></div>
+    <div class="inbox-header">
+      <div>
+        <h1>Inbox</h1>
+        <p class="subtle">Signed in as <strong><%= displayName %></strong> · <%= device === 'public' ? 'Public computer' : 'Private computer' %></p>
+      </div>
+      <form method="POST" action="/logout">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <button type="submit" class="secondary-button">Sign out</button>
+      </form>
+    </div>
+
+    <div class="message-list">
+      <% if (messages.length === 0) { %>
+        <p class="subtle">No messages yet.</p>
+      <% } %>
+      <% messages.forEach((message) => { %>
+        <article class="message-card">
+          <div class="message-meta">
+            <span class="from"><%= message.from %></span>
+            <span class="timestamp"><%= message.sentAt %></span>
+          </div>
+          <h2><%= message.subject %></h2>
+          <p><%= message.body %></p>
+          <a class="link-button" href="/message/<%= message.id %>">View message</a>
+        </article>
+      <% }) %>
+    </div>
+  </section>
+<%- include("partials/footer") %>

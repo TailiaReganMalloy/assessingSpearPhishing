@@ -1,0 +1,185 @@
+body {
+    background-color: #001550; /* Dark blue background */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    flex-direction: column;
+}
+
+.logo-container {
+    margin-bottom: 20px;
+    text-align: center;
+    color: white;
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+}
+
+.version {
+    font-size: 12px;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+.login-container {
+    background-color: white;
+    padding: 24px;
+    width: 380px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border-top: 4px solid #f68c92; /* Pinkish top border */
+    text-align: center;
+}
+
+h2 {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    position: relative;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+}
+
+.form-group i {
+    color: #666;
+    padding-right: 10px;
+    font-size: 14px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px 5px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+}
+
+.form-group .toggle-password {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+}
+
+.computer-type {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+    margin: 20px 0;
+    font-size: 14px;
+    color: #555;
+    gap: 10px; /* Add gap between options */
+}
+
+.computer-type label {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between radio and text */
+    cursor: pointer;
+    width: 150px; /* Give them a fixed width to align neatly if desired, or remove for auto */
+    justify-content: flex-start; /* Align content to the start */
+}
+
+.computer-type input[type="radio"] {
+    margin: 0;
+    accent-color: #0088ff;
+}
+
+.btn-connect {
+    background-color: #0088ff;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 150px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.btn-connect:hover {
+    background-color: #0066cc;
+}
+
+/* Inbox Styles */
+.inbox-container {
+    background-color: white;
+    width: 80%;
+    max-width: 900px;
+    height: 80vh;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+}
+
+.inbox-header {
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.message-list {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.message-item {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.message-item:hover {
+    background-color: #f9f9f9;
+}
+
+.msg-sender {
+    font-weight: bold;
+    color: #001550;
+}
+
+.msg-subject {
+    color: #333;
+}
+
+.msg-date {
+    font-size: 12px;
+    color: #888;
+    float: right;
+}
+
+.nav-links {
+    margin-top: 20px;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* Register Styles */
+.register-link {
+    display: block;
+    margin-top: 20px;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 12px;
+}

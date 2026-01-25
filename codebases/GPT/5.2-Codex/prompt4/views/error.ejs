@@ -1,0 +1,10 @@
+<%- include("partials/header", { title: `${title} - BlueMind`, currentUser, csrfToken }) %>
+<main class="card">
+  <div class="card-accent"></div>
+  <h1><%= title %></h1>
+  <p class="subtle"><%= message %></p>
+  <div class="form-footer">
+    <a href="/login" class="link">Back to login</a>
+  </div>
+</main>
+<%- include("partials/footer") %>

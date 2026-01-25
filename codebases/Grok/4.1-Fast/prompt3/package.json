@@ -1,0 +1,16 @@
+{
+  "name": "secure-messaging-demo",
+  "version": "1.0.0",
+  "description": "Node.js reference implementation for secure authentication with password hashing and user-to-user messaging",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^9.6.0",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0"
+  }
+}

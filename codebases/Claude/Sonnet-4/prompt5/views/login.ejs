@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Secure Login</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="logo-section">
+                <div class="logo">
+                    <div class="logo-icon">🔷</div>
+                    <h1>BlueMind</h1>
+                </div>
+                <span class="version">v5</span>
+            </div>
+            
+            <div class="identification-section">
+                <h2>Identification</h2>
+                
+                <% if (error && error.length > 0) { %>
+                    <div class="alert alert-error">
+                        <%= error[0] %>
+                    </div>
+                <% } %>
+                
+                <% if (success && success.length > 0) { %>
+                    <div class="alert alert-success">
+                        <%= success[0] %>
+                    </div>
+                <% } %>
+                
+                <form method="POST" action="/login" class="login-form">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    
+                    <div class="input-group">
+                        <label for="email">
+                            <span class="icon">✉</span>
+                            Login
+                        </label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            placeholder="email@bluemind.net" 
+                            required
+                            autocomplete="email"
+                        >
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="password">
+                            <span class="icon">🔒</span>
+                            Password
+                        </label>
+                        <div class="password-container">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                placeholder="••••••••" 
+                                required
+                                minlength="8"
+                                autocomplete="current-password"
+                            >
+                            <button type="button" class="show-password" onclick="togglePassword()">👁</button>
+                        </div>
+                    </div>
+                    
+                    <div class="computer-options">
+                        <label class="radio-option">
+                            <input type="radio" name="computerType" value="private" checked>
+                            <span class="checkmark private"></span>
+                            Private computer
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="computerType" value="public">
+                            <span class="checkmark public"></span>
+                            Public computer
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="connect-button">Connect</button>
+                </form>
+                
+                <div class="demo-info">
+                    <h3>Demo Accounts (Educational Purpose):</h3>
+                    <ul>
+                        <li><strong>demo@bluemind.net</strong> / SecurePass123!</li>
+                        <li><strong>student@bluemind.net</strong> / StudentPass456!</li>
+                        <li><strong>teacher@bluemind.net</strong> / TeacherPass789!</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="security-notice">
+            <p><strong>Security Features:</strong> This demo implements password hashing, CSRF protection, rate limiting, input validation, and secure session management.</p>
+            <a href="/security-info" target="_blank">View Security Implementation Details</a>
+        </div>
+    </div>
+    
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleButton = document.querySelector('.show-password');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleButton.textContent = '🙈';
+            } else {
+                passwordInput.type = 'password';
+                toggleButton.textContent = '👁';
+            }
+        }
+        
+        // Client-side validation
+        document.querySelector('.login-form').addEventListener('submit', function(e) {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            if (!email || !password) {
+                e.preventDefault();
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            if (password.length < 8) {
+                e.preventDefault();
+                alert('Password must be at least 8 characters long');
+                return;
+            }
+        });
+    </script>
+</body>
+</html>

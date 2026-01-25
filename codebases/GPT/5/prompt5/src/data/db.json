@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "alice@example.com",
+      "passwordHash": "$2b$12$SqFapCEmiwJrUksFTLtNZOOuyOlqXQXMZgYebZzVF61moHOotx5Ru",
+      "createdAt": "2026-01-21T16:45:52.408Z"
+    },
+    {
+      "id": 2,
+      "email": "bob@example.com",
+      "passwordHash": "$2b$12$SqFapCEmiwJrUksFTLtNZOOuyOlqXQXMZgYebZzVF61moHOotx5Ru",
+      "createdAt": "2026-01-21T16:45:52.408Z"
+    }
+  ],
+  "messages": [
+    {
+      "id": 1,
+      "senderId": 1,
+      "recipientId": 2,
+      "subject": "Welcome to Secure Mail",
+      "body": "Hi Bob\n\nThis is a demo message from Alice.\n\n—Alice",
+      "createdAt": "2026-01-21T16:45:52.408Z"
+    },
+    {
+      "id": 2,
+      "senderId": 2,
+      "recipientId": 1,
+      "subject": "Re: Welcome",
+      "body": "Thanks Alice! Looks great.\n\n—Bob",
+      "createdAt": "2026-01-21T16:45:52.408Z"
+    }
+  ]
+}

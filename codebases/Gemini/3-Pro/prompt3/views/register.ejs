@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind - Register</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="logo-container">
+        <div class="logo-text">
+            <span><i class="fas fa-cube"></i> BlueMind</span>
+            <span class="version">v5</span>
+        </div>
+    </div>
+
+    <div class="login-container">
+        <h2>Register (Demo)</h2>
+
+        <% if (error) { %>
+            <div class="error-message"><%= error %></div>
+        <% } %>
+
+        <form action="/register" method="POST">
+            <div class="form-group">
+                <i class="far fa-envelope"></i>
+                <input type="email" name="email" placeholder="Email" required>
+            </div>
+
+            <div class="form-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+
+            <button type="submit" class="btn-connect">Register</button>
+        </form>
+        
+        <a href="/login" class="register-link">Back to Login</a>
+    </div>
+
+</body>
+</html>

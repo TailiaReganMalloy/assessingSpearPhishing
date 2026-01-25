@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind - Messages</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="message-container">
+        <div class="header">
+            <img src="/images/bluemind-logo.png" alt="BlueMind Logo" class="logo">
+            <span class="version">v5</span>
+            <div class="user-info">
+                <span>Welcome, <%= user.email %>!</span>
+                <a href="/logout" class="logout-button">Logout</a>
+            </div>
+        </div>
+        <div class="message-card">
+            <h2>Your Messages</h2>
+            <% if (error) { %>
+                <p class="error-message"><%= error %></p>
+            <% } %>
+            <div class="message-list">
+                <% if (messages.length > 0) { %>
+                    <% messages.filter(msg => msg.recipient === user.email).forEach(message => { %>
+                        <div class="message-item">
+                            <p><strong>From:</strong> <%= message.sender %></p>
+                            <p><%= message.content %></p>
+                            <span class="timestamp"><%= message.timestamp.toLocaleString() %></span>
+                        </div>
+                    <% }); %>
+                <% } else { %>
+                    <p>No messages yet.</p>
+                <% } %>
+            </div>
+
+            <h3>Send a New Message</h3>
+            <form action="/send-message" method="POST" class="send-message-form">
+                <div class="input-group">
+                    <label for="recipientEmail">Recipient Email:</label>
+                    <input type="email" id="recipientEmail" name="recipientEmail" required>
+                </div>
+                <div class="input-group">
+                    <label for="messageContent">Message:</label>
+                    <textarea id="messageContent" name="messageContent" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="connect-button">Send Message</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

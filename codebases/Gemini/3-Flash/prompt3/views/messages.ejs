@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - BlueMind</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body style="align-items: flex-start; padding-top: 100px;">
+    <div style="position: absolute; top: 20px; left: 20px; color: white;">
+        <span>Welcome, <strong><%= user %></strong></span> | <a href="/logout" style="color: #0091ff; text-decoration: none;">Logout</a>
+    </div>
+
+    <div class="messages-container">
+        <h2>Your Messages</h2>
+        
+        <% if (messages.length === 0) { %>
+            <p>No messages found.</p>
+        <% } else { %>
+            <% messages.forEach(msg => { %>
+                <div class="message-item">
+                    <div class="message-sender">From: <%= msg.sender_email %></div>
+                    <div class="message-content"><%= msg.content %></div>
+                    <div class="message-time"><%= new Date(msg.timestamp).toLocaleString() %></div>
+                </div>
+            <% }); %>
+        <% } %>
+    </div>
+</body>
+</html>

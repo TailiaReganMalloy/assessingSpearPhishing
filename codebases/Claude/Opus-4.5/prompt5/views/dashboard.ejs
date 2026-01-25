@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind Security Demo - Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <div class="dashboard-header">
+            <div>
+                <h1 class="dashboard-title">
+                    <span style="display: flex; align-items: center; gap: 12px;">
+                        <div class="logo-icon" style="width: 32px; height: 32px;">
+                            <div style="width: 16px; height: 16px; border: 2px solid white; border-radius: 50%; border-top-color: transparent; border-right-color: transparent;"></div>
+                        </div>
+                        BlueMind Dashboard
+                    </span>
+                </h1>
+            </div>
+            <div class="user-info">
+                <span>Welcome, <%= userEmail %></span>
+                <form method="POST" action="/logout" style="display: inline;">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                    <button type="submit" class="logout-btn">Logout</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Dashboard Content -->
+        <div class="dashboard-content">
+            <!-- Statistics -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number"><%= stats.totalUsers || 0 %></div>
+                    <div class="stat-label">Total Users</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number"><%= stats.unreadMessages || 0 %></div>
+                    <div class="stat-label">Unread Messages</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number"><%= stats.totalMessages || 0 %></div>
+                    <div class="stat-label">Total Messages</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number"><%= stats.activeSessions || 0 %></div>
+                    <div class="stat-label">Active Sessions</div>
+                </div>
+            </div>
+
+            <!-- Security Information Panel -->
+            <div class="security-info" style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 20px; margin-bottom: 32px;">
+                <h3 style="margin: 0 0 12px 0; color: #166534; display: flex; align-items: center; gap: 8px;">
+                    <svg style="width: 20px; height: 20px;" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    Security Status
+                </h3>
+                <div style="color: #166534; font-size: 14px;">
+                    <p style="margin: 4px 0;"><strong>Session Type:</strong> <%= sessionType === 'private' ? 'Private Computer (24h session)' : 'Public Computer (30min session)' %></p>
+                    <p style="margin: 4px 0;"><strong>Last Login:</strong> <%= lastLogin || 'First login' %></p>
+                    <p style="margin: 4px 0;"><strong>IP Address:</strong> <%= clientIP %></p>
+                    <% if (sessionType === 'public') { %>
+                        <p style="margin: 4px 0; color: #dc2626;"><strong>⚠️ Public computer session expires in 30 minutes</strong></p>
+                    <% } %>
+                </div>
+            </div>
+
+            <!-- Messages Section -->
+            <div class="messages-section">
+                <div class="section-title">
+                    Recent Messages
+                    <a href="/compose" class="btn-primary">Compose New</a>
+                </div>
+
+                <% if (messages && messages.length > 0) { %>
+                    <div class="message-list">
+                        <% messages.forEach(function(message) { %>
+                            <div class="message-item <%= message.read_at ? '' : 'unread' %>">
+                                <div class="message-meta">
+                                    From: <%= message.sender_email %>
+                                </div>
+                                <div class="message-subject">
+                                    <a href="/message/<%= message.id %>" style="text-decoration: none; color: inherit;">
+                                        <%= message.subject %>
+                                    </a>
+                                </div>
+                                <div class="message-date">
+                                    <%= new Date(message.created_at).toLocaleDateString() %>
+                                </div>
+                            </div>
+                        <% }); %>
+                    </div>
+                <% } else { %>
+                    <div class="message-list">
+                        <div style="padding: 40px 20px; text-align: center; color: #64748b;">
+                            <svg style="width: 48px; height: 48px; margin: 0 auto 16px; opacity: 0.5;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
+                            </svg>
+                            <p>No messages yet. <a href="/compose">Send your first message!</a></p>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+
+            <!-- Educational Security Tips -->
+            <div class="security-tips" style="margin-top: 32px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 20px;">
+                <h3 style="margin: 0 0 16px 0; color: #1d4ed8;">🔒 Security Educational Notes</h3>
+                <ul style="color: #1e40af; font-size: 14px; line-height: 1.6;">
+                    <li><strong>Session Management:</strong> Notice how session duration differs based on computer type (private vs public)</li>
+                    <li><strong>Password Security:</strong> Passwords are hashed using bcrypt with <%= process.env.BCRYPT_ROUNDS || 12 %> rounds</li>
+                    <li><strong>Rate Limiting:</strong> Login attempts are limited to prevent brute force attacks</li>
+                    <li><strong>CSRF Protection:</strong> All forms include CSRF tokens to prevent cross-site request forgery</li>
+                    <li><strong>Input Validation:</strong> All user inputs are validated and sanitized</li>
+                    <li><strong>Security Logging:</strong> All security events are logged (check the server console)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

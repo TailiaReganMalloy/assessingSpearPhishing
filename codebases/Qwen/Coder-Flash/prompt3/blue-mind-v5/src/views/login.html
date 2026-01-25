@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #002147; /* Dark blue background */
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header styling */
+        .header {
+            background-color: #001a33; /* Dark navy-blue */
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Logo styling */
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            width: 30px;
+            height: 30px;
+            background-color: #007bff; /* Bright blue */
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            margin-right: 10px;
+        }
+
+        /* Login panel styling */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        .login-panel {
+            background-color: white;
+            width: 400px;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .panel-title {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+            font-size: 22px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .radio-group {
+            margin: 25px 0;
+        }
+
+        .radio-option {
+            margin-bottom: 10px;
+        }
+
+        .radio-option input {
+            margin-right: 8px;
+        }
+
+        .connect-button {
+            background-color: #007bff; /* Bright blue */
+            color: white;
+            border: none;
+            padding: 14px;
+            width: 100%;
+            border-radius: 4px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .connect-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with BlueMind logo -->
+    <div class="header">
+        <div class="logo">
+            <div class="logo-icon"></div>
+            BlueMind
+        </div>
+    </div>
+
+    <!-- Login panel -->
+    <div class="login-container">
+        <div class="login-panel">
+            <h2 class="panel-title">Identification</h2>
+            
+            <form action="/login" method="POST">
+                <div class="form-group">
+                    <label for="username">Login</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="private" name="computerType" value="private" checked>
+                        <label for="private">Private computer</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="public" name="computerType" value="public">
+                        <label for="public">Public computer</label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="connect-button">Connect</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

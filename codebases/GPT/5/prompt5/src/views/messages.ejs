@@ -1,0 +1,21 @@
+<section class="center">
+  <div class="card">
+    <div class="card-title">Inbox</div>
+    <div class="toolbar">
+      <a class="btn btn-primary" href="/compose">Compose</a>
+    </div>
+    <ul class="list">
+      <% if (inbox.length === 0) { %>
+        <li class="empty">No messages yet</li>
+      <% } %>
+      <% inbox.forEach(m => { %>
+        <li class="item">
+          <a href="/messages/<%= m.id %>">
+            <div class="subject"><%= m.subject %></div>
+            <div class="meta">From <%= m.senderEmail %> — <%= new Date(m.createdAt).toLocaleString() %></div>
+          </a>
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+</section>

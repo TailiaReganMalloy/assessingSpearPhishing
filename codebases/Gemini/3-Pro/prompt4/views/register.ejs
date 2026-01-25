@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - BlueMind</title>
+    <link rel="stylesheet" href="/style.css">
+    <!-- Reusing main style for consistency, but overriding container middle alignment if needed -->
+    <style>
+        .register-card { background: white; padding: 40px; border-radius: 4px; width: 100%; max-width: 400px; margin: 0 auto; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        h2 { text-align: center; margin-top: 0; color: #333; }
+        .back-link { display: block; text-align: center; margin-top: 20px; color: #0088ff; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="login-container"> <!-- Reuse container for centering -->
+        <h1 style="color: white; margin-bottom: 30px;">Registration</h1>
+        
+        <div class="register-card">
+            <% if (error) { %>
+                <div style="color: red; margin-bottom: 20px; text-align: center;"><%= error %></div>
+            <% } %>
+
+            <form action="/register" method="POST">
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" name="name" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" name="email" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" name="password" class="form-input" required>
+                </div>
+
+                <button type="submit" class="btn-connect">Register</button>
+            </form>
+            <a href="/login" class="back-link">Back to Login</a>
+        </div>
+    </div>
+</body>
+</html>

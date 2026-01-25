@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= title || 'Secure Mail' %></title>
+  <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body class="bg">
+  <header class="header">
+    <div class="brand">
+      <div class="logo">🔐</div>
+      <div class="name">SecureMail</div>
+      <div class="version">v1</div>
+    </div>
+    <% if (userId) { %>
+      <form class="logout" action="/logout" method="post">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button class="btn btn-outline" type="submit">Logout</button>
+      </form>
+    <% } %>
+  </header>
+
+  <% if (flash) { %>
+    <div class="flash <%= flash.type %>"><%= flash.message %></div>
+  <% } %>
+
+  <main>
+    <%- body %>
+  </main>
+</body>
+</html>

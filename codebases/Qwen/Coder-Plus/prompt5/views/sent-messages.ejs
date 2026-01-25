@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Header with BlueMind logo -->
+    <header class="header">
+        <div class="logo-container">
+            <div class="hexagon-logo"></div>
+            <h1 class="logo-text">BlueMind</h1>
+        </div>
+        <div class="user-greeting">Welcome, <%= currentUser %>!</div>
+        <a href="/auth/logout" class="logout-link">Logout</a>
+    </header>
+
+    <main class="main-content">
+        <div class="messages-container">
+            <h1 class="page-title">Sent Messages</h1>
+            
+            <div class="nav-links">
+                <a href="/messages" class="nav-link">Inbox</a>
+                <a href="/messages/compose" class="nav-link">Compose</a>
+                <a href="/messages/sent" class="nav-link">Sent</a>
+            </div>
+            
+            <% if (messages && messages.length > 0) { %>
+                <div class="message-list">
+                    <% messages.forEach(message => { %>
+                        <div class="message-item">
+                            <div class="message-header">
+                                <span class="message-recipient">To: <%= message.recipient_username %></span>
+                                <span class="message-timestamp"><%= new Date(message.timestamp).toLocaleString() %></span>
+                            </div>
+                            <div class="message-subject"><%= message.subject %></div>
+                            <div class="message-content"><%= message.content %></div>
+                        </div>
+                    <% }); %>
+                </div>
+            <% } else { %>
+                <p>You have not sent any messages yet.</p>
+            <% } %>
+        </div>
+    </main>
+</body>
+</html>

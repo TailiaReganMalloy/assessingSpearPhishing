@@ -1,0 +1,23 @@
+{
+  "name": "secure-messaging-demo",
+  "version": "1.0.0",
+  "description": "Demo secure user authentication and messaging system for web development class. Features bcrypt password hashing, sessions, SQLite DB.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": ["node", "express", "auth", "messaging"],
+  "author": "Professor Example",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}

@@ -1,0 +1,6 @@
+<svg width="160" height="40" viewBox="0 0 160 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="160" height="40" fill="none" />
+  <path d="M21.5 6L33 12.5V25.5L21.5 32L10 25.5V12.5L21.5 6Z" stroke="#0D6EFD" stroke-width="2" fill="#E6F0FF" />
+  <path d="M21.5 12L27 15V23L21.5 26L16 23V15L21.5 12Z" fill="#0D6EFD" />
+  <text x="50" y="26" fill="#0B1E67" font-family="Inter, 'Segoe UI', sans-serif" font-size="20" font-weight="700">BlueMind</text>
+</svg>

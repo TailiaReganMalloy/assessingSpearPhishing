@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BlueMind v5 - Login</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="page">
+    <main class="auth-shell">
+      <header class="brand">
+        <div class="brand-mark"></div>
+        <div>
+          <h1>BlueMind</h1>
+          <span>v5</span>
+        </div>
+      </header>
+
+      <section class="card">
+        <div class="card-accent"></div>
+        <h2>Identification</h2>
+
+        <% if (error) { %>
+        <div class="alert"><%= error %></div>
+        <% } %>
+
+        <form method="POST" action="/login" class="form">
+          <label class="field">
+            <span class="field-label">
+              <span class="icon">✉️</span>
+              Login
+            </span>
+            <input
+              type="email"
+              name="email"
+              value="<%= form.email %>"
+              placeholder="email@bluemind.net"
+              required
+              autocomplete="username"
+            />
+          </label>
+
+          <label class="field">
+            <span class="field-label">
+              <span class="icon">🔒</span>
+              Password
+            </span>
+            <div class="password-row">
+              <input
+                type="password"
+                name="password"
+                placeholder="********"
+                required
+                minlength="8"
+                autocomplete="current-password"
+              />
+              <span class="eye">👁️</span>
+            </div>
+          </label>
+
+          <div class="radio-group">
+            <label>
+              <input type="radio" name="device" value="private" <%= form.device === "private" ? "checked" : "" %> />
+              Private computer
+            </label>
+            <label>
+              <input type="radio" name="device" value="public" <%= form.device === "public" ? "checked" : "" %> />
+              Public computer
+            </label>
+          </div>
+
+          <button class="primary" type="submit">Connect</button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

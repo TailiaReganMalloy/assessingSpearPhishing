@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BlueMind Secure Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body class="login-page">
+    <div class="brand-lockup">
+      <div class="logo-mark" aria-hidden="true"></div>
+      <div>
+        <p class="eyebrow">BlueMind</p>
+        <p class="eyebrow version">v5</p>
+      </div>
+    </div>
+    <main class="card">
+      <section class="card-header">
+        <p class="section-title">Identification</p>
+        <p class="subtle">Authenticate to reach your encrypted workspace.</p>
+      </section>
+
+      <% if (flash) { %>
+        <div class="flash <%= flash.type %>"><%= flash.message %></div>
+      <% } %>
+
+      <form method="POST" action="/login" class="auth-form">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <label class="field" for="email">
+          <span>Login</span>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            spellcheck="false"
+            placeholder="email@bluemind.net"
+            value="<%= viewState.email || '' %>"
+            required
+          />
+        </label>
+
+        <label class="field" for="password">
+          <span>Password</span>
+          <div class="password-wrapper">
+            <input id="password" name="password" type="password" autocomplete="current-password" required />
+            <span class="password-ghost" aria-hidden="true"></span>
+          </div>
+        </label>
+
+        <fieldset class="device-choice">
+          <legend>Device trust</legend>
+          <label>
+            <input type="radio" name="deviceType" value="private" <%= (viewState.deviceType || 'private') === 'private' ? 'checked' : '' %> />
+            <span>Private computer</span>
+          </label>
+          <label>
+            <input type="radio" name="deviceType" value="public" <%= viewState.deviceType === 'public' ? 'checked' : '' %> />
+            <span>Public computer</span>
+          </label>
+        </fieldset>
+
+        <button class="primary" type="submit">Connect</button>
+      </form>
+
+      <footer class="card-footer">
+        <p>Demo credentials are created via the seed script.</p>
+      </footer>
+    </main>
+  </body>
+</html>

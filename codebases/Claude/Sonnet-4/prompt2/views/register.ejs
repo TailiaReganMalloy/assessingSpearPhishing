@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - BlueMind v5</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="auth-card">
+            <div class="logo-section">
+                <div class="logo">
+                    <div class="logo-icon"></div>
+                    <span class="logo-text">BlueMind</span>
+                </div>
+                <div class="version">v5</div>
+            </div>
+            
+            <div class="form-section">
+                <h2 class="form-title">Create Account</h2>
+                
+                <% if (error) { %>
+                    <div class="alert alert-error">
+                        <%= error %>
+                    </div>
+                <% } %>
+                
+                <% if (success) { %>
+                    <div class="alert alert-success">
+                        <%= success %>
+                    </div>
+                <% } %>
+                
+                <form action="/register" method="POST" id="registerForm">
+                    <div class="form-group">
+                        <label class="form-label">📧 Email</label>
+                        <input type="email" name="email" class="form-input" 
+                               placeholder="your@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">🔒 Password</label>
+                        <input type="password" name="password" class="form-input" 
+                               placeholder="Min 8 characters" required minlength="8" id="password">
+                        <div id="passwordStrength" style="margin-top: 5px; font-size: 12px;"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">🔒 Confirm Password</label>
+                        <input type="password" name="confirmPassword" class="form-input" 
+                               placeholder="Repeat password" required id="confirmPassword">
+                        <div id="passwordMatch" style="margin-top: 5px; font-size: 12px;"></div>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary" id="submitBtn">Create Account</button>
+                </form>
+                
+                <div class="auth-links">
+                    <a href="/">Already have an account? Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Password strength checker
+        function checkPasswordStrength(password) {
+            let strength = 0;
+            let feedback = [];
+            
+            if (password.length >= 8) strength++;
+            else feedback.push('At least 8 characters');
+            
+            if (/[a-z]/.test(password)) strength++;
+            else feedback.push('Lowercase letter');
+            
+            if (/[A-Z]/.test(password)) strength++;
+            else feedback.push('Uppercase letter');
+            
+            if (/[0-9]/.test(password)) strength++;
+            else feedback.push('Number');
+            
+            if (/[^A-Za-z0-9]/.test(password)) strength++;
+            else feedback.push('Special character');
+            
+            return { strength, feedback };
+        }
+        
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const strengthDiv = document.getElementById('passwordStrength');
+        const matchDiv = document.getElementById('passwordMatch');
+        const submitBtn = document.getElementById('submitBtn');
+        
+        passwordInput.addEventListener('input', function() {
+            const result = checkPasswordStrength(this.value);
+            const colors = ['#f44336', '#ff9800', '#ffeb3b', '#8bc34a', '#4caf50'];
+            const labels = ['Very Weak', 'Weak', 'Fair', 'Good', 'Strong'];
+            
+            if (this.value) {
+                strengthDiv.innerHTML = `
+                    <div style="color: ${colors[result.strength]}">
+                        Strength: ${labels[result.strength]} 
+                        ${result.feedback.length > 0 ? '(Missing: ' + result.feedback.join(', ') + ')' : ''}
+                    </div>
+                `;
+            } else {
+                strengthDiv.innerHTML = '';
+            }
+            
+            checkPasswordMatch();
+        });
+        
+        confirmPasswordInput.addEventListener('input', checkPasswordMatch);
+        
+        function checkPasswordMatch() {
+            const password = passwordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+            
+            if (confirmPassword) {
+                if (password === confirmPassword) {
+                    matchDiv.innerHTML = '<span style="color: #4caf50">✓ Passwords match</span>';
+                    submitBtn.disabled = false;
+                } else {
+                    matchDiv.innerHTML = '<span style="color: #f44336">✗ Passwords do not match</span>';
+                    submitBtn.disabled = true;
+                }
+            } else {
+                matchDiv.innerHTML = '';
+                submitBtn.disabled = false;
+            }
+        }
+        
+        // Form validation
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            const password = passwordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+            
+            if (password !== confirmPassword) {
+                e.preventDefault();
+                alert('Passwords do not match!');
+                return false;
+            }
+            
+            if (checkPasswordStrength(password).strength < 2) {
+                e.preventDefault();
+                alert('Password is too weak. Please choose a stronger password.');
+                return false;
+            }
+        });
+    </script>
+</body>
+</html>

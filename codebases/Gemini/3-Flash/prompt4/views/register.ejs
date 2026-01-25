@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - BlueMind Demo</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="logo-container">
+        <h1>BlueMind <span class="v5">v5</span></h1>
+    </div>
+
+    <div class="login-card">
+        <h2>Register</h2>
+        
+        <% if (error) { %>
+            <p class="error-msg"><%= error %></p>
+        <% } %>
+
+        <form action="/register" method="POST">
+            <div class="input-group">
+                <label>✉ Email</label>
+                <input type="email" name="email" placeholder="new-user@bluemind.net" required>
+            </div>
+            
+            <div class="input-group">
+                <label>🔒 Password</label>
+                <input type="password" name="password" placeholder="Choose a secure password" required>
+            </div>
+
+            <button type="submit" class="btn-connect">Register</button>
+        </form>
+
+        <div class="register-link">
+            <p>Already have an account? <a href="/login">Login here</a></p>
+        </div>
+    </div>
+</body>
+</html>

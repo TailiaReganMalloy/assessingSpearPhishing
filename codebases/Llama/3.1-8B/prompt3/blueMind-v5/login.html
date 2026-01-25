@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5</title>
+    <style>
+        /* Add some basic styling to the page */
+        body {
+            background-color: #2f4f7f;
+            font-family: Arial, sans-serif;
+        }
+        /* Style the header */
+        header {
+            background-color: #1a1d23;
+            padding: 1em;
+            text-align: center;
+        }
+        /* Style the login panel */
+       .login-panel {
+            background-color: #ffffff;
+            padding: 1em;
+            border: 1px solid #cccccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        /* Style the form fields */
+       .form-field {
+            margin-bottom: 1em;
+        }
+        /* Style the radio buttons */
+       .radio-button {
+            margin-bottom: 1em;
+        }
+        /* Style the action button */
+       .action-button {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 1em 2em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h1>BlueMind</h1>
+        </div>
+    </header>
+    <!-- Login panel -->
+    <div class="login-panel">
+        <h2>Identification</h2>
+        <form>
+            <!-- Login field -->
+            <div class="form-field">
+                <label for="login">Login:</label>
+                <input type="text" id="login" name="login" placeholder="Enter your login">
+            </div>
+            <!-- Password field -->
+            <div class="form-field">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password">
+            </div>
+            <!-- Radio buttons -->
+            <div class="radio-button">
+                <input type="radio" id="private" name="computer" value="private">
+                <label for="private">Private computer</label>
+            </div>
+            <div class="radio-button">
+                <input type="radio" id="public" name="computer" value="public">
+                <label for="public">Public computer</label>
+            </div>
+            <!-- Action button -->
+            <button class="action-button" type="submit">Connect</button>
+        </form>
+    </div>
+    <!-- Rest of the page -->
+    <div style="background-color: #2f4f7f; height: 100vh;"></div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<%- include("partials/header", { title: "Inbox - BlueMind", currentUser, csrfToken }) %>
+<main class="card wide">
+  <div class="card-accent"></div>
+  <div class="inbox-header">
+    <div>
+      <h1>Inbox</h1>
+      <p class="subtle">Signed in as <strong><%= currentUser.name %></strong> (<%= currentUser.email %>).</p>
+    </div>
+    <a href="/compose" class="primary-button">New message</a>
+  </div>
+
+  <div class="message-list">
+    <% if (messages.length === 0) { %>
+      <p>No messages yet. Compose one to demonstrate messaging.</p>
+    <% } %>
+
+    <% messages.forEach((message) => { %>
+      <a class="message-card" href="/message/<%= message.id %>">
+        <div>
+          <h3><%= message.subject %></h3>
+          <p>From <%= message.sender_name %> &lt;<%= message.sender_email %>&gt;</p>
+        </div>
+        <span class="message-date"><%= new Date(message.created_at).toLocaleString() %></span>
+      </a>
+    <% }) %>
+  </div>
+
+  <section class="security-panel">
+    <h2>Messaging safeguards</h2>
+    <ul>
+      <li>Messages are scoped to the authenticated user.</li>
+      <li>All SQL queries use parameterized statements.</li>
+      <li>Only known recipients can be selected.</li>
+    </ul>
+  </section>
+</main>
+<%- include("partials/footer") %>

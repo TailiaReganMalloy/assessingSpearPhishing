@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+    <div class="dashboard">
+        <header class="header">
+            <div class="header-content">
+                <div class="header-logo">
+                    <div class="logo-icon">BM</div>
+                    <div>
+                        <div class="logo-text">BlueMind</div>
+                        <div class="logo-version">v5</div>
+                    </div>
+                </div>
+                
+                <div class="user-menu">
+                    <div class="user-info">
+                        <span id="user-name">Welcome, User</span>
+                        <div class="unread-badge" id="unread-badge" style="display: none;">
+                            <span id="unread-count">0</span>
+                        </div>
+                    </div>
+                    <button class="logout-btn" id="logout-btn">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <aside class="sidebar">
+                <h2>Navigation</h2>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#inbox" class="nav-link active" data-section="inbox">
+                            📥 Inbox (<span id="nav-unread-count">0</span>)
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#compose" class="nav-link" data-section="compose">
+                            ✏️ Compose Message
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#sent" class="nav-link" data-section="sent">
+                            📤 Sent Messages
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#security" class="nav-link" data-section="security">
+                            🔒 Security Info
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+
+            <div class="content-area">
+                <div id="error-message" class="error-message"></div>
+                <div id="success-message" class="success-message"></div>
+
+                <!-- Inbox Section -->
+                <section id="inbox-section" class="content-section active">
+                    <div class="content-header">
+                        <h1 class="content-title">Inbox</h1>
+                        <button class="primary-button" onclick="refreshInbox()">Refresh</button>
+                    </div>
+                    <div id="inbox-content" class="message-list">
+                        <div class="loading">Loading messages...</div>
+                    </div>
+                </section>
+
+                <!-- Compose Section -->
+                <section id="compose-section" class="content-section">
+                    <div class="content-header">
+                        <h1 class="content-title">Compose Message</h1>
+                    </div>
+                    <form id="compose-form" class="compose-form">
+                        <div class="form-group">
+                            <label class="form-label" for="recipient">Recipient</label>
+                            <select id="recipient" name="recipient" class="form-input" required>
+                                <option value="">Select recipient...</option>
+                            </select>
+                            <div class="field-error" id="recipient-error"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" class="form-input" placeholder="Message subject" required>
+                            <div class="field-error" id="subject-error"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="content">Message</label>
+                            <textarea id="content" name="content" class="form-textarea" rows="8" placeholder="Type your message here..." required></textarea>
+                            <div class="field-error" id="content-error"></div>
+                        </div>
+                        
+                        <button type="submit" class="primary-button" id="send-button">Send Message</button>
+                    </form>
+                </section>
+
+                <!-- Sent Messages Section -->
+                <section id="sent-section" class="content-section">
+                    <div class="content-header">
+                        <h1 class="content-title">Sent Messages</h1>
+                        <button class="primary-button" onclick="refreshSent()">Refresh</button>
+                    </div>
+                    <div id="sent-content" class="message-list">
+                        <div class="loading">Loading sent messages...</div>
+                    </div>
+                </section>
+
+                <!-- Security Information Section -->
+                <section id="security-section" class="content-section">
+                    <div class="content-header">
+                        <h1 class="content-title">Security Information</h1>
+                    </div>
+                    <div class="security-info">
+                        <div class="security-card">
+                            <h3>🔐 Password Security</h3>
+                            <p>This application demonstrates secure password storage using:</p>
+                            <ul>
+                                <li><strong>bcrypt hashing:</strong> Passwords are hashed with salt rounds for security</li>
+                                <li><strong>Account lockout:</strong> Accounts lock after 5 failed attempts</li>
+                                <li><strong>Rate limiting:</strong> Login attempts are rate-limited per IP</li>
+                            </ul>
+                        </div>
+
+                        <div class="security-card">
+                            <h3>🔒 Session Management</h3>
+                            <p>Secure session handling includes:</p>
+                            <ul>
+                                <li><strong>JWT tokens:</strong> JSON Web Tokens for stateless authentication</li>
+                                <li><strong>Session cookies:</strong> Secure, HttpOnly cookies for session management</li>
+                                <li><strong>Device tracking:</strong> Different session lengths for private vs. public devices</li>
+                            </ul>
+                        </div>
+
+                        <div class="security-card">
+                            <h3>🛡️ Input Validation</h3>
+                            <p>All user input is validated using:</p>
+                            <ul>
+                                <li><strong>Server-side validation:</strong> Express-validator for all inputs</li>
+                                <li><strong>SQL injection protection:</strong> Parameterized queries</li>
+                                <li><strong>XSS prevention:</strong> Input sanitization and encoding</li>
+                            </ul>
+                        </div>
+
+                        <div class="security-card">
+                            <h3>🌐 Additional Security</h3>
+                            <p>Other security measures implemented:</p>
+                            <ul>
+                                <li><strong>HTTPS enforcement:</strong> Secure transport layer</li>
+                                <li><strong>Security headers:</strong> Helmet.js for security headers</li>
+                                <li><strong>CORS protection:</strong> Cross-origin request restrictions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Message Modal -->
+    <div id="message-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-subject">Message Subject</h2>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="message-meta">
+                    <div id="modal-sender">From: sender@example.com</div>
+                    <div id="modal-date">Date: January 1, 2024</div>
+                </div>
+                <div id="modal-content" class="message-content">
+                    Message content goes here...
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="primary-button" id="reply-button">Reply</button>
+                <button class="secondary-button" id="delete-button">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>BlueMind v5 Login</title>
+  <style>
+    body {
+      background-color: #001f3f;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login-panel {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .login-panel h2 {
+      margin-bottom: 20px;
+    }
+    .form-field {
+      margin-bottom: 15px;
+    }
+    .form-field label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    .form-field input {
+      width: 100%;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .radio-options {
+      margin-bottom: 20px;
+    }
+    .radio-options label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    .connect-button {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class='login-panel'>
+    <h2>Identification</h2>
+    <div class='form-field'>
+      <label for='login'>Login</label>
+      <input type='text' id='login' name='login' required>
+    </div>
+    <div class='form-field'>
+      <label for='password'>Password</label>
+      <input type='password' id='password' name='password' required>
+    </div>
+    <div class='radio-options'>
+      <label><input type='radio' name='computer' value='private' checked> Private computer</label><br>
+      <label><input type='radio' name='computer' value='public'> Public computer</label>
+    </div>
+    <button class='connect-button'>Connect</button>
+  </div>
+  <script>
+    document.querySelector('.connect-button').addEventListener('click', async () => {
+      const login = document.getElementById('login').value;
+      const password = document.getElementById('password').value;
+      const computer = document.querySelector('input[name="computer"]:checked').value;
+
+      const response = await fetch('/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ login, password, computer })
+      });
+
+      const result = await response.json();
+      if (result === 'Invalid credentials') {
+        alert('Invalid credentials');
+      } else {
+        localStorage.setItem('token', result.token);
+        window.location.href = '/dashboard';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind Dashboard - Educational Demo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <div class="header-left">
+                <div class="logo">
+                    <svg width="30" height="30" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 0L35 10L35 30L20 40L5 30L5 10L20 0Z" fill="#00BFFF"/>
+                        <path d="M20 8L28 13L28 27L20 32L12 27L12 13L20 8Z" fill="#ffffff"/>
+                    </svg>
+                    <span class="brand-name">BlueMind Dashboard</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <span id="userEmail" class="user-email"></span>
+                <button id="logoutBtn" class="logout-btn">Logout</button>
+            </div>
+        </header>
+        
+        <div class="dashboard-content">
+            <div class="educational-banner">
+                🎓 <strong>Educational Demo</strong> - This dashboard demonstrates secure messaging with proper authentication
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="messages-section">
+                    <h2>Your Messages</h2>
+                    <div id="messagesContainer" class="messages-container">
+                        <div class="loading">Loading messages...</div>
+                    </div>
+                </div>
+                
+                <div class="compose-section">
+                    <h2>Send Message</h2>
+                    <form id="composeForm" class="compose-form">
+                        <div class="form-group">
+                            <label for="toEmail">To:</label>
+                            <select id="toEmail" name="to_email" required>
+                                <option value="">Select recipient...</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject:</label>
+                            <input type="text" id="subject" name="subject" maxlength="200" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="content">Message:</label>
+                            <textarea id="content" name="content" rows="6" maxlength="5000" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="send-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="security-features">
+                <h3>🔒 Security Features Demonstrated:</h3>
+                <ul>
+                    <li>✅ Password hashing with bcrypt (12 rounds)</li>
+                    <li>✅ JWT tokens with HttpOnly cookies</li>
+                    <li>✅ Rate limiting on authentication endpoints</li>
+                    <li>✅ Input validation and sanitization</li>
+                    <li>✅ CORS protection</li>
+                    <li>✅ Helmet.js security headers</li>
+                    <li>✅ Session management based on device type</li>
+                    <li>✅ SQL injection protection with parameterized queries</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <script src="dashboard.js"></script>
+</body>
+</html>

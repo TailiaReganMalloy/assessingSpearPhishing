@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Web Security Example</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-box">
+      <h1>Identification</h1>
+      <form action="/auth/login" method="POST">
+        <div class="form-group">
+          <label for="login">Login</label>
+          <input type="email" id="login" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <div class="form-group">
+          <input type="checkbox" id="private" name="private" checked>
+          <label for="private">Private computer</label>
+        </div>
+        <button type="submit" class="connect-btn">Connect</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

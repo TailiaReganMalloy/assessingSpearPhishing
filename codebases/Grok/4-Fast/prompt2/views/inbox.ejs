@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inbox - Secure Mailer</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f0f0f0; }
+        .header { background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .header h1 { margin: 0; color: #333; }
+        .send-form { background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .send-form input, .send-form textarea { width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        .send-form button { padding: 0.5rem 1rem; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .messages { background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .message { border-bottom: 1px solid #eee; padding: 0.5rem 0; }
+        .message:last-child { border-bottom: none; }
+        .logout { position: absolute; top: 20px; right: 20px; }
+        .logout a { color: #dc3545; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="logout">
+        <a href="/login">Logout</a>
+    </div>
+    <div class="header">
+        <h1>Welcome, <%= userEmail %>!</h1>
+    </div>
+    <div class="send-form">
+        <h3>Send Message</h3>
+        <form id="sendForm">
+            <input type="email" id="toEmail" placeholder="Recipient Email" required>
+            <textarea id="message" placeholder="Message" required rows="3"></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+    <div class="messages">
+        <h3>Inbox</h3>
+        <% if (messages.length === 0) { %>
+            <p>No messages yet.</p>
+        <% } else { %>
+            <% messages.forEach(msg => { %>
+                <div class="message">
+                    <strong>From: <%= msg.from_email %></strong> - <%= msg.timestamp %><br>
+                    <%= msg.message %>
+                </div>
+            <% }); %>
+        <% } %>
+    </div>
+
+    <script>
+        const token = localStorage.getItem('token');
+        if (!token) {
+            window.location.href = '/login';
+        }
+
+        document.getElementById('sendForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const toEmail = document.getElementById('toEmail').value;
+            const message = document.getElementById('message').value;
+
+            try {
+                const response = await fetch('/send', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ toEmail, message })
+                });
+                if (response.ok) {
+                    location.reload();
+                } else {
+                    alert('Failed to send message');
+                }
+            } catch (err) {
+                alert('Error: ' + err.message);
+            }
+        });
+
+        // Add token to inbox fetch if needed, but since it's server-rendered, ok
+        fetch('/inbox', {
+            headers: { 'Authorization': `Bearer ${token}` }
+        }).catch(err => {
+            if (err.name === 'TypeError' && err.message.includes('401')) {
+                localStorage.removeItem('token');
+                window.location.href = '/login';
+            }
+        });
+    </script>
+</body>
+</html>

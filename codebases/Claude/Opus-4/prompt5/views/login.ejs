@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SecureMail</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <div class="login-header">
+            <div class="logo">
+                <svg width="50" height="50" viewBox="0 0 50 50" class="logo-icon">
+                    <circle cx="25" cy="25" r="20" fill="none" stroke="#00bcd4" stroke-width="3"/>
+                    <circle cx="25" cy="15" r="8" fill="#00bcd4"/>
+                    <circle cx="15" cy="30" r="8" fill="#00bcd4"/>
+                    <circle cx="35" cy="30" r="8" fill="#00bcd4"/>
+                </svg>
+                <h1>SecureMail</h1>
+            </div>
+            <p class="version">v5</p>
+        </div>
+        
+        <div class="login-form-container">
+            <h2>Identification</h2>
+            
+            <% if (error) { %>
+                <div class="error-message"><%= error %></div>
+            <% } %>
+            
+            <form action="/login" method="POST" class="login-form">
+                <div class="form-group">
+                    <label for="email">
+                        <svg class="icon" width="20" height="20" viewBox="0 0 20 20">
+                            <path d="M10 2a8 8 0 100 16 8 8 0 000-16zM8 7a2 2 0 114 0 2 2 0 01-4 0zm-2 8a6 6 0 0112 0H6z" fill="#666"/>
+                        </svg>
+                        Login
+                    </label>
+                    <input type="email" id="email" name="email" placeholder="email@securemail.net" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">
+                        <svg class="icon" width="20" height="20" viewBox="0 0 20 20">
+                            <path d="M10 2a3 3 0 00-3 3v1H5a1 1 0 00-1 1v8a1 1 0 001 1h10a1 1 0 001-1V7a1 1 0 00-1-1h-2V5a3 3 0 00-3-3zm0 2a1 1 0 011 1v1H9V5a1 1 0 011-1z" fill="#666"/>
+                        </svg>
+                        Password
+                    </label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="password" name="password" placeholder="********" required>
+                        <button type="button" class="toggle-password" onclick="togglePassword()">
+                            <svg width="20" height="20" viewBox="0 0 20 20">
+                                <path d="M10 4C6 4 2.73 6.11 1 10c1.73 3.89 5 6 9 6s7.27-2.11 9-6c-1.73-3.89-5-6-9-6zm0 10a4 4 0 110-8 4 4 0 010 8zm0-6a2 2 0 100 4 2 2 0 000-4z" fill="#666"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="form-options">
+                    <label class="radio-option">
+                        <input type="radio" name="computer_type" value="private" checked>
+                        <span class="radio-custom"></span>
+                        Private computer
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="computer_type" value="public">
+                        <span class="radio-custom"></span>
+                        Public computer
+                    </label>
+                </div>
+                
+                <button type="submit" class="connect-button">Connect</button>
+            </form>
+            
+            <div class="form-footer">
+                <p>Don't have an account? <a href="/register">Register here</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+        }
+    </script>
+</body>
+</html>

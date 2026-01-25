@@ -1,0 +1,26 @@
+[
+  {
+    "id": "u-100",
+    "displayName": "Amelia Laurent",
+    "email": "amelia@bluemind.net",
+    "role": "Security Lead",
+    "passwordHash": "$2b$12$u.2HXtjjb3s4y0wCGpTRKeDjiEq4gmfb.YT5cqtrOdy8iACO1.03i",
+    "avatarColor": "#2F8FED"
+  },
+  {
+    "id": "u-200",
+    "displayName": "David Mensah",
+    "email": "david@bluemind.net",
+    "role": "Operations Engineer",
+    "passwordHash": "$2b$12$uUoNN8azLVryjwbnY5YgV.iRaaFMSoaDmQAlHVqpJMrBP6t76SLMK",
+    "avatarColor": "#E45E5D"
+  },
+  {
+    "id": "u-300",
+    "displayName": "Sara N'Diaye",
+    "email": "sara@bluemind.net",
+    "role": "Program Manager",
+    "passwordHash": "$2b$12$NpLw11ygsB3ADPsRU5N7pe4kKJwX8Dzd56DhdNK7wrp02zelRLI86",
+    "avatarColor": "#F0A500"
+  }
+]

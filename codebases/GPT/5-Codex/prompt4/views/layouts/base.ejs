@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%= title ? `${title} · ${appTitle}` : appTitle %></title>
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body class="<%= bodyClass || '' %>">
+    <header class="top-bar">
+      <div class="top-bar__brand">
+        <div class="brand-logo">BlueMind</div>
+        <span class="brand-version">v5</span>
+      </div>
+      <% if (currentUser) { %>
+        <nav class="top-bar__nav">
+          <span class="nav-user">Signed in as <strong><%= currentUser.display_name %></strong></span>
+          <form action="/logout" method="post">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+            <button type="submit" class="btn-link">Sign out</button>
+          </form>
+        </nav>
+      <% } %>
+    </header>
+
+    <main class="main-content">
+      <%- include('../partials/flash') %>
+      <%- body %>
+    </main>
+
+    <footer class="site-footer">
+      <p>&copy; <%= year %> <%= appTitle %>. Built for security education.</p>
+    </footer>
+
+    <script src="/js/main.js" defer></script>
+  </body>
+</html>

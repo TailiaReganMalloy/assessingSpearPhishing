@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - Inbox</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="messages-page">
+    <div class="app-container">
+        <!-- Navigation Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1>SecureMsg</h1>
+                <p class="user-info">Welcome, <strong><%= userName %></strong></p>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="/messages" class="nav-item active">📮 Inbox</a></li>
+                <li><a href="/messages/sent" class="nav-item">📤 Sent</a></li>
+                <li><a href="/messages/compose" class="nav-item">✏️ Compose</a></li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <a href="/logout" class="btn btn-logout">Logout</a>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <div class="content-header">
+                <h2>Inbox</h2>
+                <% if (unreadCount > 0) { %>
+                    <span class="badge"><%= unreadCount %> unread</span>
+                <% } %>
+            </div>
+
+            <% if (messages.length === 0) { %>
+                <div class="empty-state">
+                    <p>📭 No messages yet</p>
+                    <p class="text-secondary">Start by <a href="/messages/compose">composing a new message</a></p>
+                </div>
+            <% } else { %>
+                <div class="messages-list">
+                    <% messages.forEach(msg => { %>
+                        <div class="message-item <%= msg.is_read ? '' : 'unread' %>">
+                            <a href="/messages/<%= msg.id %>" class="message-link">
+                                <div class="message-header">
+                                    <strong><%= msg.sender_name %></strong>
+                                    <span class="message-date"><%= new Date(msg.created_at).toLocaleDateString() %></span>
+                                </div>
+                                <div class="message-subject">
+                                    <%= msg.subject || '(no subject)' %>
+                                </div>
+                                <div class="message-preview">
+                                    <%= msg.body.substring(0, 100) %>..
+                                </div>
+                            </a>
+                        </div>
+                    <% }); %>
+                </div>
+            <% } %>
+        </main>
+    </div>
+</body>
+</html>

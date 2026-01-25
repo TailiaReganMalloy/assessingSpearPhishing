@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind - Messages</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="/bluemind-logo.png" alt="BlueMind Logo">
+            <span>BlueMind</span>
+            <span class="version">v5</span>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                Welcome, <%= user %>!
+                <a href="/logout" class="logout-btn">Logout</a>
+            </div>
+            <div class="card-body">
+                <h2>Your Messages</h2>
+                <% if (messages.length > 0) { %>
+                    <ul class="message-list">
+                        <% messages.forEach(message => { %>
+                            <li class="message-item">
+                                <div class="message-header">
+                                    <strong>From:</strong> <%= message.sender %>
+                                    <strong>Subject:</strong> <%= message.subject %>
+                                </div>
+                                <div class="message-body">
+                                    <%= message.body %>
+                                </div>
+                            </li>
+                        <% }); %>
+                    </ul>
+                <% } else { %>
+                    <p>No messages to display.</p>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

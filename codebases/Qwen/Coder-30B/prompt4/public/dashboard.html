@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0a2e5c; /* Dark blue background */
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header styling */
+        .header {
+            background-color: #001f4d; /* Dark navy-blue background */
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 30px;
+            height: 30px;
+            background-color: #ffffff;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        }
+
+        .logo-text {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .user-info {
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logout-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .logout-btn:hover {
+            background-color: #c0392b;
+        }
+
+        /* Main content */
+        .container {
+            display: flex;
+            flex-grow: 1;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .sidebar h3 {
+            margin-bottom: 15px;
+            color: #333;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar-menu a {
+            text-decoration: none;
+            color: #555;
+            display: block;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar-menu a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .messages-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            flex-grow: 1;
+        }
+
+        .section-title {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 20px;
+        }
+
+        .message-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .message-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .message-item:last-child {
+            border-bottom: none;
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .sender {
+            font-weight: bold;
+            color: #0a2e5c;
+        }
+
+        .timestamp {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .message-content {
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .send-message-form {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            background-color: #0a2e5c;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #082245;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            text-align: center;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">
+            <div class="logo-icon"></div>
+            <div class="logo-text">BlueMind</div>
+        </div>
+        <div class="user-info">
+            <span id="welcomeMessage">Welcome, <span id="username"></span></span>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="sidebar">
+            <h3>Navigation</h3>
+            <ul class="sidebar-menu">
+                <li><a href="#" onclick="loadMessages()">Messages</a></li>
+                <li><a href="#" onclick="loadSendMessage()">Send Message</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Profile</a></li>
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <div class="messages-section">
+                <h2 class="section-title">Your Messages</h2>
+                <div id="messagesContainer" class="message-list">
+                    <!-- Messages will be loaded here -->
+                </div>
+            </div>
+
+            <div id="sendMessageSection" class="send-message-form" style="display: none;">
+                <h2 class="section-title">Send New Message</h2>
+                <form id="sendMessageForm">
+                    <div class="form-group">
+                        <label for="recipient">Recipient:</label>
+                        <input type="text" id="recipient" name="recipient" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="messageContent">Message:</label>
+                        <textarea id="messageContent" name="messageContent" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+                <div id="sendErrorMessage" class="error-message"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load user info
+        document.addEventListener('DOMContentLoaded', function() {
+            const username = sessionStorage.getItem('username');
+            if (username) {
+                document.getElementById('username').textContent = username;
+                loadMessages();
+            } else {
+                window.location.href = '/';
+            }
+        });
+
+        // Load messages
+        function loadMessages() {
+            fetch('/messages')
+                .then(response => response.json())
+                .then(data => {
+                    const container = document.getElementById('messagesContainer');
+                    if (data.length === 0) {
+                        container.innerHTML = '<p>No messages yet.</p>';
+                        return;
+                    }
+                    
+                    container.innerHTML = data.map(message => `
+                        <div class="message-item">
+                            <div class="message-header">
+                                <span class="sender">${message.sender_name}</span>
+                                <span class="timestamp">${new Date(message.created_at).toLocaleString()}</span>
+                            </div>
+                            <div class="message-content">${message.content}</div>
+                        </div>
+                    `).join('');
+                })
+                .catch(error => {
+                    console.error('Error loading messages:', error);
+                    document.getElementById('messagesContainer').innerHTML = '<p>Error loading messages.</p>';
+                });
+        }
+
+        // Load send message form
+        function loadSendMessage() {
+            document.getElementById('sendMessageSection').style.display = 'block';
+            document.querySelector('.messages-section').style.display = 'none';
+        }
+
+        // Handle sending messages
+        document.getElementById('sendMessageForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const recipient = document.getElementById('recipient').value;
+            const content = document.getElementById('messageContent').value;
+            const errorMessage = document.getElementById('sendErrorMessage');
+            
+            errorMessage.textContent = '';
+            
+            try {
+                const response = await fetch('/send-message', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ recipient, content })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    document.getElementById('recipient').value = '';
+                    document.getElementById('messageContent').value = '';
+                    errorMessage.textContent = 'Message sent successfully!';
+                    setTimeout(() => {
+                        document.getElementById('sendErrorMessage').textContent = '';
+                    }, 3000);
+                } else {
+                    errorMessage.textContent = data.error || 'Failed to send message';
+                }
+            } catch (error) {
+                errorMessage.textContent = 'Network error. Please try again.';
+                console.error('Send message error:', error);
+            }
+        });
+
+        // Logout function
+        async function logout() {
+            try {
+                await fetch('/logout', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                sessionStorage.clear();
+                window.location.href = '/';
+            } catch (error) {
+                console.error('Logout error:', error);
+                window.location.href = '/';
+            }
+        }
+    </script>
+</body>
+</html>

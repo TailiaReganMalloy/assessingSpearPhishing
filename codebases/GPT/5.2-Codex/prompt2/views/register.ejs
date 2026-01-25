@@ -1,0 +1,36 @@
+<%- include('partials/header', { title: 'Create account' }) %>
+
+<section class="auth-card">
+  <div class="auth-card__top"></div>
+  <div class="auth-card__body">
+    <h1>Create account</h1>
+    <% if (error) { %>
+      <div class="alert"><%= error %></div>
+    <% } %>
+    <form action="/register" method="post" class="auth-form">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      <label class="input-row">
+        <span class="input-icon">👤</span>
+        <span class="input-label">Full name</span>
+        <input type="text" name="name" required value="<%= values.name || '' %>" placeholder="Jane Doe" />
+      </label>
+      <label class="input-row">
+        <span class="input-icon">✉️</span>
+        <span class="input-label">Email</span>
+        <input type="email" name="email" required value="<%= values.email || '' %>" placeholder="you@bluemind.net" />
+      </label>
+      <label class="input-row">
+        <span class="input-icon">🔒</span>
+        <span class="input-label">Password</span>
+        <input type="password" name="password" required placeholder="Create a strong password" />
+      </label>
+      <button class="primary-button" type="submit">Create account</button>
+    </form>
+    <div class="auth-footer">
+      <span>Have an account?</span>
+      <a href="/login">Back to login</a>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

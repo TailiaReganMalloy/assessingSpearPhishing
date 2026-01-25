@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BlueMind · Secure Access</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body class="page page--login">
+    <header class="site-header">
+      <div class="site-brand">
+        <div class="site-logo" aria-hidden="true"></div>
+        <div>
+          <p class="site-name">BlueMind</p>
+          <span class="site-version">v5</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="card login-card">
+        <div class="card-header">
+          <p class="eyebrow">Secure portal</p>
+          <h1>Identification</h1>
+          <p class="card-subtitle">Use your BlueMind mail credentials to continue.</p>
+        </div>
+
+        <% if (errors.length) { %>
+          <div class="alert" role="alert">
+            <ul>
+              <% errors.forEach((error) => { %>
+                <li><%= error %></li>
+              <% }) %>
+            </ul>
+          </div>
+        <% } %>
+
+        <form method="post" action="/auth/login" class="form">
+          <label class="form-label" for="email">Login</label>
+          <div class="input-wrapper">
+            <span class="input-icon" aria-hidden="true">✉️</span>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="name@bluemind.net"
+              autocomplete="username"
+              required
+              value="<%= lastEmail %>"
+            />
+          </div>
+
+          <label class="form-label" for="password">Password</label>
+          <div class="input-wrapper">
+            <span class="input-icon" aria-hidden="true">🔒</span>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="••••••••"
+              autocomplete="current-password"
+              minlength="12"
+              required
+            />
+          </div>
+
+          <fieldset class="radio-group">
+            <legend>Device</legend>
+            <label>
+              <input type="radio" name="device" value="private" checked />
+              Private computer
+            </label>
+            <label>
+              <input type="radio" name="device" value="public" />
+              Public computer
+            </label>
+          </fieldset>
+
+          <button type="submit" class="btn btn-primary">Connect</button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

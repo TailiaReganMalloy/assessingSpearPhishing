@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; }
+        form { margin-bottom: 20px; }
+        input, textarea, button { width: 100%; padding: 10px; margin: 5px 0; }
+        button { background: #007bff; color: white; border: none; cursor: pointer; }
+        .message { border: 1px solid #ddd; padding: 10px; margin: 10px 0; }
+        .error { color: red; }
+        .success { color: green; }
+        #logoutBtn { background: #dc3545; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Your Messages</h1>
+    
+    <form id="sendForm">
+        <input type="email" id="toEmail" placeholder="Recipient Email" required>
+        <textarea id="content" placeholder="Message Content" required></textarea>
+        <button type="submit">Send Message</button>
+    </form>
+    <div id="sendMessage"></div>
+
+    <h2>Inbox</h2>
+    <div id="messagesList"></div>
+
+    <button id="logoutBtn" onclick="logout()">Logout</button>
+
+    <script>
+        async function loadMessages() {
+            try {
+                const response = await fetch('/api/messages');
+                if (response.status === 401) {
+                    window.location.href = '/';
+                    return;
+                }
+                const data = await response.json();
+                const messagesList = document.getElementById('messagesList');
+                if (data.messages.length === 0) {
+                    messagesList.innerHTML = '<p>No messages yet.</p>';
+                } else {
+                    messagesList.innerHTML = data.messages.map(msg => 
+                        `<div class="message">
+                            <strong>From: ${msg.from_email}</strong> | ${new Date(msg.timestamp).toLocaleString()}
+                            <p>${msg.content}</p>
+                        </div>`
+                    ).join('');
+                }
+            } catch (err) {
+                document.getElementById('messagesList').innerHTML = `<p class="error">Error loading messages: ${err.message}</p>`;
+            }
+        }
+
+        document.getElementById('sendForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const toEmail = document.getElementById('toEmail').value;
+            const content = document.getElementById('content').value;
+            const messageDiv = document.getElementById('sendMessage');
+
+            try {
+                const response = await fetch('/send-message', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ toEmail, content })
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    messageDiv.innerHTML = `<p class="success">${data.message}</p>`;
+                    document.getElementById('sendForm').reset();
+                    loadMessages(); // Reload messages
+                } else {
+                    messageDiv.innerHTML = `<p class="error">${data.error}</p>`;
+                }
+            } catch (err) {
+                messageDiv.innerHTML = `<p class="error">Error: ${err.message}</p>`;
+            }
+        });
+
+        async function logout() {
+            try {
+                const response = await fetch('/logout', { method: 'POST' });
+                if (response.ok) {
+                    window.location.href = '/';
+                }
+            } catch (err) {
+                console.error('Logout error:', err);
+            }
+        }
+
+        // Load messages on page load
+        loadMessages();
+    </script>
+</body>
+</html>

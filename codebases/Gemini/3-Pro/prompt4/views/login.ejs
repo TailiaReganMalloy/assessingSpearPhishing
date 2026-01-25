@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="logo-area">
+            <div class="logo-icon"></div>
+            <span>BlueMind</span>
+            <span class="version-text">v5</span>
+        </div>
+
+        <div class="login-card">
+            <div class="login-header">Identification</div>
+
+            <% if (error) { %>
+                <div style="color: red; margin-bottom: 20px; text-align: center;"><%= error %></div>
+            <% } %>
+
+            <form action="/login" method="POST">
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="far fa-envelope"></i> Login
+                    </label>
+                    <div class="form-input-wrapper">
+                        <input type="text" name="email" class="form-input" placeholder="email@bluemind.net" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-lock"></i> Password
+                    </label>
+                    <div class="form-input-wrapper">
+                        <input type="password" name="password" id="password" class="form-input" placeholder="********" required>
+                        <i class="far fa-eye password-toggle" onclick="togglePassword()"></i>
+                    </div>
+                </div>
+
+                <div class="computer-type">
+                    <label class="radio-option">
+                        <input type="radio" name="computer_type" value="private" checked>
+                        <span>Private computer</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="computer_type" value="public">
+                        <span>Public computer</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-connect">Connect</button>
+            </form>
+        </div>
+        
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="/register" style="color: #668; text-decoration: none; font-size: 14px;">Register New Account</a>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const icon = document.querySelector('.password-toggle');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+    </script>
+</body>
+</html>

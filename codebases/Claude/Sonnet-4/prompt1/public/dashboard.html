@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">
+                    <svg viewBox="0 0 50 50" width="30" height="30">
+                        <circle cx="25" cy="25" r="20" fill="#00a8ff" stroke="#ffffff" stroke-width="2"/>
+                        <polygon points="15,25 25,15 35,25 25,35" fill="#ffffff"/>
+                    </svg>
+                    <span>BlueMind v5</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <span class="user-email" id="userEmail">Loading...</span>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <aside class="sidebar">
+                <nav class="nav-menu">
+                    <a href="#inbox" class="nav-item active" data-section="inbox">
+                        <span class="nav-icon">📧</span>
+                        <span>Inbox</span>
+                        <span class="unread-count" id="unreadCount">0</span>
+                    </a>
+                    <a href="#compose" class="nav-item" data-section="compose">
+                        <span class="nav-icon">✏️</span>
+                        <span>Compose</span>
+                    </a>
+                    <a href="#security" class="nav-item" data-section="security">
+                        <span class="nav-icon">🔒</span>
+                        <span>Security</span>
+                    </a>
+                </nav>
+            </aside>
+
+            <main class="content">
+                <!-- Inbox Section -->
+                <section id="inbox-section" class="content-section active">
+                    <div class="section-header">
+                        <h2>Inbox</h2>
+                        <button class="refresh-btn" onclick="loadMessages()">🔄 Refresh</button>
+                    </div>
+                    <div class="messages-list" id="messagesList">
+                        <div class="loading-messages">Loading messages...</div>
+                    </div>
+                </section>
+
+                <!-- Compose Section -->
+                <section id="compose-section" class="content-section">
+                    <div class="section-header">
+                        <h2>Compose Message</h2>
+                    </div>
+                    <form id="composeForm" class="compose-form">
+                        <div class="form-group">
+                            <label for="recipientEmail">To:</label>
+                            <input type="email" id="recipientEmail" name="recipientEmail" required placeholder="recipient@bluemind.net">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject:</label>
+                            <input type="text" id="subject" name="subject" required placeholder="Enter subject">
+                        </div>
+                        <div class="form-group">
+                            <label for="messageBody">Message:</label>
+                            <textarea id="messageBody" name="body" rows="8" required placeholder="Write your message here..."></textarea>
+                        </div>
+                        <button type="submit" class="send-btn">Send Message</button>
+                    </form>
+                    <div id="compose-status" class="status-message"></div>
+                </section>
+
+                <!-- Security Section -->
+                <section id="security-section" class="content-section">
+                    <div class="section-header">
+                        <h2>Security Information</h2>
+                    </div>
+                    <div class="security-info">
+                        <div class="security-card">
+                            <h3>🔐 Password Security</h3>
+                            <p>Your passwords are securely hashed using bcrypt with salt rounds.</p>
+                            <ul>
+                                <li>Passwords are never stored in plain text</li>
+                                <li>Bcrypt automatically handles salt generation</li>
+                                <li>Password verification is done server-side</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="security-card">
+                            <h3>🛡️ Session Management</h3>
+                            <p id="sessionInfo">Loading session information...</p>
+                            <ul>
+                                <li>Secure session cookies</li>
+                                <li>Automatic timeout for public computers</li>
+                                <li>Session data stored server-side</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="security-card">
+                            <h3>🔒 Additional Security</h3>
+                            <ul>
+                                <li>Rate limiting on login attempts</li>
+                                <li>Helmet.js for security headers</li>
+                                <li>Input validation and sanitization</li>
+                                <li>SQL injection protection</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Message Modal -->
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalSubject">Message Subject</h3>
+                <span class="close" onclick="closeMessageModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="message-meta">
+                    <p><strong>From:</strong> <span id="modalSender"></span></p>
+                    <p><strong>Sent:</strong> <span id="modalDate"></span></p>
+                </div>
+                <div class="message-body" id="modalBody"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

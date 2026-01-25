@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind - Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .dashboard-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 500px;
+        }
+        .header {
+            background-color: #0087e8; /* BlueMind blue */
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+        }
+        .content {
+            padding: 20px;
+        }
+        .message-list {
+            list-style: none;
+            padding: 0;
+        }
+        .message-item {
+            border-bottom: 1px solid #eee;
+            padding: 15px 10px;
+        }
+        .message-item:last-child {
+            border-bottom: none;
+        }
+        .msg-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        .msg-sender {
+            font-weight: bold;
+            color: #333;
+        }
+        .msg-date {
+            color: #888;
+            font-size: 0.9em;
+        }
+        .msg-subject {
+            color: #0087e8;
+            font-weight: 500;
+        }
+        .msg-body {
+            margin-top: 5px;
+            color: #555;
+        }
+        .empty-state {
+            text-align: center;
+            color: #888;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body style="background-color: #f4f7fa;"> <!-- Light background for dashboard -->
+
+    <div class="dashboard-container">
+        <div class="header">
+            <div class="user-info">
+                <i class="fas fa-user-circle"></i> <%= user.email %>
+            </div>
+            <div class="nav-links">
+                <a href="/dashboard"><i class="fas fa-inbox"></i> Inbox</a>
+                <a href="/compose"><i class="fas fa-pen"></i> Compose</a>
+                <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <h2>Inbox</h2>
+            
+            <% if (messages.length === 0) { %>
+                <div class="empty-state">No messages received.</div>
+            <% } else { %>
+                <ul class="message-list">
+                    <% messages.forEach(function(msg) { %>
+                        <li class="message-item">
+                            <div class="msg-header">
+                                <span class="msg-sender"><i class="fas fa-envelope"></i> <%= msg.sender_email %></span>
+                                <span class="msg-date"><%= msg.timestamp %></span>
+                            </div>
+                            <div class="msg-subject"><%= msg.subject %></div>
+                            <div class="msg-body"><%= msg.body %></div>
+                        </li>
+                    <% }); %>
+                </ul>
+            <% } %>
+        </div>
+    </div>
+
+</body>
+</html>

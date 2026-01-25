@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind Dashboard - Secure Messages</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <div class="logo">
+                <div class="logo-icon">🔷</div>
+                <h1>BlueMind Dashboard</h1>
+            </div>
+            <div class="user-info">
+                <span>Welcome, <%= userEmail %></span>
+                <form method="POST" action="/logout" class="logout-form">
+                    <button type="submit" class="logout-btn">Logout</button>
+                </form>
+            </div>
+        </header>
+        
+        <main class="dashboard-content">
+            <% if (error && error.length > 0) { %>
+                <div class="alert alert-error">
+                    <%= error[0] %>
+                </div>
+            <% } %>
+            
+            <% if (success && success.length > 0) { %>
+                <div class="alert alert-success">
+                    <%= success[0] %>
+                </div>
+            <% } %>
+            
+            <div class="dashboard-grid">
+                <section class="compose-section">
+                    <h2>Compose Message</h2>
+                    <form method="POST" action="/send-message" class="compose-form">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        
+                        <div class="input-group">
+                            <label for="recipient">To:</label>
+                            <input 
+                                type="email" 
+                                id="recipient" 
+                                name="recipient" 
+                                placeholder="recipient@bluemind.net" 
+                                required
+                            >
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="subject">Subject:</label>
+                            <input 
+                                type="text" 
+                                id="subject" 
+                                name="subject" 
+                                placeholder="Message subject" 
+                                maxlength="200"
+                                required
+                            >
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="content">Message:</label>
+                            <textarea 
+                                id="content" 
+                                name="content" 
+                                placeholder="Type your message here..." 
+                                rows="4"
+                                maxlength="5000"
+                                required
+                            ></textarea>
+                        </div>
+                        
+                        <button type="submit" class="send-btn">Send Message</button>
+                    </form>
+                </section>
+                
+                <section class="messages-section">
+                    <h2>Messages</h2>
+                    <div class="messages-list">
+                        <% if (messages && messages.length > 0) { %>
+                            <% messages.forEach(function(message) { %>
+                                <div class="message-item <%= message.recipient_id === sessionUserId && !message.is_read ? 'unread' : '' %>">
+                                    <div class="message-header">
+                                        <div class="message-info">
+                                            <strong>
+                                                <%= message.sender_id === sessionUserId ? 'To: ' + message.recipient_email : 'From: ' + message.sender_email %>
+                                            </strong>
+                                            <span class="message-date">
+                                                <%= new Date(message.created_at).toLocaleDateString() %>
+                                            </span>
+                                        </div>
+                                        <% if (message.recipient_id === sessionUserId && !message.is_read) { %>
+                                            <form method="POST" action="/mark-read/<%= message.id %>" style="display: inline;">
+                                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                                <button type="submit" class="mark-read-btn">Mark as Read</button>
+                                            </form>
+                                        <% } %>
+                                    </div>
+                                    <div class="message-subject">
+                                        <strong><%= message.subject %></strong>
+                                        <% if (message.recipient_id === sessionUserId && !message.is_read) { %>
+                                            <span class="unread-indicator">●</span>
+                                        <% } %>
+                                    </div>
+                                    <div class="message-content">
+                                        <%= message.content %>
+                                    </div>
+                                </div>
+                            <% }); %>
+                        <% } else { %>
+                            <div class="no-messages">
+                                <p>No messages yet. Send a message to get started!</p>
+                                <p><em>Try sending messages between the demo accounts to see how it works.</em></p>
+                            </div>
+                        <% } %>
+                    </div>
+                </section>
+            </div>
+        </main>
+        
+        <footer class="dashboard-footer">
+            <div class="security-info">
+                <h3>Security Features Active:</h3>
+                <ul>
+                    <li>✓ Secure Session Management</li>
+                    <li>✓ CSRF Protection</li>
+                    <li>✓ Input Validation & Sanitization</li>
+                    <li>✓ SQL Injection Prevention</li>
+                    <li>✓ XSS Protection</li>
+                </ul>
+            </div>
+            <div class="demo-accounts">
+                <h3>Available Demo Accounts:</h3>
+                <ul>
+                    <li>demo@bluemind.net</li>
+                    <li>student@bluemind.net</li>
+                    <li>teacher@bluemind.net</li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+    
+    <script>
+        // Client-side form validation
+        document.querySelector('.compose-form').addEventListener('submit', function(e) {
+            const recipient = document.getElementById('recipient').value;
+            const subject = document.getElementById('subject').value;
+            const content = document.getElementById('content').value;
+            
+            if (!recipient || !subject || !content) {
+                e.preventDefault();
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            if (subject.length > 200) {
+                e.preventDefault();
+                alert('Subject must be 200 characters or less');
+                return;
+            }
+            
+            if (content.length > 5000) {
+                e.preventDefault();
+                alert('Message content must be 5000 characters or less');
+                return;
+            }
+        });
+        
+        // Auto-refresh messages every 30 seconds (in a real app, use WebSockets)
+        setInterval(function() {
+            // In a production app, you'd implement proper real-time updates
+            console.log('In production: implement WebSocket for real-time message updates');
+        }, 30000);
+    </script>
+</body>
+</html>

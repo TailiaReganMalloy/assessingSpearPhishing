@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Secure Mailbox</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="bg">
+  <main class="card inbox">
+    <header class="toolbar">
+      <h1>Mailbox</h1>
+      <div>
+        <span id="user-badge"></span>
+        <button id="logout">Log out</button>
+      </div>
+    </header>
+
+    <section>
+      <h2>Send a message</h2>
+      <form id="message-form" class="form">
+        <label>Recipient email
+          <input type="email" name="recipientEmail" required>
+        </label>
+        <label>Subject
+          <input type="text" name="subject" required maxlength="120">
+        </label>
+        <label>Message
+          <textarea name="body" rows="4" required></textarea>
+        </label>
+        <button type="submit">Send</button>
+      </form>
+      <p id="message-error" class="error"></p>
+    </section>
+
+    <section>
+      <h2>Inbox</h2>
+      <ul id="inbox" class="list"></ul>
+    </section>
+
+    <section>
+      <h2>Sent</h2>
+      <ul id="sent" class="list"></ul>
+    </section>
+  </main>
+  <template id="message-template">
+    <li>
+      <h3 class="message-title"></h3>
+      <time class="message-meta"></time>
+      <p class="message-body"></p>
+    </li>
+  </template>
+  <script type="module">
+    async function fetchJson(url, options) {
+      const res = await fetch(url, options);
+      if (res.status === 401) {
+        window.location.href = '/login.html';
+        return null;
+      }
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || 'Request failed');
+      }
+      return res.json();
+    }
+
+    function renderMessages(container, items, formatter) {
+      container.innerHTML = '';
+      if (!items.length) {
+        const li = document.createElement('li');
+        li.textContent = 'No messages yet.';
+        container.appendChild(li);
+        return;
+      }
+      for (const item of items) {
+        const node = document.getElementById('message-template').content.cloneNode(true);
+        const title = node.querySelector('.message-title');
+        const meta = node.querySelector('.message-meta');
+        const body = node.querySelector('.message-body');
+        formatter(item, title, meta, body);
+        container.appendChild(node);
+      }
+    }
+
+    async function loadMessages() {
+      const inbox = await fetchJson('/messages');
+      const sent = await fetchJson('/messages/sent');
+      renderMessages(
+        document.getElementById('inbox'),
+        inbox.messages,
+        (msg, title, meta, body) => {
+          title.textContent = `${msg.subject} — from ${msg.senderName} <${msg.senderEmail}>`;
+          meta.textContent = new Date(msg.createdAt).toLocaleString();
+          body.textContent = msg.body;
+        }
+      );
+      renderMessages(
+        document.getElementById('sent'),
+        sent.messages,
+        (msg, title, meta, body) => {
+          title.textContent = `${msg.subject} — to ${msg.recipientName} <${msg.recipientEmail}>`;
+          meta.textContent = new Date(msg.createdAt).toLocaleString();
+          body.textContent = msg.body;
+        }
+      );
+    }
+
+    async function boot() {
+      const profile = await fetchJson('/auth/me');
+      if (!profile) {
+        return;
+      }
+      document.getElementById('user-badge').textContent = profile.user.displayName;
+      await loadMessages();
+    }
+
+    document.getElementById('logout').addEventListener('click', async () => {
+      await fetchJson('/auth/logout', { method: 'POST' });
+      window.location.href = '/login.html';
+    });
+
+    document.getElementById('message-form').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const errorNode = document.getElementById('message-error');
+      const payload = Object.fromEntries(new FormData(event.target).entries());
+      try {
+        await fetchJson('/messages', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        event.target.reset();
+        errorNode.textContent = '';
+        await loadMessages();
+      } catch (err) {
+        errorNode.textContent = err.message;
+      }
+    });
+
+    boot().catch(() => {
+      window.location.href = '/login.html';
+    });
+  </script>
+</body>
+</html>

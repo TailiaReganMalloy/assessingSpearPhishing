@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Messages</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #0a2e5c; /* Dark blue background */
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header styling */
+        header {
+            background-color: #001f4d; /* Dark navy-blue background */
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .hexagon {
+            width: 30px;
+            height: 30px;
+            background-color: #ffffff;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        }
+        
+        .logo-text {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .user-info {
+            color: white;
+            font-size: 16px;
+        }
+        
+        /* Main content styling */
+        .container {
+            display: flex;
+            flex-grow: 1;
+            padding: 20px;
+        }
+        
+        .sidebar {
+            width: 250px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-right: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .nav-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            color: #555;
+        }
+        
+        .nav-item:hover {
+            color: #007bff;
+        }
+        
+        .messages-area {
+            flex-grow: 1;
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow-y: auto;
+        }
+        
+        .message-list {
+            margin-top: 20px;
+        }
+        
+        .message-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
+        
+        .message-item:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .message-subject {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .message-sender {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .message-preview {
+            color: #888;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+        
+        .message-details {
+            margin-top: 20px;
+            padding: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .message-header {
+            margin-bottom: 15px;
+        }
+        
+        .message-title {
+            font-size: 20px;
+            color: #333;
+        }
+        
+        .message-meta {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .message-content {
+            line-height: 1.6;
+            color: #444;
+        }
+        
+        .logout-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .logout-btn:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="hexagon"></div>
+                <div class="logo-text">BlueMind</div>
+            </div>
+            <div class="user-info">
+                Welcome, <%= username %> (<%= role %>)
+                <form action="/logout" method="GET" style="display: inline;">
+                    <button type="submit" class="logout-btn">Logout</button>
+                </form>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="sidebar">
+            <h3>Navigation</h3>
+            <div class="nav-item">Inbox</div>
+            <div class="nav-item">Sent</div>
+            <div class="nav-item">Drafts</div>
+            <div class="nav-item">Trash</div>
+        </div>
+        
+        <div class="messages-area">
+            <h2>Messages</h2>
+            
+            <div class="message-list">
+                <% messages.forEach(function(message) { %>
+                <div class="message-item" onclick="showMessage(<%= message.id %>)">
+                    <div class="message-subject"><%= message.subject %></div>
+                    <div class="message-sender">From: <%= message.sender %> | <%= message.timestamp.toLocaleString() %></div>
+                    <div class="message-preview"><%= message.content.substring(0, 100) %>...</div>
+                </div>
+                <% }); %>
+            </div>
+            
+            <div id="messageDetails" class="message-details" style="display: none;">
+                <!-- Message details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showMessage(messageId) {
+            // In a real application, this would fetch message details from the server
+            // For this demo, we'll just show a placeholder
+            const message = <%= JSON.stringify(messages) %>.find(m => m.id === messageId);
+            if (message) {
+                document.getElementById('messageDetails').innerHTML = `
+                    <div class="message-header">
+                        <h3 class="message-title">${message.subject}</h3>
+                        <div class="message-meta">From: ${message.sender} | ${message.timestamp.toLocaleString()}</div>
+                    </div>
+                    <div class="message-content">${message.content}</div>
+                `;
+                document.getElementById('messageDetails').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

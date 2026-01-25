@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Your Messages</h1>
+    <ul>
+        <% messages.forEach(message => { %>
+            <li>From: <%= message.Sender.email %> - <%= message.content %></li>
+        <% }); %>
+    </ul>
+    <a href="/send">Send Message</a>
+</body>
+</html>

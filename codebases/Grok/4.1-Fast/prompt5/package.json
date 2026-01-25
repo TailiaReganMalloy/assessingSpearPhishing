@@ -1,0 +1,16 @@
+{
+  "name": "web-security-example",
+  "version": "1.0.0",
+  "description": "Node.js example app for teaching web security: secure user authentication with bcrypt, SQLite database, and messaging between users.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "ejs": "^3.1.9",
+    "bcryptjs": "^2.4.3",
+    "express-session": "^1.17.3",
+    "sqlite3": "^5.1.6"
+  }
+}

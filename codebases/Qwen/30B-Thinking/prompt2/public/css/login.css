@@ -1,0 +1,72 @@
+#header {
+  background-color: #0a2463;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  font-size: 1.5rem;
+}
+
+#logo {
+  display: inline-block;
+  font-weight: bold;
+}
+
+.hexagon {
+  width: 30px;
+  height: 30px;
+  background: #007bff;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.login-panel {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  padding: 2rem;
+  width: 300px;
+  margin: 50px auto;
+}
+
+.login-panel h1 {
+  text-align: center;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.radio-group {
+  margin-bottom: 1.5rem;
+}
+
+.radio-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.connect-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1rem;
+}

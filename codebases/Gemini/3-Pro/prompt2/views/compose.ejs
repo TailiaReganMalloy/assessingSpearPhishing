@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind - Compose</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .dashboard-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 500px;
+        }
+        .header {
+            background-color: #0087e8;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+        }
+        .content {
+            padding: 20px;
+        }
+        .compose-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #333;
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .btn-send {
+            background-color: #0087e8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn-send:hover {
+            background-color: #006bba;
+        }
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+             padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body style="background-color: #f4f7fa;">
+
+    <div class="dashboard-container">
+        <div class="header">
+            <div class="user-info">
+                <i class="fas fa-user-circle"></i> <%= user.email %>
+            </div>
+            <div class="nav-links">
+                <a href="/dashboard"><i class="fas fa-inbox"></i> Inbox</a>
+                <a href="/compose"><i class="fas fa-pen"></i> Compose</a>
+                <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <h2>Compose Message</h2>
+
+            <% if (success) { %>
+                <div class="alert-success"><%= success %></div>
+            <% } %>
+            <% if (error) { %>
+                <div class="alert-error"><%= error %></div>
+            <% } %>
+
+            <form action="/send" method="POST" class="compose-form">
+                <div class="form-group">
+                    <label for="receiver_email">To:</label>
+                    <input type="email" id="receiver_email" name="receiver_email" class="form-control" placeholder="Recipient's email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject:</label>
+                    <input type="text" id="subject" name="subject" class="form-control" placeholder="Subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="body">Message:</label>
+                    <textarea id="body" name="body" class="form-control" rows="8" placeholder="Type your message here..." required></textarea>
+                </div>
+                <button type="submit" class="btn-send"><i class="fas fa-paper-plane"></i> Send Message</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

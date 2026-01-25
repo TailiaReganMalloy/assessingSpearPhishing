@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #002147; /* Dark blue background */
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header styling */
+        .header {
+            background-color: #001a33; /* Dark navy-blue */
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            padding: 0 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Logo styling */
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            width: 30px;
+            height: 30px;
+            background-color: #007bff; /* Bright blue */
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            margin-right: 10px;
+        }
+
+        /* Main content styling */
+        .main-content {
+            display: flex;
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            width: 250px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-right: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+        }
+
+        .sidebar li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .sidebar li:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .sidebar a:hover {
+            text-decoration: underline;
+        }
+
+        /* Messages area styling */
+        .messages-area {
+            flex-grow: 1;
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .messages-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .messages-header h2 {
+            color: #333;
+        }
+
+        .send-message-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .send-message-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Messages list styling */
+        .messages-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .message-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .message-item:last-child {
+            border-bottom: none;
+        }
+
+        .message-subject {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .message-from {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .message-preview {
+            margin-top: 5px;
+            color: #555;
+        }
+
+        .message-time {
+            font-size: 12px;
+            color: #999;
+            text-align: right;
+        }
+
+        /* Send message modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 500px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-modal {
+            float: right;
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        .modal-form-group {
+            margin-bottom: 15px;
+        }
+
+        .modal-form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .modal-form-group input,
+        .modal-form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .modal-form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .submit-message-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            float: right;
+        }
+
+        .submit-message-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with BlueMind logo and user info -->
+    <div class="header">
+        <div class="logo">
+            <div class="logo-icon"></div>
+            BlueMind
+        </div>
+        <div class="user-info">
+            Welcome, <span id="username-display"></span>!
+        </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="main-content">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h3>Navigation</h3>
+            <ul>
+                <li><a href="#" onclick="showMessages()">Inbox</a></li>
+                <li><a href="#" onclick="showSendMessage()">Send Message</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#" onclick="logout()">Logout</a></li>
+            </ul>
+        </div>
+
+        <!-- Messages area -->
+        <div class="messages-area">
+            <div class="messages-header">
+                <h2>Inbox</h2>
+                <button class="send-message-btn" onclick="showSendMessage()">Send Message</button>
+            </div>
+            
+            <div class="messages-list" id="messages-list">
+                <!-- Messages will be loaded here dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Send Message Modal -->
+    <div id="send-message-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2>Send New Message</h2>
+            <form id="send-message-form">
+                <div class="modal-form-group">
+                    <label for="recipient">Recipient:</label>
+                    <input type="text" id="recipient" name="recipient" required>
+                </div>
+                <div class="modal-form-group">
+                    <label for="subject">Subject:</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="modal-form-group">
+                    <label for="content">Message:</label>
+                    <textarea id="content" name="content" required></textarea>
+                </div>
+                <button type="submit" class="submit-message-btn">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Display username
+        document.getElementById('username-display').textContent = localStorage.getItem('username') || 'User';
+
+        // Load messages when page loads
+        loadMessages();
+
+        // Function to load messages
+        function loadMessages() {
+            fetch('/messages')
+                .then(response => response.json())
+                .then(messages => {
+                    const messagesList = document.getElementById('messages-list');
+                    messagesList.innerHTML = '';
+
+                    if (messages.length === 0) {
+                        messagesList.innerHTML = '<p>No messages found.</p>';
+                        return;
+                    }
+
+                    messages.forEach(message => {
+                        const messageElement = document.createElement('div');
+                        messageElement.className = 'message-item';
+                        messageElement.innerHTML = `
+                            <div class="message-subject">${message.subject}</div>
+                            <div class="message-from">From: ${message.from}</div>
+                            <div class="message-preview">${message.content.substring(0, 100)}${message.content.length > 100 ? '...' : ''}</div>
+                            <div class="message-time">${formatDate(message.timestamp)}</div>
+                        `;
+                        messagesList.appendChild(messageElement);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading messages:', error);
+                    document.getElementById('messages-list').innerHTML = '<p>Error loading messages.</p>';
+                });
+        }
+
+        // Function to format date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+        }
+
+        // Show send message modal
+        function showSendMessage() {
+            document.getElementById('send-message-modal').style.display = 'block';
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('send-message-modal').style.display = 'none';
+        }
+
+        // Logout function
+        function logout() {
+            localStorage.removeItem('username');
+            window.location.href = '/login';
+        }
+
+        // Show messages
+        function showMessages() {
+            loadMessages();
+        }
+
+        // Handle sending message
+        document.getElementById('send-message-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const messageData = {
+                to: formData.get('recipient'),
+                subject: formData.get('subject'),
+                content: formData.get('content')
+            };
+
+            fetch('/send-message', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(messageData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Message sent successfully!');
+                    closeModal();
+                    this.reset();
+                    loadMessages(); // Refresh messages list
+                } else {
+                    alert('Error sending message: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error sending message:', error);
+                alert('Error sending message.');
+            });
+        });
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('send-message-modal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>

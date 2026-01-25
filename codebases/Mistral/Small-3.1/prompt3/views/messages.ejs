@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Messages</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="messages-container">
+    <h1>Messages</h1>
+    <% if (error) { %>
+      <p class="error"><%= error %></p>
+    <% } %>
+    
+    <div class="messages-list">
+      <% messages.forEach(message => { %>
+        <div class="message">
+          <p><strong><%= message.sender.email %>:</strong> <%= message.content %></p>
+          <small>To: <%= message.recipient.email %></small>
+        </div>
+      <% }); %>
+    </div>
+    
+    <form action="/messages/send" method="POST">
+      <div class="form-group">
+        <label for="recipientId">Recipient Email</label>
+        <input type="email" id="recipientId" name="recipientId" placeholder="Enter recipient email" required>
+      </div>
+      <div class="form-group">
+        <label for="content">Message</label>
+        <textarea id="content" name="content" rows="4" required></textarea>
+      </div>
+      <button type="submit" class="connect-btn">Send Message</button>
+    </form>
+  </div>
+</body>
+</html>

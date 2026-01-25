@@ -1,0 +1,32 @@
+{
+  "name": "bluemind-security-demo",
+  "version": "1.0.0",
+  "description": "Node.js reference app for teaching secure login and messaging workflows with a BlueMind-inspired interface.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon --watch src --watch views --watch public src/server.js"
+  },
+  "keywords": [
+    "security",
+    "authentication",
+    "express",
+    "education"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "csurf": "^1.11.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "helmet": "^7.1.0",
+    "memorystore": "^1.6.7",
+    "morgan": "^1.10.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  }
+}

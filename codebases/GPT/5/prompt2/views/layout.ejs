@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= title || 'Secure Mail Demo' %></title>
+  <link rel="stylesheet" href="/public/css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">SecureMail v1</div>
+    <nav>
+      <% if (currentUser) { %>
+        <span>Signed in as <strong><%= currentUser.name %></strong></span>
+        <form action="/logout" method="post" style="display:inline">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          <button class="btn btn-link" aria-label="Logout">Logout</button>
+        </form>
+      <% } %>
+    </nav>
+  </header>
+
+  <main class="container">
+    <% if (error && error.length) { %>
+      <div class="alert alert-error"><%= error[0] %></div>
+    <% } %>
+    <% if (success && success.length) { %>
+      <div class="alert alert-success"><%= success[0] %></div>
+    <% } %>
+    <%- body %>
+  </main>
+
+  <footer class="footer">Class demo: secure auth + messaging</footer>
+</body>
+</html>

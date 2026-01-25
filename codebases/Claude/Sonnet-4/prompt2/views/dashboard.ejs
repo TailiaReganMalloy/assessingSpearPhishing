@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - BlueMind v5</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="dashboard-card">
+            <div class="dashboard-header">
+                <div class="dashboard-title">
+                    <div class="logo">
+                        <div class="logo-icon"></div>
+                        <span>BlueMind Secure Messaging</span>
+                    </div>
+                </div>
+                <div class="user-info">
+                    <span class="user-email">👤 <%= userEmail %></span>
+                    <span class="security-badge">Encrypted Session</span>
+                    <form action="/logout" method="POST" style="display: inline;">
+                        <button type="submit" class="btn-secondary">Logout</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="dashboard-nav">
+                <a href="/dashboard" class="nav-link active">📧 Messages</a>
+                <a href="/compose" class="nav-link">✏️ Compose</a>
+            </div>
+            
+            <div class="dashboard-content">
+                <% if (error) { %>
+                    <div class="alert alert-error">
+                        <%= error %>
+                    </div>
+                <% } %>
+                
+                <% if (success) { %>
+                    <div class="alert alert-success">
+                        <%= success %>
+                    </div>
+                <% } %>
+                
+                <h3 style="margin-bottom: 20px; color: #333;">Your Messages</h3>
+                
+                <% if (messages && messages.length > 0) { %>
+                    <ul class="messages-list">
+                        <% messages.forEach(function(message) { %>
+                            <li class="message-item">
+                                <div class="message-header">
+                                    <span class="message-sender">From: <%= message.sender_email %></span>
+                                    <span class="message-date">
+                                        <%= new Date(message.sent_at).toLocaleDateString('en-US', {
+                                            year: 'numeric',
+                                            month: 'short',
+                                            day: 'numeric',
+                                            hour: '2-digit',
+                                            minute: '2-digit'
+                                        }) %>
+                                    </span>
+                                </div>
+                                <div class="message-subject"><%= message.subject %></div>
+                                <div class="message-body">
+                                    <%= message.body.length > 150 ? message.body.substring(0, 150) + '...' : message.body %>
+                                </div>
+                                <% if (!message.read_at) { %>
+                                    <div style="margin-top: 8px;">
+                                        <span style="background: #2196F3; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px;">UNREAD</span>
+                                    </div>
+                                <% } %>
+                            </li>
+                        <% }); %>
+                    </ul>
+                <% } else { %>
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📭</div>
+                        <h4>No Messages Yet</h4>
+                        <p>You haven't received any messages yet. Ask someone to send you a message!</p>
+                        <p style="margin-top: 10px;">
+                            <a href="/compose" class="btn-primary" style="display: inline-block; text-decoration: none; padding: 10px 20px;">
+                                Send your first message
+                            </a>
+                        </p>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Auto-refresh messages every 30 seconds
+        setInterval(function() {
+            if (!document.hidden) {
+                fetch(window.location.href, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        // Only refresh if there are new messages (implementation could be enhanced)
+                        console.log('Checking for new messages...');
+                    }
+                }).catch(err => {
+                    console.log('Auto-refresh error:', err);
+                });
+            }
+        }, 30000);
+        
+        // Mark page as visited (for session tracking)
+        if ('localStorage' in window) {
+            localStorage.setItem('lastVisited', new Date().toISOString());
+        }
+        
+        // Security: Clear sensitive data on page unload
+        window.addEventListener('beforeunload', function() {
+            // Clear any temporary data
+            sessionStorage.clear();
+        });
+    </script>
+</body>
+</html>

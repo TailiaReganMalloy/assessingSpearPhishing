@@ -1,0 +1,22 @@
+{
+  "name": "secure-auth-messaging-system",
+  "version": "1.0.0",
+  "description": "A secure Node.js authentication and messaging system for educational purposes.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "GitHub Copilot",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.3",
+    "ejs": "^4.0.1",
+    "express": "^5.2.1",
+    "express-session": "^1.18.2",
+    "express-validator": "^7.3.1",
+    "mongoose": "^9.1.5"
+  }
+}

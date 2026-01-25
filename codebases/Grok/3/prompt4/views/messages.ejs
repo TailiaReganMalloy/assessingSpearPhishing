@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlueMind v5 - Messages</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #1e3a8a;
+    }
+    header {
+      background-color: #1e3a8a;
+    }
+  </style>
+</head>
+<body class="font-sans antialiased">
+  <header class="py-4 px-6 flex justify-center items-center text-white">
+    <div class="flex items-center space-x-2">
+      <div class="w-8 h-8 bg-white rounded-full flex justify-center items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#1e3a8a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+      </div>
+      <span class="text-xl font-bold">BlueMind</span>
+    </div>
+  </header>
+  <div class="flex justify-center items-center min-h-screen px-4 py-8">
+    <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-2xl">
+      <h1 class="text-2xl font-semibold text-gray-800 text-center mb-6">Messages for <%= user.username %></h1>
+      <div class="flex justify-between mb-4">
+        <a href="/dashboard" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Back to Dashboard</a>
+        <a href="/logout" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">Logout</a>
+      </div>
+      <div class="mt-6">
+        <h2 class="text-lg font-medium text-gray-700 mb-2">Your Messages</h2>
+        <% if (user.messages.length > 0) { %>
+          <ul class="space-y-4">
+            <% user.messages.forEach(msg => { %>
+              <li class="border-b border-gray-200 pb-2">
+                <p class="text-sm font-medium text-gray-700">From: <%= msg.from %></p>
+                <p class="text-sm text-gray-600">Message: <%= msg.content %></p>
+                <p class="text-xs text-gray-500">Received: <%= msg.timestamp.toLocaleString() %></p>
+              </li>
+            <% }) %>
+          </ul>
+        <% } else { %>
+          <p class="text-sm text-gray-600">No messages yet.</p>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

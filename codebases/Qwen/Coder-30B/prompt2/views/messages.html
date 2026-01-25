@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Messages</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0a2e5c; /* Dark blue background */
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: #001f4d; /* Dark navy-blue background */
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hexagon {
+            width: 30px;
+            height: 30px;
+            background-color: #ffffff;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        }
+
+        .logo-text {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .user-info {
+            color: white;
+            font-size: 16px;
+        }
+
+        /* Main Content */
+        .container {
+            display: flex;
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin-right: 20px;
+        }
+
+        .sidebar h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .nav-link {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .main-content {
+            flex-grow: 1;
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .message-list {
+            margin-top: 20px;
+        }
+
+        .message-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s;
+        }
+
+        .message-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .message-from {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .message-subject {
+            font-size: 18px;
+            margin: 5px 0;
+        }
+
+        .message-content {
+            color: #666;
+            margin: 10px 0;
+        }
+
+        .message-timestamp {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background-color: #545b62;
+        }
+
+        .compose-form {
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        textarea {
+            height: 150px;
+            resize: vertical;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="hexagon"></div>
+            <div class="logo-text">BlueMind</div>
+        </div>
+        <div class="user-info">Welcome, Student</div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h3>Navigation</h3>
+            <a href="/dashboard" class="nav-link">Dashboard</a>
+            <a href="/messages" class="nav-link">Messages</a>
+            <a href="#" class="nav-link">Settings</a>
+            <a href="#" class="nav-link">Profile</a>
+            <a href="/logout" class="nav-link">Logout</a>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <h1 class="section-title">Messages</h1>
+            
+            <div id="messagesContainer" class="message-list">
+                <!-- Messages will be loaded here dynamically -->
+            </div>
+            
+            <div class="compose-form">
+                <h2 class="section-title">Compose New Message</h2>
+                <form id="composeForm">
+                    <div class="form-group">
+                        <label for="to">To:</label>
+                        <input type="text" id="to" name="to" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject:</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Message:</label>
+                        <textarea id="content" name="content" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load messages when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadMessages();
+        });
+
+        async function loadMessages() {
+            try {
+                const response = await fetch('/api/messages');
+                const messages = await response.json();
+                
+                const container = document.getElementById('messagesContainer');
+                container.innerHTML = '';
+                
+                if (messages.length === 0) {
+                    container.innerHTML = '<p>No messages found.</p>';
+                    return;
+                }
+                
+                messages.forEach(message => {
+                    const messageElement = document.createElement('div');
+                    messageElement.className = 'message-item';
+                    messageElement.innerHTML = `
+                        <div class="message-from">From: ${message.from}</div>
+                        <div class="message-subject">${message.subject}</div>
+                        <div class="message-content">${message.content}</div>
+                        <div class="message-timestamp">${new Date(message.timestamp).toLocaleString()}</div>
+                    `;
+                    container.appendChild(messageElement);
+                });
+            } catch (error) {
+                console.error('Error loading messages:', error);
+                document.getElementById('messagesContainer').innerHTML = '<p>Error loading messages.</p>';
+            }
+        }
+
+        // Handle compose form submission
+        document.getElementById('composeForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const messageData = {
+                to: formData.get('to'),
+                subject: formData.get('subject'),
+                content: formData.get('content')
+            };
+            
+            // In a real application, you would send this data to your backend
+            alert(`Message would be sent to: ${messageData.to}\nSubject: ${messageData.subject}\nContent: ${messageData.content}`);
+            
+            // Reset form
+            this.reset();
+        });
+    </script>
+</body>
+</html>

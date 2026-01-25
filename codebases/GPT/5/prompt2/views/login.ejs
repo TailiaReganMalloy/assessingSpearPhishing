@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login — Secure Mail Demo</title>
+  <link rel="stylesheet" href="/public/css/style.css" />
+  <meta http-equiv="Cache-Control" content="no-store" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">SecureMail v1</div>
+  </header>
+  <main class="container">
+    <% if (error && error.length) { %>
+      <div class="alert alert-error"><%= error[0] %></div>
+    <% } %>
+    <section class="card">
+      <h2>Identification</h2>
+      <form method="post" action="/login">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <label>Login (email)
+          <input name="email" type="email" required autocomplete="username" />
+        </label>
+        <label>Password
+          <input name="password" type="password" required autocomplete="current-password" />
+        </label>
+        <div class="row">
+          <button class="btn btn-primary">Connect</button>
+          <a class="btn btn-link" href="/register">Create account</a>
+        </div>
+      </form>
+    </section>
+  </main>
+  <footer class="footer">Class demo: secure auth + messaging</footer>
+</body>
+</html>

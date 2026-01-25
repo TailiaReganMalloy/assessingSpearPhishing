@@ -1,0 +1,172 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #1e3a8a; /* Dark blue background */
+    color: #333;
+}
+
+.header {
+    background-color: #172554; /* Dark navy-blue */
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.icon {
+    margin-right: 10px;
+    font-size: 28px;
+}
+
+.user-info {
+    font-size: 16px;
+}
+
+.user-info a {
+    color: white;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.user-info a:hover {
+    text-decoration: underline;
+}
+
+.login-container, .dashboard-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 60px);
+    padding: 20px;
+}
+
+.login-panel, .dashboard-panel {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    max-width: 400px; /* Adjusted for login panel */
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+.dashboard-panel {
+    max-width: 600px; /* Wider for dashboard */
+}
+
+h2 {
+    color: #1f2937; /* Dark gray */
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+h3 {
+    color: #1f2937;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input[type="text"], input[type="password"], textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.radio-group {
+    margin-bottom: 20px;
+}
+
+.radio-group div {
+    margin-bottom: 10px;
+}
+
+.radio-group input[type="radio"] {
+    margin-right: 10px;
+}
+
+.connect-btn {
+    background-color: #3b82f6; /* Bright blue */
+    color: white;
+    font-weight: bold;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    font-size: 16px;
+    text-align: center;
+}
+
+.connect-btn:hover {
+    background-color: #2563eb;
+}
+
+.error-message {
+    color: #dc2626; /* Red for errors */
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.message-list {
+    margin-bottom: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.message-item {
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+}
+
+.message-item:last-child {
+    border-bottom: none;
+}
+
+.message-item strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #1f2937;
+}
+
+.message-item p {
+    margin: 0;
+    word-wrap: break-word;
+}
+
+.send-message {
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}

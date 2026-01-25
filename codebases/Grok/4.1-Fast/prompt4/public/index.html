@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SecureLogin Demo - BlueMind Style</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="login-container" id="loginContainer">
+    <!-- Logo like BlueMind -->
+    <div class="logo">🔒 SecureLogin</div>
+    
+    <h2>Identification</h2>
+    
+    <div id="message"></div>
+    
+    <!-- Login Form -->
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="loginEmail">Email</label>
+        <input type="email" id="loginEmail" placeholder="@bluemind.net" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" required>
+      </div>
+      
+      <!-- Simplified computer type -->
+      <div class="radio-group">
+        <label><input type="radio" name="computer" value="public" checked> Public computer</label>
+        <label><input type="radio" name="computer" value="private"> Private computer</label>
+      </div>
+      
+      <button type="submit" class="btn">Connect</button>
+    </form>
+    
+    <div class="switch-form">
+      Don't have an account? <a href="#" id="showRegister">Register here</a>
+    </div>
+  </div>
+
+  <!-- Register Form (hidden initially) -->
+  <div class="login-container" id="registerContainer" style="display: none;">
+    <div class="logo">🔑 Register</div>
+    
+    <h2>Create Account</h2>
+    
+    <div id="regMessage"></div>
+    
+    <form id="registerForm">
+      <div class="form-group">
+        <label for="regUsername">Username</label>
+        <input type="text" id="regUsername" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="regEmail">Email</label>
+        <input type="email" id="regEmail" placeholder="@bluemind.net" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="regPassword">Password</label>
+        <input type="password" id="regPassword" minlength="8" required>
+      </div>
+      
+      <button type="submit" class="btn">Register</button>
+    </form>
+    
+    <div class="switch-form">
+      Already have an account? <a href="#" id="showLogin">Login here</a>
+    </div>
+  </div>
+
+  <script>
+    // Toggle forms
+    document.getElementById('showRegister').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('loginContainer').style.display = 'none';
+      document.getElementById('registerContainer').style.display = 'block';
+    });
+
+    document.getElementById('showLogin').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('registerContainer').style.display = 'none';
+      document.getElementById('loginContainer').style.display = 'block';
+    });
+
+    // Register handler
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = {
+        username: document.getElementById('regUsername').value,
+        email: document.getElementById('regEmail').value,
+        password: document.getElementById('regPassword').value
+      };
+
+      try {
+        const res = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+        const data = await res.json();
+
+        const msg = document.getElementById('regMessage');
+        if (res.ok) {
+          msg.innerHTML = `<div class="success">${data.message}</div>`;
+          setTimeout(() => {
+            document.getElementById('registerContainer').style.display = 'none';
+            document.getElementById('loginContainer').style.display = 'block';
+            document.getElementById('registerForm').reset();
+          }, 1500);
+        } else {
+          msg.innerHTML = `<div class="error">${data.error || data.errors?.[0]?.msg || 'Registration failed'}</div>`;
+        }
+      } catch (err) {
+        document.getElementById('regMessage').innerHTML = `<div class="error">Network error</div>`;
+      }
+    });
+
+    // Login handler
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = {
+        email: document.getElementById('loginEmail').value,
+        password: document.getElementById('loginPassword').value
+      };
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+        const data = await res.json();
+
+        const msg = document.getElementById('message');
+        if (res.ok) {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', JSON.stringify(data.user));
+          window.location.href = '/dashboard.html';
+        } else {
+          msg.innerHTML = `<div class="error">${data.error}</div>`;
+        }
+      } catch (err) {
+        document.getElementById('message').innerHTML = `<div class="error">Network error</div>`;
+      }
+    });
+  </script>
+</body>
+</html>

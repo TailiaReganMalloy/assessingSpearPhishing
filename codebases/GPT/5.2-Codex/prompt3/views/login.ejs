@@ -1,0 +1,66 @@
+<%- include("partials/head", { title: "BlueMind v5 - Identification" }) %>
+<div class="page">
+  <header class="brand">
+    <div class="brand-mark"></div>
+    <div class="brand-text">
+      <div class="brand-name">BlueMind</div>
+      <div class="brand-version">v5</div>
+    </div>
+  </header>
+
+  <main class="card">
+    <div class="card-accent"></div>
+    <h1>Identification</h1>
+
+    <% if (error) { %>
+      <div class="alert"><%= error %></div>
+    <% } %>
+
+    <form method="post" action="/login" class="form">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      <label class="field">
+        <span class="field-label">Login</span>
+        <div class="field-input">
+          <span class="field-icon">✉️</span>
+          <input
+            type="email"
+            name="email"
+            value="<%= email %>"
+            placeholder="email@domain.net"
+            autocomplete="username"
+            required
+          />
+        </div>
+      </label>
+
+      <label class="field">
+        <span class="field-label">Password</span>
+        <div class="field-input">
+          <span class="field-icon">🔒</span>
+          <input
+            type="password"
+            name="password"
+            placeholder="********"
+            autocomplete="current-password"
+            required
+          />
+          <span class="field-icon">👁️</span>
+        </div>
+      </label>
+
+      <div class="device">
+        <label class="device-option">
+          <input type="radio" name="deviceType" value="private" checked />
+          <span>Private computer</span>
+        </label>
+        <label class="device-option">
+          <input type="radio" name="deviceType" value="public" />
+          <span>Public computer</span>
+        </label>
+      </div>
+
+      <button class="primary" type="submit">Connect</button>
+    </form>
+  </main>
+</div>
+<%- include("partials/footer") %>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Message</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Send Message</h1>
+        <form action="/messages/send" method="POST">
+            <div class="input-group">
+                <label for="toUserId">To User</label>
+                <select id="toUserId" name="toUserId" required>
+                    <% users.forEach(user => { %>
+                        <option value="<%= user.id %>"><%= user.email %></option>
+                    <% }); %>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="connect-btn">Send</button>
+        </form>
+        <a href="/messages/dashboard">Back to Dashboard</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<%- include('partials/header') %>
+
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="bi bi-envelope"></i> Messages</h2>
+            <a href="/messages/compose" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Compose Message
+            </a>
+        </div>
+
+        <% if (messages && messages.length > 0) { %>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Status</th>
+                                            <th>From</th>
+                                            <th>To</th>
+                                            <th>Subject</th>
+                                            <th>Date</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% messages.forEach(function(message) { %>
+                                            <tr class="<%= message.recipient_id === user.id && !message.read_at ? 'table-info' : '' %>">
+                                                <td>
+                                                    <% if (message.recipient_id === user.id) { %>
+                                                        <% if (message.read_at) { %>
+                                                            <i class="bi bi-envelope-open text-muted" title="Read"></i>
+                                                        <% } else { %>
+                                                            <i class="bi bi-envelope-fill text-primary" title="Unread"></i>
+                                                        <% } %>
+                                                    <% } else { %>
+                                                        <i class="bi bi-send text-success" title="Sent"></i>
+                                                    <% } %>
+                                                </td>
+                                                <td>
+                                                    <span class="<%= message.sender_id === user.id ? 'fw-bold' : '' %>">
+                                                        <%= message.sender_email %>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="<%= message.recipient_id === user.id ? 'fw-bold' : '' %>">
+                                                        <%= message.recipient_email %>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <a href="/messages/<%= message.id %>" 
+                                                       class="text-decoration-none <%= message.recipient_id === user.id && !message.read_at ? 'fw-bold' : '' %>">
+                                                        <%= message.subject %>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <small class="text-muted">
+                                                        <%= new Date(message.created_at).toLocaleDateString() %>
+                                                        <%= new Date(message.created_at).toLocaleTimeString() %>
+                                                    </small>
+                                                </td>
+                                                <td>
+                                                    <a href="/messages/<%= message.id %>" 
+                                                       class="btn btn-sm btn-outline-primary">
+                                                        <i class="bi bi-eye"></i> View
+                                                    </a>
+                                                    <% if (message.recipient_id === user.id && !message.read_at) { %>
+                                                        <form method="POST" 
+                                                              action="/messages/<%= message.id %>/read" 
+                                                              class="d-inline">
+                                                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                                            <button type="submit" 
+                                                                    class="btn btn-sm btn-outline-secondary"
+                                                                    title="Mark as read">
+                                                                <i class="bi bi-check"></i>
+                                                            </button>
+                                                        </form>
+                                                    <% } %>
+                                                </td>
+                                            </tr>
+                                        <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% } else { %>
+            <div class="text-center py-5">
+                <i class="bi bi-envelope-slash text-muted" style="font-size: 4rem;"></i>
+                <h4 class="text-muted mt-3">No messages yet</h4>
+                <p class="text-muted">Start a conversation by sending your first message!</p>
+                <a href="/messages/compose" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> Compose Message
+                </a>
+            </div>
+        <% } %>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,30 @@
+<%- include('partials/head', { title: 'Inbox', bodyClass: 'dashboard-page' }) %>
+  <section class="inbox">
+    <header class="section-header">
+      <div>
+        <h1>Secure inbox</h1>
+        <p>Signed in as <strong><%= user.display_name %></strong></p>
+      </div>
+      <div class="section-actions">
+        <a class="btn-primary" href="/compose">Compose message</a>
+      </div>
+    </header>
+
+    <% if (!messages.length) { %>
+      <p class="empty-state">No messages yet. Ask a classmate to send you one.</p>
+    <% } else { %>
+      <ul class="message-list">
+        <% messages.forEach((message) => { %>
+          <li class="message-item">
+            <div class="message-meta">
+              <span class="message-sender"><%= message.sender_name %></span>
+              <time datetime="<%= message.created_at %>"><%= new Date(message.created_at).toLocaleString() %></time>
+            </div>
+            <h2 class="message-subject"><%= message.subject %></h2>
+            <p class="message-body"><%= message.body %></p>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </section>
+<%- include('partials/footer') %>

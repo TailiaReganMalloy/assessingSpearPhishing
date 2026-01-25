@@ -1,0 +1,282 @@
+:root {
+  --blue-deep: #001b70;
+  --blue-card: #0a2ea4;
+  --blue-button: #0d6efd;
+  --blue-button-hover: #0b5ed7;
+  --pink-accent: #f24b6a;
+  --gray-border: #d9dce3;
+  --gray-text: #5a6270;
+  --surface: #ffffff;
+  --font-stack: "Inter", "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body.page {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-stack);
+  background: radial-gradient(circle at top center, #1433b0, var(--blue-deep));
+  color: var(--gray-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.page__content {
+  width: 100%;
+  max-width: 1120px;
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+}
+
+.login__card {
+  width: min(100%, 420px);
+  background: var(--surface);
+  border-radius: 20px;
+  padding: 2.5rem 3rem 3rem;
+  box-shadow: 0 24px 36px rgba(0, 29, 112, 0.4);
+  border-top: 6px solid var(--pink-accent);
+}
+
+.login__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.login__logo,
+.inbox__logo {
+  width: 120px;
+}
+
+.login__version,
+.inbox__version {
+  font-weight: 600;
+  color: var(--surface);
+  background: var(--blue-button);
+  border-radius: 999px;
+  padding: 0.1rem 0.7rem;
+  font-size: 0.8rem;
+}
+
+.login__title {
+  text-align: center;
+  margin: 0 0 1.5rem;
+  font-size: 1.5rem;
+  color: #091133;
+}
+
+.alert {
+  background: rgba(242, 75, 106, 0.12);
+  color: var(--pink-accent);
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.field__label {
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #2d3748;
+}
+
+.field__input {
+  border: 1px solid var(--gray-border);
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  font-size: 1rem;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.field__input:focus {
+  outline: none;
+  border-color: var(--blue-button);
+  box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.15);
+}
+
+.choice {
+  border: 1px solid var(--gray-border);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.choice__legend {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.choice__option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: #202938;
+}
+
+.choice__option + .choice__option {
+  margin-top: 0.6rem;
+}
+
+.button {
+  border: none;
+  border-radius: 12px;
+  padding: 0.85rem 1.2rem;
+  background: var(--blue-button);
+  color: var(--surface);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.button:hover {
+  background: var(--blue-button-hover);
+}
+
+.button--secondary {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.button--secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.inbox {
+  background: var(--surface);
+  border-radius: 24px;
+  padding: 2.5rem 3rem;
+  box-shadow: 0 24px 36px rgba(0, 29, 112, 0.4);
+}
+
+.inbox__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.inbox__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.inbox__user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.inbox__name {
+  font-weight: 600;
+  color: #091133;
+}
+
+.inbox__title {
+  margin: 0 0 1.5rem;
+  color: #091133;
+}
+
+.inbox__empty {
+  text-align: center;
+  padding: 2rem 0;
+  color: #4a5568;
+}
+
+.message-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.message {
+  border: 1px solid #eef1f7;
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem;
+  background: #f9fbff;
+}
+
+.message__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-bottom: 0.6rem;
+}
+
+.message__subject {
+  margin: 0 0 0.5rem;
+  color: #091133;
+}
+
+.message__body {
+  margin: 0;
+  color: #2d3748;
+  line-height: 1.5;
+}
+
+.error {
+  display: flex;
+  justify-content: center;
+}
+
+.error__card {
+  background: var(--surface);
+  padding: 2rem 3rem;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 24px 36px rgba(0, 29, 112, 0.4);
+}
+
+.error__title {
+  margin: 0 0 1rem;
+  color: #091133;
+}
+
+.error__message {
+  margin: 0 0 1.5rem;
+  color: #4a5568;
+}
+
+@media (max-width: 640px) {
+  body.page {
+    padding: 1.5rem;
+  }
+
+  .login__card,
+  .inbox {
+    padding: 2rem;
+  }
+
+  .inbox__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}

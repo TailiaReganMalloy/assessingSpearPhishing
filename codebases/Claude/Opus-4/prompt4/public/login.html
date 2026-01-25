@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Secure Messaging Demo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="20" cy="20" r="18" stroke="#00A8E8" stroke-width="4"/>
+                    <circle cx="20" cy="20" r="10" fill="#00A8E8"/>
+                    <circle cx="14" cy="14" r="4" fill="#00A8E8"/>
+                    <circle cx="26" cy="14" r="4" fill="#00A8E8"/>
+                    <circle cx="20" cy="26" r="4" fill="#00A8E8"/>
+                </svg>
+                <h1>BlueMind</h1>
+            </div>
+            <span class="version">v5</span>
+        </div>
+
+        <div class="login-box">
+            <h2>Identification</h2>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M2 6L10 12L18 6" stroke="#666" stroke-width="2"/>
+                            <rect x="2" y="4" width="16" height="12" rx="2" stroke="#666" stroke-width="2" fill="none"/>
+                        </svg>
+                        Login
+                    </label>
+                    <input type="email" id="email" name="email" placeholder="email@bluemind.net" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <rect x="5" y="8" width="10" height="8" rx="2" stroke="#666" stroke-width="2" fill="none"/>
+                            <path d="M8 8V6C8 4.34315 9.34315 3 11 3H9C10.6569 3 12 4.34315 12 6V8" stroke="#666" stroke-width="2"/>
+                        </svg>
+                        Password
+                    </label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="password" name="password" placeholder="••••••••" required>
+                        <button type="button" class="toggle-password" id="togglePassword">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <circle cx="10" cy="10" r="3" stroke="#666" stroke-width="2"/>
+                                <path d="M2 10C2 10 5 4 10 4C15 4 18 10 18 10C18 10 15 16 10 16C5 16 2 10 2 10Z" stroke="#666" stroke-width="2"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="computer-type">
+                    <label class="radio-option">
+                        <input type="radio" name="rememberMe" value="true" checked>
+                        <span class="radio-custom"></span>
+                        Private computer
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="rememberMe" value="false">
+                        <span class="radio-custom"></span>
+                        Public computer
+                    </label>
+                </div>
+
+                <div id="errorMessage" class="error-message"></div>
+
+                <button type="submit" class="connect-button">Connect</button>
+            </form>
+
+            <div class="demo-credentials">
+                <h3>Demo Credentials:</h3>
+                <p>admin@bluemind.net / SecureAdmin123!</p>
+                <p>user1@bluemind.net / UserPass123!</p>
+                <p>user2@bluemind.net / UserPass456!</p>
+            </div>
+        </div>
+
+        <div class="security-info">
+            <h3>Security Features Demonstrated:</h3>
+            <ul>
+                <li>Password hashing with bcrypt (10 rounds)</li>
+                <li>JWT tokens with secure HTTP-only cookies</li>
+                <li>Account lockout after failed attempts</li>
+                <li>Input validation and sanitization</li>
+                <li>CSRF protection with SameSite cookies</li>
+                <li>Rate limiting on authentication endpoints</li>
+                <li>Login attempt auditing</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<%- include("partials/header", { title: "Login - BlueMind", currentUser, csrfToken }) %>
+<main class="card">
+  <div class="card-accent"></div>
+  <h1>Identification</h1>
+  <p class="subtle">Use the demo accounts or register a new one.</p>
+
+  <% if (error) { %>
+    <div class="alert"><%= error %></div>
+  <% } %>
+
+  <form method="post" action="/login" class="form">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+    <label class="field">
+      <span class="field-label">Login</span>
+      <div class="field-input">
+        <span class="field-icon">✉️</span>
+        <input type="email" name="email" placeholder="email@bluemind.net" value="<%= email %>" required />
+      </div>
+    </label>
+
+    <label class="field">
+      <span class="field-label">Password</span>
+      <div class="field-input">
+        <span class="field-icon">🔒</span>
+        <input type="password" name="password" id="password" placeholder="********" required />
+        <button type="button" class="icon-button" id="togglePassword" aria-label="Show password">👁️</button>
+      </div>
+    </label>
+
+    <div class="radio-group">
+      <label class="radio-item">
+        <input type="radio" name="device" value="private" checked />
+        <span>Private computer</span>
+      </label>
+      <label class="radio-item">
+        <input type="radio" name="device" value="public" />
+        <span>Public computer</span>
+      </label>
+    </div>
+
+    <button type="submit" class="primary-button">Connect</button>
+  </form>
+
+  <div class="form-footer">
+    <a href="/register" class="link">Create an account</a>
+  </div>
+
+  <section class="security-panel">
+    <h2>Secure login notes</h2>
+    <ul>
+      <li>Passwords are hashed with bcrypt before storage.</li>
+      <li>Session cookies use httpOnly and sameSite protections.</li>
+      <li>CSRF tokens protect form submissions.</li>
+    </ul>
+  </section>
+</main>
+
+<script>
+  const toggle = document.getElementById("togglePassword");
+  const input = document.getElementById("password");
+  toggle?.addEventListener("click", () => {
+    input.type = input.type === "password" ? "text" : "password";
+  });
+</script>
+<%- include("partials/footer") %>

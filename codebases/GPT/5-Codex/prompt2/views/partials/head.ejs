@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %> · Secure Messaging Demo</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="page <%= bodyClass || '' %>">
+  <header class="top-bar">
+    <div class="brand">
+      <div class="brand-icon" aria-hidden="true"></div>
+      <div class="brand-text">
+        <span class="brand-title">BlueMind Lab</span>
+        <span class="brand-version">v5 demo</span>
+      </div>
+    </div>
+    <% if (currentUser) { %>
+    <form class="logout-form" method="post" action="/logout">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <button type="submit" class="btn-link">Sign out</button>
+    </form>
+    <% } %>
+  </header>
+  <% if (flash) { %>
+    <div class="flash flash-<%= flash.type %>"><%= flash.message %></div>
+  <% } %>
+  <main class="content">

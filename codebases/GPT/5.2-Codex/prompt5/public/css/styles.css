@@ -1,0 +1,259 @@
+:root {
+  color-scheme: light;
+  --blue-900: #071c5a;
+  --blue-800: #0b2b75;
+  --blue-600: #0f62fe;
+  --blue-500: #1e88ff;
+  --gray-100: #f4f6fb;
+  --gray-300: #d7dbe8;
+  --gray-500: #6f768a;
+  --gray-700: #3a3f4a;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  background: var(--blue-900);
+  color: var(--gray-700);
+}
+
+.auth-bg {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 16px;
+}
+
+.auth-shell {
+  width: min(640px, 95vw);
+  text-align: center;
+}
+
+.brand-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: var(--white);
+  margin-bottom: 24px;
+}
+
+.logo-mark {
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #3c89ff, #64d2ff);
+  position: relative;
+}
+
+.logo-mark::before,
+.logo-mark::after {
+  content: "";
+  position: absolute;
+  border: 3px solid rgba(255, 255, 255, 0.75);
+  inset: 14px;
+  border-radius: 8px;
+}
+
+.logo-mark::after {
+  inset: 8px;
+  border-radius: 12px;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: var(--white);
+}
+
+.brand-name {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.brand-version {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.card {
+  background: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 18px 36px rgba(5, 13, 42, 0.35);
+  padding: 32px 36px 40px;
+  text-align: left;
+  position: relative;
+}
+
+.card-accent {
+  height: 6px;
+  border-radius: 10px 10px 0 0;
+  background: linear-gradient(90deg, #ff9090, #ffd1d1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+h1 {
+  margin-top: 8px;
+  font-size: 24px;
+  text-align: center;
+}
+
+.form {
+  margin-top: 16px;
+  display: grid;
+  gap: 16px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.field-label {
+  font-weight: 600;
+  color: var(--gray-700);
+}
+
+.field-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 2px solid var(--gray-300);
+  padding-bottom: 6px;
+}
+
+.field-input input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 16px;
+  padding: 6px 4px;
+}
+
+.icon {
+  font-size: 18px;
+}
+
+.radio-group {
+  display: grid;
+  gap: 10px;
+  color: var(--gray-500);
+  margin: 8px 0 4px;
+}
+
+.primary-button,
+.secondary-button {
+  border: none;
+  border-radius: 6px;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.link-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  color: var(--blue-600);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.primary-button {
+  background: var(--blue-600);
+  color: var(--white);
+  width: 180px;
+  margin: 0 auto;
+}
+
+.secondary-button {
+  background: var(--gray-100);
+  color: var(--gray-700);
+}
+
+.alert {
+  background: #fff2f2;
+  color: #c62828;
+  border: 1px solid #ffd3d3;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.demo-hint {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.inbox-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.subtle {
+  color: var(--gray-500);
+  font-size: 14px;
+}
+
+.message-list {
+  display: grid;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.message-card {
+  background: var(--gray-100);
+  padding: 16px;
+  border-radius: 10px;
+}
+
+.message-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--gray-500);
+}
+
+.message-card h2 {
+  margin: 10px 0 6px;
+  font-size: 18px;
+}
+
+.message-detail {
+  margin-top: 16px;
+  background: var(--gray-100);
+  padding: 16px;
+  border-radius: 8px;
+  line-height: 1.5;
+}
+
+@media (max-width: 560px) {
+  .card {
+    padding: 28px 20px 32px;
+  }
+
+  .inbox-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

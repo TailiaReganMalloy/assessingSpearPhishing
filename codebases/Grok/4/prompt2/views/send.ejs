@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Send Message</title>
+</head>
+<body>
+    <h1>Send Message</h1>
+    <form action="/send" method="post">
+        <label for="receiverEmail">Receiver Email:</label>
+        <input type="email" id="receiverEmail" name="receiverEmail" required><br>
+        <label for="content">Message:</label>
+        <textarea id="content" name="content" required></textarea><br>
+        <button type="submit">Send</button>
+    </form>
+</body>
+</html>

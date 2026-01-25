@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inbox</title>
+</head>
+<body>
+  <h1>Inbox</h1>
+  <ul>
+    <% messages.forEach(message => { %>
+      <li><strong>From:</strong> <%= message.sender.email %> - <strong>Message:</strong> <%= message.content %></li>
+    <% }) %>
+  </ul>
+</body>
+</html>

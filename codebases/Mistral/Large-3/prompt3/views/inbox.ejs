@@ -1,0 +1,35 @@
+<div class="messages-container">
+  <div class="messages-header">
+    <h2>Inbox</h2>
+    <a href="/messages/compose" class="btn-compose">Compose</a>
+  </div>
+  
+  <div class="messages-list">
+    <% if (messages.length > 0) { %>
+      <table class="messages-table">
+        <thead>
+          <tr>
+            <th>From</th>
+            <th>Subject</th>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% messages.forEach(message => { %>
+            <tr class="<%= message.isRead ? '' : 'unread' %>">
+              <td><%= message.sender.email %></td>
+              <td><a href="/messages/<%= message._id %>"><%= message.subject %></a></td>
+              <td><%= message.createdAt.toLocaleString() %></td>
+              <td><%= message.isRead ? 'Read' : 'Unread' %></td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    <% } else { %>
+      <div class="no-messages">
+        <p>No messages in your inbox.</p>
+      </div>
+    <% } %>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+{
+  "name": "secure-messaging-reference",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Reference implementation for secure login and messaging with Node.js and SQLite.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "db:init": "node src/db/migrate.js"
+  },
+  "dependencies": {
+    "bcrypt": "5.1.1",
+    "better-sqlite3": "9.4.3",
+    "better-sqlite3-session-store": "1.2.0",
+    "express": "4.19.2",
+    "express-session": "1.18.0",
+    "helmet": "7.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "3.0.1"
+  }
+}

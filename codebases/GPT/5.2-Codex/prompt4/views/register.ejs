@@ -1,0 +1,45 @@
+<%- include("partials/header", { title: "Register - BlueMind", currentUser, csrfToken }) %>
+<main class="card">
+  <div class="card-accent"></div>
+  <h1>Create account</h1>
+  <p class="subtle">Use a long password to demonstrate safe storage.</p>
+
+  <% if (error) { %>
+    <div class="alert"><%= error %></div>
+  <% } %>
+
+  <form method="post" action="/register" class="form">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+    <label class="field">
+      <span class="field-label">Name</span>
+      <div class="field-input">
+        <span class="field-icon">👤</span>
+        <input type="text" name="name" value="<%= values.name || "" %>" required />
+      </div>
+    </label>
+
+    <label class="field">
+      <span class="field-label">Email</span>
+      <div class="field-input">
+        <span class="field-icon">✉️</span>
+        <input type="email" name="email" value="<%= values.email || "" %>" required />
+      </div>
+    </label>
+
+    <label class="field">
+      <span class="field-label">Password</span>
+      <div class="field-input">
+        <span class="field-icon">🔒</span>
+        <input type="password" name="password" placeholder="At least 10 characters" required />
+      </div>
+    </label>
+
+    <button type="submit" class="primary-button">Create account</button>
+  </form>
+
+  <div class="form-footer">
+    <a href="/login" class="link">Back to login</a>
+  </div>
+</main>
+<%- include("partials/footer") %>

@@ -1,0 +1,34 @@
+[
+  {
+    "id": "m1",
+    "senderId": "u1",
+    "recipientId": "u2",
+    "subject": "Welcome to the exercise",
+    "body": "Remember to review the secure messaging checklist before responding to any external contacts.",
+    "sentAt": "2026-01-15T09:25:00.000Z"
+  },
+  {
+    "id": "m2",
+    "senderId": "u2",
+    "recipientId": "u1",
+    "subject": "Playbook update",
+    "body": "Updated the incident response doc with the latest phishing indicators.",
+    "sentAt": "2026-01-16T14:10:00.000Z"
+  },
+  {
+    "id": "m3",
+    "senderId": "u1",
+    "recipientId": "u3",
+    "subject": "Training kickoff",
+    "body": "Use this mailbox to practice spotting anomalous login attempts and suspicious requests.",
+    "sentAt": "2026-01-17T13:00:00.000Z"
+  },
+  {
+    "id": "m4",
+    "senderId": "u3",
+    "recipientId": "u2",
+    "subject": "Question about MFA",
+    "body": "Is there a recommended authenticator app we should standardize on for the simulations?",
+    "sentAt": "2026-01-18T08:45:00.000Z"
+  }
+]

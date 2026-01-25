@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Identification</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-box">
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 5L8 12V28L20 35L32 28V12L20 5Z" fill="#00BFFF" stroke="#00BFFF" stroke-width="2"/>
+                    <circle cx="20" cy="20" r="8" fill="#1E3A8A"/>
+                </svg>
+                <h1>BlueMind</h1>
+                <span class="version">v5</span>
+            </div>
+
+            <h2>Identification</h2>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M2 4L10 11L18 4M2 4H18V16H2V4Z" stroke="#666" stroke-width="1.5"/>
+                        </svg>
+                        Login
+                    </label>
+                    <input type="email" id="email" name="email" placeholder="email@bluemind.net" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <rect x="4" y="9" width="12" height="8" stroke="#666" stroke-width="1.5"/>
+                            <path d="M6 9V6C6 3.79 7.79 2 10 2C12.21 2 14 3.79 14 6V9" stroke="#666" stroke-width="1.5"/>
+                        </svg>
+                        Password
+                    </label>
+                    <div class="password-input">
+                        <input type="password" id="password" name="password" placeholder="********" required>
+                        <button type="button" id="togglePassword" class="toggle-password">
+                            <svg id="eyeIcon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M10 6C7 6 4.5 8.5 2 10C4.5 11.5 7 14 10 14C13 14 15.5 11.5 18 10C15.5 8.5 13 6 10 6Z" stroke="#666" stroke-width="1.5"/>
+                                <circle cx="10" cy="10" r="2" stroke="#666" stroke-width="1.5"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="computer-type">
+                    <label class="radio-label">
+                        <input type="radio" name="computerType" value="private" checked>
+                        <span class="radio-custom"></span>
+                        Private computer
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="computerType" value="public">
+                        <span class="radio-custom"></span>
+                        Public computer
+                    </label>
+                </div>
+
+                <button type="submit" class="connect-btn">Connect</button>
+
+                <div class="register-link">
+                    Don't have an account? <a href="#" id="showRegister">Register here</a>
+                </div>
+            </form>
+
+            <form id="registerForm" style="display: none;">
+                <div class="form-group">
+                    <label for="regName">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <circle cx="10" cy="7" r="3" stroke="#666" stroke-width="1.5"/>
+                            <path d="M4 18C4 14 6.5 12 10 12C13.5 12 16 14 16 18" stroke="#666" stroke-width="1.5"/>
+                        </svg>
+                        Name
+                    </label>
+                    <input type="text" id="regName" name="name" placeholder="Your name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="regEmail">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M2 4L10 11L18 4M2 4H18V16H2V4Z" stroke="#666" stroke-width="1.5"/>
+                        </svg>
+                        Email
+                    </label>
+                    <input type="email" id="regEmail" name="email" placeholder="email@bluemind.net" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="regPassword">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <rect x="4" y="9" width="12" height="8" stroke="#666" stroke-width="1.5"/>
+                            <path d="M6 9V6C6 3.79 7.79 2 10 2C12.21 2 14 3.79 14 6V9" stroke="#666" stroke-width="1.5"/>
+                        </svg>
+                        Password
+                    </label>
+                    <input type="password" id="regPassword" name="password" placeholder="********" required>
+                </div>
+
+                <button type="submit" class="connect-btn">Register</button>
+
+                <div class="register-link">
+                    Already have an account? <a href="#" id="showLogin">Login here</a>
+                </div>
+            </form>
+
+            <div id="message" class="message"></div>
+        </div>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>

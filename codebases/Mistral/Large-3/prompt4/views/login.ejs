@@ -1,0 +1,57 @@
+<div class="login-container">
+    <div class="login-header">
+        <div class="logo-container">
+            <img src="/images/logo.png" alt="BlueMind Logo" class="logo">
+        </div>
+        <div class="version">v5</div>
+    </div>
+    
+    <h1 class="login-title">Identification</h1>
+    
+    <form action="/login" method="POST" class="login-form">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        
+        <div class="form-group">
+            <label class="form-label">
+                <input type="checkbox" class="form-checkbox"> Login
+            </label>
+            <input type="email" name="email" class="form-input" placeholder="email@bluemind.net" value="<%= email %>">
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Password</label>
+            <div class="password-input-container">
+                <input type="password" name="password" class="form-input password-input" placeholder="••••••••">
+                <span class="password-toggle">👁</span>
+            </div>
+        </div>
+        
+        <div class="form-group computer-type">
+            <p>This computer is a:</p>
+            <label class="radio-label">
+                <input type="radio" name="computerType" value="private" checked>
+                <span class="radio-custom"></span> Private computer
+            </label>
+            <label class="radio-label">
+                <input type="radio" name="computerType" value="public">
+                <span class="radio-custom"></span> Public computer
+            </label>
+        </div>
+        
+        <button type="submit" class="login-button">Connect</button>
+    </form>
+    
+    <div class="login-footer">
+        <p>Don't have an account? <a href="/register">Register here</a></p>
+    </div>
+</div>
+
+<script>
+    // Toggle password visibility
+    document.querySelector('.password-toggle').addEventListener('click', function() {
+        const passwordInput = document.querySelector('.password-input');
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        this.textContent = type === 'password' ? '👁' : '🙈';
+    });
+</script>

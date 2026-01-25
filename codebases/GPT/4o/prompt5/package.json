@@ -1,0 +1,15 @@
+{
+  "name": "web-security-course-app",
+  "version": "1.0.0",
+  "description": "A Node.js application for teaching web security concepts including user authentication, secure password management, and messaging between registered users.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "bcrypt": "^5.1.0",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.0.0"
+  }
+}

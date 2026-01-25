@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind - Login</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="logo-container">
+        <div class="logo-text">
+            <span><i class="fas fa-cube"></i> BlueMind</span>
+            <span class="version">v5</span>
+        </div>
+    </div>
+
+    <div class="login-container">
+        <h2>Identification</h2>
+
+        <% if (error) { %>
+            <div class="error-message"><%= error %></div>
+        <% } %>
+
+        <form action="/login" method="POST">
+            <div class="form-group">
+                <i class="far fa-envelope"></i>
+                <label for="login" style="display:none;">Login</label>
+                <input type="email" id="login" name="login" placeholder="email@bluemind.net" required>
+            </div>
+
+            <div class="form-group">
+                <i class="fas fa-lock"></i>
+                <label for="password" style="display:none;">Password</label>
+                <input type="password" id="password" name="password" placeholder="********" required>
+                <i class="far fa-eye toggle-password" onclick="togglePassword()"></i>
+            </div>
+
+            <div class="computer-type">
+                <label>
+                    <input type="radio" name="computer" value="private" checked>
+                    Private computer
+                </label>
+                <label>
+                    <input type="radio" name="computer" value="public">
+                    Public computer
+                </label>
+            </div>
+
+            <button type="submit" class="btn-connect">Connect</button>
+        </form>
+    </div>
+    
+    <a href="/register" class="register-link">Register new account (Demo only)</a>
+
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const icon = document.querySelector('.toggle-password');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+    </script>
+</body>
+</html>

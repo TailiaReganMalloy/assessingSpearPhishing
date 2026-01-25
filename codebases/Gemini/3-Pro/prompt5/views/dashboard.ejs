@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind - Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="dashboard-body">
+
+    <nav class="nav-bar">
+        <div class="nav-brand"><i class="fas fa-cube"></i> BlueMind Message Center</div>
+        <div class="nav-links">
+            <span>Welcome, <%= user %></span>
+            <a href="/dashboard" class="active">Inbox</a>
+            <a href="/compose">Compose</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Inbox</h1>
+        
+        <% if (messages.length === 0) { %>
+            <div style="text-align: center; color: #999; margin-top: 50px;">
+                <i class="fas fa-inbox" style="font-size: 3em; margin-bottom: 20px;"></i>
+                <p>No messages received yet.</p>
+            </div>
+        <% } %>
+
+        <% messages.forEach(function(msg) { %>
+            <div class="message-card">
+                <div class="message-header">
+                    <span class="sender"><i class="fas fa-user-circle"></i> <%= msg.sender_email %></span>
+                    <span class="timestamp"><%= new Date(msg.timestamp).toLocaleString() %></span>
+                </div>
+                <div class="message-content">
+                    <%= msg.content %>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</body>
+</html>

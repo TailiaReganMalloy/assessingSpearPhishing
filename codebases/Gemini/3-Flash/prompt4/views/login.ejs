@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Identification</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="logo-container">
+        <h1>BlueMind <span class="v5">v5</span></h1>
+    </div>
+
+    <div class="login-card">
+        <h2>Identification</h2>
+        
+        <% if (error) { %>
+            <p class="error-msg"><%= error %></p>
+        <% } %>
+
+        <form action="/login" method="POST">
+            <div class="input-group">
+                <label>✉ Login</label>
+                <input type="email" name="login" placeholder="email@bluemind.net" required>
+            </div>
+            
+            <div class="input-group">
+                <label>🔒 Password</label>
+                <input type="password" name="password" placeholder="********" required>
+            </div>
+
+            <div class="options">
+                <label class="option-item">
+                    <input type="radio" name="computer_type" value="private" checked> Private computer
+                </label>
+                <label class="option-item">
+                    <input type="radio" name="computer_type" value="public"> Public computer
+                </label>
+            </div>
+
+            <button type="submit" class="btn-connect">Connect</button>
+        </form>
+
+        <div class="register-link">
+            <p>Don't have an account? <a href="/register">Register here</a></p>
+        </div>
+    </div>
+</body>
+</html>

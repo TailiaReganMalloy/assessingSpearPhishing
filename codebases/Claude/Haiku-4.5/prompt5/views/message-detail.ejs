@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= message.subject || 'Message' %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="messages-page">
+    <div class="app-container">
+        <!-- Navigation Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1>SecureMsg</h1>
+                <p class="user-info">Welcome, <strong><%= userName %></strong></p>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="/messages" class="nav-item">📮 Inbox</a></li>
+                <li><a href="/messages/sent" class="nav-item">📤 Sent</a></li>
+                <li><a href="/messages/compose" class="nav-item">✏️ Compose</a></li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <a href="/logout" class="btn btn-logout">Logout</a>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <div class="content-header">
+                <a href="/messages" class="btn btn-secondary btn-small">← Back to Inbox</a>
+            </div>
+
+            <div class="message-detail-container">
+                <div class="message-detail-header">
+                    <h2><%= message.subject || '(no subject)' %></h2>
+                    <div class="message-detail-meta">
+                        <p><strong>From:</strong> <%= message.sender_name %> &lt;<%= message.sender_email %>&gt;</p>
+                        <p><strong>Date:</strong> <%= new Date(message.created_at).toLocaleString() %></p>
+                    </div>
+                </div>
+
+                <div class="message-detail-body">
+                    <%= message.body %>
+                </div>
+
+                <div class="message-detail-actions">
+                    <a href="/messages/compose?to=<%= message.sender_id %>" class="btn btn-primary">
+                        Reply
+                    </a>
+                    <a href="/messages" class="btn btn-secondary">Back to Inbox</a>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

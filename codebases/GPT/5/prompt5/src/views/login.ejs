@@ -1,0 +1,27 @@
+<section class="center">
+  <div class="card">
+    <div class="card-title">Identification</div>
+    <form action="/login" method="post" class="form">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+      <label class="field">
+        <span class="label">Login</span>
+        <input class="input" type="email" name="email" placeholder="email@example.com" required autocomplete="username" />
+      </label>
+
+      <label class="field">
+        <span class="label">Password</span>
+        <input class="input" type="password" name="password" placeholder="••••••••" required autocomplete="current-password" />
+      </label>
+
+      <div class="options">
+        <label class="radio"><input type="radio" name="mode" value="private" checked /> Private computer</label>
+        <label class="radio"><input type="radio" name="mode" value="public" /> Public computer</label>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-primary" type="submit">Connect</button>
+      </div>
+    </form>
+  </div>
+</section>

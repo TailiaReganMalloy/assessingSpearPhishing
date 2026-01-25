@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Secure Mailbox · BlueMind</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body class="dashboard-page">
+    <header class="top-bar">
+      <div class="brand">
+        <div class="logo-mark" aria-hidden="true"></div>
+        <div>
+          <p class="eyebrow">BlueMind</p>
+          <p class="eyebrow version">v5</p>
+        </div>
+      </div>
+      <div class="user-chip">
+        <div>
+          <p class="user-name"><%= currentUser.display_name %></p>
+          <p class="user-email"><%= currentUser.email %></p>
+        </div>
+        <form method="POST" action="/logout">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          <button type="submit">Logout</button>
+        </form>
+      </div>
+    </header>
+
+    <main class="dashboard">
+      <% if (flash) { %>
+        <div class="flash <%= flash.type %>"><%= flash.message %></div>
+      <% } %>
+
+      <section class="panel inbox">
+        <div class="panel-header">
+          <h2>Inbox</h2>
+          <p>Messages sent by collaborators are decrypted on arrival.</p>
+        </div>
+        <div class="message-list">
+          <% if (!inbox.length) { %>
+            <p class="empty-state">No messages yet. Send one to start the conversation!</p>
+          <% } %>
+
+          <% inbox.forEach((msg) => { %>
+            <article class="message-card">
+              <div class="message-meta">
+                <p class="sender"><%= msg.sender_name %></p>
+                <p class="timestamp"><%= new Date(msg.created_at).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }) %></p>
+              </div>
+              <p class="message-body"><%= msg.body %></p>
+            </article>
+          <% }); %>
+        </div>
+      </section>
+
+      <section class="panel composer">
+        <div class="panel-header">
+          <h2>Send a secure message</h2>
+          <p>Payloads are encrypted at rest. Keep them concise (max 500 characters).</p>
+        </div>
+
+        <form method="POST" action="/messages" class="composer-form">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          <label class="field">
+            <span>Recipient</span>
+            <% if (!peers.length) { %>
+              <select disabled>
+                <option>Create another user to message.</option>
+              </select>
+            <% } else { %>
+              <select name="recipientId" required>
+                <option value="" disabled selected>Select a teammate</option>
+                <% peers.forEach((peer) => { %>
+                  <option value="<%= peer.id %>"><%= peer.display_name %> · <%= peer.email %></option>
+                <% }); %>
+              </select>
+            <% } %>
+          </label>
+
+          <label class="field">
+            <span>Message</span>
+            <textarea name="body" maxlength="500" rows="5" placeholder="Share operational updates, incident alerts, or secrets."></textarea>
+          </label>
+
+          <button class="primary" type="submit" <%= peers.length ? '' : 'disabled' %>>Send securely</button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

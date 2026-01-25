@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .messages {
+            margin-top: 20px;
+        }
+        .message {
+            background-color: white;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input, textarea {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome, <%= user.email %></h1>
+    <a href="/logout">Logout</a>
+    
+    <h2>Your Messages</h2>
+    <div class="messages">
+        <% messages.forEach(msg => { %>
+            <div class="message">
+                <p><strong>From:</strong> <%= msg.sender_email %> <strong>At:</strong> <%= msg.timestamp %></p>
+                <p><%= msg.message %></p>
+            </div>
+        <% }) %>
+    </div>
+    
+    <h2>Send Message</h2>
+    <form action="/send" method="POST">
+        <input type="email" name="receiver" placeholder="Receiver Email" required>
+        <textarea name="message" placeholder="Message" required></textarea>
+        <button type="submit">Send</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Messages - BlueMind</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Messages</h1>
+    <div id="messages">
+      <% messages.forEach(message => { %>
+        <div class="message">
+          <p><strong><%= message.sender.email %>:</strong> <%= message.content %></p>
+        </div>
+      <% }); %>
+    </div>
+    <form action="/send" method="POST">
+      <input type="text" name="recipientId" placeholder="Recipient ID" required>
+      <textarea name="content" placeholder="Message" required></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</body>
+</html>

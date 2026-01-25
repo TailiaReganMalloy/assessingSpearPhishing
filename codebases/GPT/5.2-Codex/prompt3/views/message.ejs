@@ -1,0 +1,29 @@
+<%- include("partials/head", { title: "Message" }) %>
+<div class="page">
+  <header class="topbar">
+    <div>
+      <div class="brand-name">BlueMind</div>
+      <div class="subtle">Signed in as <%= currentUser.display_name %></div>
+    </div>
+    <form method="post" action="/logout">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      <button class="secondary" type="submit">Sign out</button>
+    </form>
+  </header>
+
+  <main class="content">
+    <a class="link" href="/inbox">Back to inbox</a>
+
+    <% if (!message) { %>
+      <div class="empty">Message not found.</div>
+    <% } else { %>
+      <div class="message-detail">
+        <h1><%= message.subject %></h1>
+        <div class="subtle">From <%= message.senderName %> (<%= message.senderEmail %>)</div>
+        <div class="subtle">Sent <%= new Date(message.sentAt).toLocaleString() %></div>
+        <p class="message-body"><%= message.body %></p>
+      </div>
+    <% } %>
+  </main>
+</div>
+<%- include("partials/footer") %>

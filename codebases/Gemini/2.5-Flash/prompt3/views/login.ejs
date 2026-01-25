@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind Login</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="logo-section">
+            <img src="/bluemind-logo.svg" alt="BlueMind Logo" class="logo">
+            <span class="version">v5</span>
+        </div>
+        <div class="login-card">
+            <div class="error-banner" style="<% if (!errorMessage) { %> display: none; <% } %>">
+                <%= errorMessage %>
+            </div>
+            <h2>Identification</h2>
+            <form action="/login" method="POST">
+                <div class="input-group">
+                    <label for="username"><img src="/user-icon.svg" alt="Login Icon" class="input-icon"> Login</label>
+                    <input type="text" id="username" name="username" placeholder="email@bluemind.net" required>
+                </div>
+                <div class="input-group">
+                    <label for="password"><img src="/lock-icon.svg" alt="Password Icon" class="input-icon"> Password</label>
+                    <input type="password" id="password" name="password" value="********" required>
+                    <span class="password-toggle"><img src="/eye-icon.svg" alt="Show Password"></span>
+                </div>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="computerType" value="private" checked>
+                        Private computer
+                    </label>
+                    <label>
+                        <input type="radio" name="computerType" value="public">
+                        Public computer
+                    </label>
+                </div>
+                <button type="submit" class="connect-button">Connect</button>
+            </form>
+            <p class="register-link">Don't have an account? <a href="/register">Register here</a></p>
+        </div>
+    </div>
+</body>
+</html>

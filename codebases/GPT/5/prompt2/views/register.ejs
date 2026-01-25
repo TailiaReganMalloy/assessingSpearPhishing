@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Register — Secure Mail Demo</title>
+  <link rel="stylesheet" href="/public/css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">SecureMail v1</div>
+  </header>
+  <main class="container">
+    <% if (error && error.length) { %>
+      <div class="alert alert-error"><%= error[0] %></div>
+    <% } %>
+    <section class="card">
+      <h2>Create Account</h2>
+      <form method="post" action="/register">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <label>Name
+          <input name="name" type="text" required />
+        </label>
+        <label>Email
+          <input name="email" type="email" required autocomplete="username" />
+        </label>
+        <label>Password
+          <input name="password" type="password" required autocomplete="new-password" />
+        </label>
+        <p class="muted">Password must be at least 8 characters.</p>
+        <div class="row">
+          <button class="btn btn-primary">Register</button>
+          <a class="btn btn-link" href="/login">Back to login</a>
+        </div>
+      </form>
+    </section>
+  </main>
+  <footer class="footer">Class demo: secure auth + messaging</footer>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Secure Mailer</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f0f0f0; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .login-form { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 300px; }
+        h2 { text-align: center; color: #333; }
+        input[type="email"], input[type="password"] { width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        .radio-group { margin: 1rem 0; }
+        .radio-group label { display: block; margin: 0.25rem 0; }
+        button { width: 100%; padding: 0.75rem; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .register-link { text-align: center; margin-top: 1rem; }
+        .register-link a { color: #007bff; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="login-form">
+        <h2>Identification</h2>
+        <form id="loginForm">
+            <input type="email" id="email" placeholder="Email @bluemind.net" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <div class="radio-group">
+                <label><input type="radio" name="computer" value="public" checked> Public computer</label>
+                <label><input type="radio" name="computer" value="private"> Private computer</label>
+            </div>
+            <button type="submit">Connect</button>
+        </form>
+        <div class="register-link">
+            <a href="/register">Register new account</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await response.json();
+                if (data.token) {
+                    localStorage.setItem('token', data.token);
+                    window.location.href = '/inbox';
+                } else {
+                    alert('Login failed');
+                }
+            } catch (err) {
+                alert('Error: ' + err.message);
+            }
+        });
+    </script>
+</body>
+</html>

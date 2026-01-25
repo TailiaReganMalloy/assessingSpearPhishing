@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind - Register</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="login-body">
+    <div class="logo-container">
+        <div class="logo-icon"><i class="fas fa-cube"></i></div>
+        <div class="logo-text">BlueMind</div>
+    </div>
+
+    <div class="login-card">
+        <div class="card-header">
+            Create Account
+        </div>
+
+        <% if (error) { %>
+            <div class="alert-error"><%= error %></div>
+        <% } %>
+
+        <form action="/register" method="POST">
+            <div class="form-group">
+                <i class="fas fa-envelope input-icon"></i>
+                <div class="input-wrapper">
+                    <span class="input-label-text">Email</span>
+                    <input type="email" id="email" name="email" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <i class="fas fa-lock input-icon"></i>
+                <div class="input-wrapper">
+                    <span class="input-label-text">Password</span>
+                    <input type="password" id="password" name="password" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-connect">Register</button>
+        </form>
+    </div>
+     <div style="text-align: center; margin-top: 20px;">
+        <a href="/login" style="color: white; text-decoration: none; opacity: 0.7;">Back to Login</a>
+    </div>
+</body>
+</html>

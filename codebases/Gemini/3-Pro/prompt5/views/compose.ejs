@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind - Compose</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="dashboard-body">
+
+    <nav class="nav-bar">
+        <div class="nav-brand"><i class="fas fa-cube"></i> BlueMind Message Center</div>
+        <div class="nav-links">
+            <span>Welcome, <%= user %></span>
+            <a href="/dashboard">Inbox</a>
+            <a href="/compose" class="active">Compose</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Compose Message</h1>
+        
+        <% if (error) { %>
+            <div class="error-message"><%= error %></div>
+        <% } %>
+        
+        <% if (success) { %>
+            <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 4px; margin-bottom: 20px;">
+                <%= success %>
+            </div>
+        <% } %>
+
+        <div class="compose-form">
+            <form action="/send" method="POST">
+                <label for="recipient_email">Recipient:</label>
+                <input type="text" list="users" name="recipient_email" id="recipient_email" placeholder="Type to search users..." required autocomplete="off">
+                <datalist id="users">
+                    <% users.forEach(function(u) { %>
+                        <option value="<%= u.email %>">
+                    <% }); %>
+                </datalist>
+
+                <label for="content">Message:</label>
+                <textarea name="content" id="content" rows="6" placeholder="Write your message here..." required></textarea>
+
+                <button type="submit"><i class="fas fa-paper-plane"></i> Send Message</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

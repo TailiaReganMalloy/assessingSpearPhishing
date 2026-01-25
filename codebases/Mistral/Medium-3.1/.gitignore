@@ -1,6 +1,0 @@
-.env.example
-node_modules/
-app.db
-uploads/
-.DS_Store
-*.log

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Identification</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <svg width="50" height="50" viewBox="0 0 50 50">
+                <path d="M25 5 L45 15 L45 35 L25 45 L5 35 L5 15 Z" fill="none" stroke="#00c3ff" stroke-width="3"/>
+                <circle cx="25" cy="25" r="8" fill="#00c3ff"/>
+            </svg>
+            <h1>BlueMind</h1>
+            <span class="version">v5</span>
+        </div>
+
+        <div class="login-box">
+            <h2>Identification</h2>
+            
+            <div id="errorMessage" class="error-message"></div>
+            <div id="successMessage" class="success-message"></div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">
+                        <svg class="icon" width="20" height="20" viewBox="0 0 20 20">
+                            <path d="M2 4 L10 10 L18 4 M2 4 L2 16 L18 16 L18 4 Z" fill="none" stroke="#666" stroke-width="1.5"/>
+                        </svg>
+                        Login
+                    </label>
+                    <input type="email" id="email" name="email" placeholder="email@bluemind.net" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">
+                        <svg class="icon" width="20" height="20" viewBox="0 0 20 20">
+                            <rect x="5" y="9" width="10" height="8" fill="none" stroke="#666" stroke-width="1.5"/>
+                            <path d="M7 9 L7 6 C7 4 8 3 10 3 C12 3 13 4 13 6 L13 9" fill="none" stroke="#666" stroke-width="1.5"/>
+                        </svg>
+                        Password
+                    </label>
+                    <div class="password-wrapper">
+                        <input type="password" id="password" name="password" placeholder="********" required>
+                        <button type="button" class="toggle-password" onclick="togglePassword()">
+                            <svg width="20" height="20" viewBox="0 0 20 20">
+                                <circle cx="10" cy="10" r="3" fill="none" stroke="#666" stroke-width="1.5"/>
+                                <path d="M2 10 C2 10 5 5 10 5 C15 5 18 10 18 10 C18 10 15 15 10 15 C5 15 2 10 2 10" fill="none" stroke="#666" stroke-width="1.5"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="computer-type">
+                    <label class="radio-label">
+                        <input type="radio" name="computerType" value="private" checked>
+                        <span class="radio-custom"></span>
+                        Private computer
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="computerType" value="public">
+                        <span class="radio-custom"></span>
+                        Public computer
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-connect">Connect</button>
+            </form>
+
+            <div class="register-link">
+                <p>Don't have an account? <a href="#" onclick="showRegister(); return false;">Register here</a></p>
+            </div>
+        </div>
+
+        <!-- Registration Form (Hidden by default) -->
+        <div class="login-box" id="registerBox" style="display: none;">
+            <h2>Registration</h2>
+            
+            <div id="registerErrorMessage" class="error-message"></div>
+            <div id="registerSuccessMessage" class="success-message"></div>
+
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerEmail">
+                        <svg class="icon" width="20" height="20" viewBox="0 0 20 20">
+                            <path d="M2 4 L10 10 L18 4 M2 4 L2 16 L18 16 L18 4 Z" fill="none" stroke="#666" stroke-width="1.5"/>
+                        </svg>
+                        Email
+                    </label>
+                    <input type="email" id="registerEmail" name="email" placeholder="email@bluemind.net" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="registerPassword">
+                        <svg class="icon" width="20" height="20" viewBox="0 0 20 20">
+                            <rect x="5" y="9" width="10" height="8" fill="none" stroke="#666" stroke-width="1.5"/>
+                            <path d="M7 9 L7 6 C7 4 8 3 10 3 C12 3 13 4 13 6 L13 9" fill="none" stroke="#666" stroke-width="1.5"/>
+                        </svg>
+                        Password
+                    </label>
+                    <input type="password" id="registerPassword" name="password" placeholder="Min 8 characters" required minlength="8">
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">
+                        <svg class="icon" width="20" height="20" viewBox="0 0 20 20">
+                            <rect x="5" y="9" width="10" height="8" fill="none" stroke="#666" stroke-width="1.5"/>
+                            <path d="M7 9 L7 6 C7 4 8 3 10 3 C12 3 13 4 13 6 L13 9" fill="none" stroke="#666" stroke-width="1.5"/>
+                        </svg>
+                        Confirm Password
+                    </label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter password" required>
+                </div>
+
+                <button type="submit" class="btn-connect">Register</button>
+            </form>
+
+            <div class="register-link">
+                <p>Already have an account? <a href="#" onclick="showLogin(); return false;">Login here</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>

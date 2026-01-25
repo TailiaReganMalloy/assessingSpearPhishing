@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind Messages</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container message-page">
+        <div class="header">
+            <div class="logo-section">
+                <img src="/bluemind-logo.svg" alt="BlueMind Logo" class="logo">
+                <span class="version">v5</span>
+            </div>
+            <div class="user-info">
+                <span>Welcome, <%= username %>!</span>
+                <a href="/logout" class="logout-button">Logout</a>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="message-panel">
+                <h3>Your Messages</h3>
+                <% if (messages.length === 0) { %>
+                    <p>No messages yet.</p>
+                <% } else { %>
+                    <div class="message-list">
+                        <% messages.forEach(message => { %>
+                            <div class="message-item <%= message.sender_username === username ? 'sent' : 'received' %>">
+                                <div class="message-header">
+                                    <strong><%= message.sender_username === username ? 'To: ' + message.receiver_username : 'From: ' + message.sender_username %></strong>
+                                    <span class="timestamp"><%= new Date(message.timestamp).toLocaleString() %></span>
+                                </div>
+                                <p><%= message.message %></p>
+                            </div>
+                        <% }); %>
+                    </div>
+                <% } %>
+            </div>
+
+            <div class="send-message-panel">
+                <h3>Send a New Message</h3>
+                <% if (errorMessage) { %>
+                    <div class="error-banner message-error">
+                        <%= errorMessage %>
+                    </div>
+                <% } %>
+                <form action="/send-message" method="POST">
+                    <div class="input-group">
+                        <label for="receiverUsername">Recipient:</label>
+                        <select id="receiverUsername" name="receiverUsername" required>
+                            <option value="">Select a user</option>
+                            <% users.forEach(user => { %>
+                                <option value="<%= user.username %>"><%= user.username %></option>
+                            <% }); %>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="connect-button">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

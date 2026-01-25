@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <div class="hexagon"></div>
+            <span>BlueMind</span>
+        </div>
+    </header>
+    <main>
+        <div class="login-panel">
+            <h1>Identification</h1>
+            <form action="/login" method="POST">
+                <div class="form-group">
+                    <label for="username">Login</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="computer" value="private" checked>
+                        Private computer
+                    </label>
+                    <label>
+                        <input type="radio" name="computer" value="public">
+                        Public computer
+                    </label>
+                </div>
+                <button type="submit" class="connect-btn">Connect</button>
+            </form>
+            <div class="register-link">
+                <p>Don't have an account? <a href="#" onclick="showRegister()">Register here</a></p>
+            </div>
+        </div>
+        <div class="register-panel" id="register-panel" style="display: none;">
+            <h1>Registration</h1>
+            <form action="/register" method="POST">
+                <div class="form-group">
+                    <label for="reg-username">Username</label>
+                    <input type="text" id="reg-username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-password">Password</label>
+                    <input type="password" id="reg-password" name="password" required>
+                </div>
+                <button type="submit" class="connect-btn">Register</button>
+            </form>
+            <div class="register-link">
+                <p>Already have an account? <a href="#" onclick="showLogin()">Login here</a></p>
+            </div>
+        </div>
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<%- include("partials/header", { title: "Message - BlueMind", currentUser, csrfToken }) %>
+<main class="card wide">
+  <div class="card-accent"></div>
+  <div class="message-detail">
+    <div>
+      <h1><%= message.subject %></h1>
+      <p class="subtle">From <%= message.sender_name %> &lt;<%= message.sender_email %>&gt;</p>
+    </div>
+    <span class="message-date"><%= new Date(message.created_at).toLocaleString() %></span>
+  </div>
+
+  <div class="message-body">
+    <p><%= message.body %></p>
+  </div>
+
+  <div class="form-footer">
+    <a href="/inbox" class="link">Back to inbox</a>
+  </div>
+</main>
+<%- include("partials/footer") %>

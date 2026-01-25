@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind - Compose Message</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="header">
+            <h1>BlueMind Mail</h1>
+            <div class="user-info">
+                <span>Welcome, <%= email %></span>
+                <a href="/logout" class="logout-btn">Logout</a>
+            </div>
+        </header>
+        
+        <nav class="nav">
+            <div class="nav-links">
+                <a href="/dashboard">Inbox</a>
+                <a href="/compose" class="active">Compose Message</a>
+            </div>
+        </nav>
+        
+        <main class="content">
+            <h2>Compose New Message</h2>
+            
+            <% if (error) { %>
+                <div class="error-message"><%= error %></div>
+            <% } %>
+            
+            <% if (success) { %>
+                <div class="success-message"><%= success %></div>
+            <% } %>
+            
+            <form action="/send-message" method="POST" class="compose-form">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                
+                <div class="form-group">
+                    <label for="recipient">To:</label>
+                    <input type="email" id="recipient" name="recipient" placeholder="recipient@bluemind.net" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">Subject:</label>
+                    <input type="text" id="subject" name="subject" placeholder="Enter subject" maxlength="200" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" placeholder="Type your message here..." maxlength="2000" required></textarea>
+                </div>
+                
+                <button type="submit" class="send-btn">Send Message</button>
+            </form>
+        </main>
+    </div>
+</body>
+</html>

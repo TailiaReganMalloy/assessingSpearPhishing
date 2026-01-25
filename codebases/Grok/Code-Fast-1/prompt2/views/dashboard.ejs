@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f0f0f0; margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; }
+        h1 { color: #333; }
+        .message { border: 1px solid #ccc; padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .message strong { color: #007bff; }
+        form { margin-top: 20px; }
+        select, textarea, button { display: block; width: 100%; margin: 10px 0; padding: 10px; }
+        button { background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        a { color: #007bff; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, <%= username %>!</h1>
+        <a href="/logout">Logout</a>
+        
+        <h2>Your Messages</h2>
+        <% if (messages.length === 0) { %>
+            <p>No messages yet.</p>
+        <% } else { %>
+            <% messages.forEach(msg => { %>
+                <div class="message">
+                    <strong><%= msg.from_username %></strong>: <%= msg.message %>
+                    <small><%= new Date(msg.timestamp).toLocaleString() %></small>
+                </div>
+            <% }); %>
+        <% } %>
+        
+        <h2>Send Message</h2>
+        <form action="/send-message" method="POST">
+            <label for="to_user">To:</label>
+            <select name="to_user" id="to_user" required>
+                <% users.forEach(user => { %>
+                    <% if (user.id != currentUserId) { %>  <!-- Don't send to self -->
+                        <option value="<%= user.id %>"><%= user.username %></option>
+                    <% } %>
+                <% }); %>
+            </select>
+            <label for="message">Message:</label>
+            <textarea name="message" id="message" rows="4" required></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+</body>
+</html>

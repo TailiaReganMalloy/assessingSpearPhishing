@@ -1,0 +1,21 @@
+<section class="page">
+  <div class="toolbar">
+    <a class="primary" href="/messages/compose">Compose</a>
+  </div>
+  <h2>Inbox</h2>
+  <% if (inbox.length === 0) { %>
+    <p>No messages yet.</p>
+  <% } else { %>
+    <ul class="messages">
+      <% inbox.forEach(m => { %>
+        <li class="message">
+          <div class="meta">
+            <span class="from"><strong>From:</strong> <%= m.sender_email %></span>
+            <span class="time"><%= new Date(m.created_at).toLocaleString() %></span>
+          </div>
+          <div class="content"><%= m.content %></div>
+        </li>
+      <% }) %>
+    </ul>
+  <% } %>
+</section>

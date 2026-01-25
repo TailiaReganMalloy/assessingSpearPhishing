@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Secure Messages</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="dashboard">
+    <div class="dashboard-header">
+      <div>
+        <h2>📨 Secure Messages</h2>
+      </div>
+      <div class="user-info">
+        <span id="currentUser"></span>
+        <button class="logout" onclick="logout()">Logout</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Users</h3>
+      <div class="users-list" id="usersList"></div>
+    </div>
+
+    <div class="section">
+      <h3>Send Message</h3>
+      <form class="send-form" id="sendForm">
+        <select id="toUser">
+          <option value="">Select user...</option>
+        </select>
+        <textarea id="messageContent" placeholder="Type your message..." required></textarea>
+        <button type="submit" class="btn">Send</button>
+      </form>
+    </div>
+
+    <div class="section">
+      <h3>Inbox</h3>
+      <div class="messages-list" id="messagesList"></div>
+    </div>
+  </div>
+
+  <script>
+    const token = localStorage.getItem('token');
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+
+    if (!token || !user.id) {
+      window.location.href = '/index.html';
+    }
+
+    document.getElementById('currentUser').textContent = `Welcome, ${user.username}!`;
+
+    const apiCall = async (endpoint, options = {}) => {
+      const res = await fetch(`/api/messages${endpoint}`, {
+        ...options,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+          ...options.headers
+        }
+      });
+      if (res.status === 401) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.location.href = '/index.html';
+        return;
+      }
+      return res.json();
+    };
+
+    // Load users
+    const loadUsers = async () => {
+      const users = await apiCall('/users');
+      const list = document.getElementById('usersList');
+      list.innerHTML = users.map(u => `<div class="user-item" onclick="selectUser(${u.id})">${u.username}</div>`).join('');
+      
+      // Populate send select
+      const select = document.getElementById('toUser');
+      select.innerHTML = '<option value="">Select user...</option>' + users.map(u => `<option value="${u.id}">${u.username}</option>`).join('');
+    };
+
+    // Load messages
+    const loadMessages = async () => {
+      const messages = await apiCall('/');
+      const list = document.getElementById('messagesList');
+      list.innerHTML = messages.map(m => `
+        <div class="message-item">
+          <strong>${m.from_username}</strong><br>
+          <small>${new Date(m.created_at).toLocaleString()}</small><br>
+          ${m.content}
+        </div>
+      `).join('');
+    };
+
+    const selectUser = (id) => {
+      document.getElementById('toUser').value = id;
+    };
+
+    // Send message
+    document.getElementById('sendForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const to_id = document.getElementById('toUser').value;
+      const content = document.getElementById('messageContent').value;
+
+      if (!to_id || !content) return;
+
+      const res = await apiCall('/', {
+        method: 'POST',
+        body: JSON.stringify({ to_id, content })
+      });
+
+      if (res) {
+        document.getElementById('messageContent').value = '';
+        document.getElementById('toUser').value = '';
+        loadMessages();
+      }
+    });
+
+    // Logout
+    function logout() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      window.location.href = '/index.html';
+    }
+
+    // Initial load
+    loadUsers();
+    loadMessages();
+
+    // Refresh every 30s
+    setInterval(() => {
+      loadMessages();
+    }, 30000);
+  </script>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Messages</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0a2e5c; /* Dark blue background */
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header styling */
+        .header {
+            background-color: #001f4d; /* Dark navy-blue background */
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 30px;
+            height: 30px;
+            background-color: #4d94ff;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        }
+
+        .logo-text {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .user-info {
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logout-btn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .logout-btn:hover {
+            background-color: #e63939;
+        }
+
+        /* Main content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .sidebar h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 10px 0;
+            color: #555;
+            text-decoration: none;
+            border-bottom: 1px solid #eee;
+        }
+
+        .nav-link:hover {
+            color: #4d94ff;
+        }
+
+        .content {
+            flex: 1;
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .content h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .message-list {
+            margin-top: 20px;
+        }
+
+        .message-item {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-left: 4px solid #4d94ff;
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .message-sender {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .message-date {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .message-content {
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .new-message-form {
+            background-color: #e6f0ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-group textarea,
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .submit-btn {
+            background-color: #4d94ff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .submit-btn:hover {
+            background-color: #3a7bde;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">
+            <div class="logo-icon"></div>
+            <div class="logo-text">BlueMind</div>
+        </div>
+        <div class="user-info">
+            <span>Welcome, Demo User</span>
+            <form action="/logout" method="POST" style="display: inline;">
+                <button type="submit" class="logout-btn">Logout</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="sidebar">
+            <h3>Navigation</h3>
+            <a href="/dashboard" class="nav-link">Dashboard</a>
+            <a href="/messages" class="nav-link">Messages</a>
+            <a href="#" class="nav-link">Settings</a>
+            <a href="#" class="nav-link">Profile</a>
+        </div>
+        
+        <div class="content">
+            <h2>Secure Messages</h2>
+            
+            <div class="message-list">
+                <div class="message-item">
+                    <div class="message-header">
+                        <div class="message-sender">Admin</div>
+                        <div class="message-date">2023-12-15 14:30</div>
+                    </div>
+                    <div class="message-content">
+                        <p>Welcome to BlueMind v5! This is a secure messaging system with end-to-end encryption.</p>
+                        <p>All communications are protected with industry-standard security protocols.</p>
+                    </div>
+                </div>
+                
+                <div class="message-item">
+                    <div class="message-header">
+                        <div class="message-sender">System</div>
+                        <div class="message-date">2023-12-14 09:15</div>
+                    </div>
+                    <div class="message-content">
+                        <p>Please ensure you're using a private computer for sensitive operations.</p>
+                        <p>Remember to log out when you're finished using the system.</p>
+                    </div>
+                </div>
+                
+                <div class="message-item">
+                    <div class="message-header">
+                        <div class="message-sender">Team Lead</div>
+                        <div class="message-date">2023-12-13 16:45</div>
+                    </div>
+                    <div class="message-content">
+                        <p>Don't forget about the upcoming security training session next week.</p>
+                        <p>It will cover best practices for password management and secure communication.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="new-message-form">
+                <h3>Send New Message</h3>
+                <form id="sendMessageForm">
+                    <div class="form-group">
+                        <label for="recipient">Recipient:</label>
+                        <input type="text" id="recipient" name="recipient" placeholder="Enter recipient username">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Enter your message here..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('sendMessageForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('In a real application, this message would be sent securely to the recipient.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+/* Inspired by the provided template; no assets copied */
+:root {
+  --blue: #0b2c6a;
+  --blue-dark: #051a43;
+  --white: #ffffff;
+  --border: #e8eef7;
+  --accent: #1f8cff;
+  --text: #1b1b1b;
+  --muted: #6b7280;
+  --success: #0ea5e9;
+  --error: #ef4444;
+}
+
+* { box-sizing: border-box; }
+body.bg { margin: 0; min-height: 100vh; background: var(--blue-dark); font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; color: var(--text); }
+
+.header { display: flex; justify-content: space-between; align-items: center; padding: 24px; color: var(--white); }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+.logo { font-size: 22px; }
+.name { font-size: 20px; }
+.version { opacity: 0.8; margin-left: 6px; }
+
+.center { display: grid; place-items: center; padding: 40px; }
+.card { width: 640px; max-width: 92vw; background: var(--white); border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); border-top: 4px solid var(--accent); }
+.card-title { font-size: 22px; font-weight: 700; padding: 22px 24px 0; }
+.form, .toolbar, .list, .body, .actions { padding: 16px 24px 24px; }
+
+.field { display: grid; gap: 6px; margin-bottom: 14px; }
+.label { font-weight: 600; color: var(--muted); }
+.input, .textarea { width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 6px; font-size: 16px; }
+.textarea { resize: vertical; }
+
+.options { display: flex; gap: 18px; margin: 8px 0 14px; color: var(--muted); }
+.radio input { margin-right: 6px; }
+
+.actions { display: flex; gap: 10px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; padding: 10px 16px; border-radius: 6px; text-decoration: none; cursor: pointer; border: 1px solid transparent; }
+.btn-primary { background: var(--accent); color: var(--white); }
+.btn-outline { background: transparent; color: var(--white); border-color: rgba(255,255,255,0.6); }
+
+.list { list-style: none; margin: 0; }
+.item { padding: 12px 0; border-bottom: 1px solid var(--border); }
+.item a { text-decoration: none; color: inherit; display: block; }
+.subject { font-weight: 600; }
+.meta { color: var(--muted); font-size: 14px; }
+
+.flash { margin: 0 24px; padding: 10px 14px; border-radius: 6px; color: var(--white); }
+.flash.success { background: #10b981; }
+.flash.error { background: var(--error); }
+
+.body { background: #f8fafc; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); white-space: pre-wrap; }

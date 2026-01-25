@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Register</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="header">
+        <!-- Header bar with dark navy-blue background -->
+        <div class="logo-container">
+            <div class="hexagon-icon"></div>
+            <h1>BlueMind</h1>
+        </div>
+    </div>
+
+    <div class="login-container">
+        <div class="login-panel">
+            <h2 class="panel-title">Register</h2>
+            
+            <% if (error) { %>
+                <div class="error-message"><%= error %></div>
+            <% } %>
+            
+            <form action="/register" method="POST">
+                <div class="form-group">
+                    <label for="login">Login</label>
+                    <input type="text" id="login" name="login" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <button type="submit" class="connect-button">Register</button>
+            </form>
+            
+            <div class="login-link">
+                <a href="/login">Already have an account? Login here</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

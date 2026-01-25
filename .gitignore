@@ -3,6 +3,8 @@ __pycache__/
 *.py[codz]
 *$py.class
 
+*.pkl
+
 # C extensions
 *.so
 
@@ -205,3 +207,7 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Node.js dependencies
+# This ignores any node_modules directory in any subfolder
+node_modules/

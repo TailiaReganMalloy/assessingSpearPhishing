@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - Secure Login Demo</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, <%= user.email %>!</h1>
+        <nav>
+            <a href="/messages/send">Send Message</a>
+            <a href="/messages/inbox">Inbox</a>
+            <a href="/logout">Logout</a>
+        </nav>
+        <div id="messages">
+            <!-- Messages will be loaded here -->
+        </div>
+    </div>
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>

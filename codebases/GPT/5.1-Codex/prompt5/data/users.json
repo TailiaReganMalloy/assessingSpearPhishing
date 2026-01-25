@@ -1,0 +1,23 @@
+[
+  {
+    "id": "u1",
+    "email": "trainer@bluemind.net",
+    "displayName": "Training Admin",
+    "role": "trainer",
+    "passwordHash": "$2b$12$qNXavv0Ycj22jiBAs2YSleiLrnadIPnE2wPfDWSTBKNE6sMWAsBju"
+  },
+  {
+    "id": "u2",
+    "email": "analyst@bluemind.net",
+    "displayName": "Security Analyst",
+    "role": "analyst",
+    "passwordHash": "$2b$12$sKAp2r/bFu5SbVXr/zkf9.JhXt5DghhhCekZvRY8DYRu8BcLHLsL."
+  },
+  {
+    "id": "u3",
+    "email": "student@bluemind.net",
+    "displayName": "Learner One",
+    "role": "student",
+    "passwordHash": "$2b$12$d/RKP1FOyA3KyIu9rtG6g.DMnChKoubDT45N50bweayEWkctZ1fy6"
+  }
+]

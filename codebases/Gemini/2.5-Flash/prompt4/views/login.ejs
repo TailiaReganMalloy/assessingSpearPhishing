@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind Login</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="logo-section">
+            <img src="/images/logo.png" alt="BlueMind Logo" class="logo">
+            <span class="version">v5</span>
+        </div>
+        <div class="login-card">
+            <div class="alert-section">
+                <% if (error) { %>
+                    <p><%= error %></p>
+                <% } %>
+            </div>
+            <h2>Identification</h2>
+            <form action="/login" method="POST">
+                <div class="input-group">
+                    <label for="login-email">
+                        <img src="/images/mail-icon.png" alt="Mail icon"> Login
+                    </label>
+                    <input type="email" id="login-email" name="email" value="email@bluemind.net" required>
+                </div>
+                <div class="input-group">
+                    <label for="login-password">
+                        <img src="/images/lock-icon.png" alt="Lock icon"> Password
+                    </label>
+                    <input type="password" id="login-password" name="password" value="********" required>
+                    <span class="password-toggle">
+                        <img src="/images/eye-icon.png" alt="Show password">
+                    </span>
+                </div>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="computerType" value="private" checked> Private computer
+                    </label>
+                    <label>
+                        <input type="radio" name="computerType" value="public"> Public computer
+                    </label>
+                </div>
+                <button type="submit" class="connect-button">Connect</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Inbox · BlueMind</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body class="page page--dashboard">
+    <header class="dashboard-header">
+      <div class="site-brand">
+        <div class="site-logo" aria-hidden="true"></div>
+        <div>
+          <p class="site-name">BlueMind</p>
+          <span class="site-version">v5</span>
+        </div>
+      </div>
+
+      <div class="user-chip" style="--chip-color:<%= currentUser.avatarColor %>">
+        <span class="user-avatar" aria-hidden="true"><%= currentUser.displayName.charAt(0) %></span>
+        <div>
+          <p class="user-name"><%= currentUser.displayName %></p>
+          <p class="user-role"><%= currentUser.role %></p>
+        </div>
+        <form method="post" action="/auth/logout">
+          <button type="submit" class="btn btn-link">Sign out</button>
+        </form>
+      </div>
+    </header>
+
+    <main class="dashboard">
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Inbox</p>
+            <h1>Messages</h1>
+          </div>
+          <p class="panel-subtitle">Messages addressed to <strong><%= currentUser.email %></strong></p>
+        </div>
+
+        <% if (!messages.length) { %>
+          <p class="empty-state">No messages yet.</p>
+        <% } else { %>
+          <ul class="message-list">
+            <% messages.forEach((message) => { %>
+              <li class="message-list-item">
+                <a href="/messages/<%= message.id %>" class="message-link">
+                  <div class="message-meta">
+                    <span class="message-avatar" style="--chip-color:<%= message.sender.avatarColor %>">
+                      <%= message.sender.displayName.charAt(0) %>
+                    </span>
+                    <div>
+                      <p class="message-sender"><%= message.sender.displayName %></p>
+                      <p class="message-role"><%= message.sender.role %></p>
+                    </div>
+                  </div>
+                  <div class="message-body">
+                    <p class="message-subject"><%= message.subject %></p>
+                    <p class="message-preview"><%= message.body %></p>
+                  </div>
+                  <span class="message-date"><%= message.friendlyDate %></span>
+                </a>
+              </li>
+            <% }) %>
+          </ul>
+        <% } %>
+      </div>
+    </main>
+  </body>
+</html>

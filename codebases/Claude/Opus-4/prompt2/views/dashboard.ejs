@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind - Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="header">
+            <h1>BlueMind Mail</h1>
+            <div class="user-info">
+                <span>Welcome, <%= email %></span>
+                <a href="/logout" class="logout-btn">Logout</a>
+            </div>
+        </header>
+        
+        <nav class="nav">
+            <div class="nav-links">
+                <a href="/dashboard" class="active">Inbox</a>
+                <a href="/compose">Compose Message</a>
+            </div>
+        </nav>
+        
+        <main class="content">
+            <h2>Inbox</h2>
+            
+            <% if (messages.length > 0) { %>
+                <table class="messages-table">
+                    <thead>
+                        <tr>
+                            <th>From</th>
+                            <th>Subject</th>
+                            <th>Date</th>
+                            <th>Message</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% messages.forEach(message => { %>
+                            <tr class="<%= message.read_at ? '' : 'unread' %>">
+                                <td><%= message.sender_email %></td>
+                                <td><%= message.subject %></td>
+                                <td><%= new Date(message.created_at).toLocaleDateString() %></td>
+                                <td><%= message.message %></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            <% } else { %>
+                <p class="no-messages">No messages in your inbox.</p>
+            <% } %>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Messages</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span class="icon">⬡</span> BlueMind
+        </div>
+        <div class="user-info">
+            Welcome, <%= username %> | <a href="/logout">Logout</a>
+        </div>
+    </header>
+    <main>
+        <div class="messages-panel">
+            <h1>Your Messages</h1>
+            <% if (messages.length === 0) { %>
+                <p>No messages yet.</p>
+            <% } else { %>
+                <ul class="message-list">
+                    <% messages.forEach(msg => { %>
+                        <li>
+                            <strong><%= msg.from_user %></strong> at <%= new Date(msg.timestamp).toLocaleString() %>:
+                            <p><%= msg.message %></p>
+                        </li>
+                    <% }); %>
+                </ul>
+            <% } %>
+        </div>
+    </main>
+</body>
+</html>

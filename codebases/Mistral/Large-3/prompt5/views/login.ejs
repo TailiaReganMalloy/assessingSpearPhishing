@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlueMind - Login</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-header">
+      <img src="/images/bluemind-logo.png" alt="BlueMind Logo" class="logo">
+      <span class="version">v5</span>
+    </div>
+    <h2>Identification</h2>
+    <form action="/login" method="POST">
+      <div class="form-group">
+        <label for="email">
+          <input type="checkbox" id="login-checkbox" checked disabled>
+          Login
+        </label>
+        <input type="email" id="email" name="email" placeholder="email@bluemind.net" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+        <span class="password-icon">👁</span>
+      </div>
+      <div class="form-group">
+        <label>
+          <input type="radio" name="computerType" value="private" checked>
+          Private computer
+        </label>
+        <label>
+          <input type="radio" name="computerType" value="public">
+          Public computer
+        </label>
+      </div>
+      <button type="submit" class="connect-button">Connect</button>
+    </form>
+  </div>
+</body>
+</html>

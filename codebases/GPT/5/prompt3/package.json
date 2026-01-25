@@ -1,0 +1,28 @@
+{
+  "name": "secure-mailer-reference",
+  "version": "1.0.0",
+  "description": "Reference Node.js implementation for secure authentication and user-to-user messaging (bcrypt + sessions + CSRF + SQLite).",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "connect-sqlite3": "^0.9.15",
+    "csurf": "^1.11.0",
+    "dotenv": "^16.6.1",
+    "ejs": "^3.1.9",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.4.0",
+    "express-session": "^1.17.3",
+    "helmet": "^7.0.0",
+    "morgan": "^1.10.0",
+    "sqlite3": "^5.1.7",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

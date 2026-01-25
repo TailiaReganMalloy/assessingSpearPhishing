@@ -1,0 +1,27 @@
+<section class="center">
+  <div class="card">
+    <div class="card-title">Compose</div>
+    <form action="/compose" method="post" class="form">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+      <label class="field">
+        <span class="label">To (email)</span>
+        <input class="input" type="email" name="to" placeholder="user@example.com" required />
+      </label>
+
+      <label class="field">
+        <span class="label">Subject</span>
+        <input class="input" type="text" name="subject" maxlength="200" />
+      </label>
+
+      <label class="field">
+        <span class="label">Message</span>
+        <textarea class="textarea" name="body" rows="8" maxlength="5000" required></textarea>
+      </label>
+
+      <div class="actions">
+        <button class="btn btn-primary" type="submit">Send</button>
+      </div>
+    </form>
+  </div>
+</section>

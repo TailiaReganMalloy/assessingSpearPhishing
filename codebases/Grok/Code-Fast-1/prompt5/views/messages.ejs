@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlueMind v5 - Messages</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="header">
+    <div class="logo">⬡ BlueMind</div>
+  </div>
+  <div class="login-panel">
+    <h2>Welcome, <%= user %>!</h2>
+    <h3>Your Messages:</h3>
+    <% if (messages.length === 0) { %>
+      <p>No messages yet.</p>
+    <% } else { %>
+      <ul>
+        <% messages.forEach(msg => { %>
+          <li><strong>From <%= msg.from %>:</strong> <%= msg.message %></li>
+        <% }) %>
+      </ul>
+    <% } %>
+    <form action="/logout" method="POST">
+      <button type="submit" class="connect-btn">Logout</button>
+    </form>
+  </div>
+</body>
+</html>

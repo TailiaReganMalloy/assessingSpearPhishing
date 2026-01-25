@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inbox</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Inbox</h1>
+        <div id="messages">
+            <% messages.forEach(msg => { %>
+                <div class="message">
+                    <p><strong>From: <%= msg.from_email %></strong> - <%= new Date(msg.created_at).toLocaleString() %></p>
+                    <p><%= msg.message %></p>
+                </div>
+            <% }); %>
+        </div>
+        <a href="/messages/dashboard">Back to Dashboard</a>
+    </div>
+</body>
+</html>

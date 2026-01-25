@@ -1,0 +1,55 @@
+<div class="auth-container">
+  <div class="auth-header">
+    <div class="logo">BlueMind</div>
+    <div class="version">v5</div>
+  </div>
+  
+  <h2>Create Account</h2>
+  
+  <form method="POST" action="/register" class="auth-form">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    
+    <div class="form-group">
+      <label for="email">
+        <span class="icon">✉</span> Email
+      </label>
+      <input type="email" id="email" name="email" 
+             value="<%= typeof email !== 'undefined' ? email : '' %>" 
+             placeholder="email@bluemind.net" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="password">
+        <span class="icon">🔒</span> Password
+      </label>
+      <input type="password" id="password" name="password" required 
+             minlength="8" placeholder="Minimum 8 characters">
+      <span class="toggle-password">👁</span>
+    </div>
+    
+    <div class="form-group">
+      <label for="confirmPassword">
+        <span class="icon">🔒</span> Confirm Password
+      </label>
+      <input type="password" id="confirmPassword" name="confirmPassword" required>
+    </div>
+    
+    <button type="submit" class="btn-connect">Register</button>
+  </form>
+  
+  <div class="register-link">
+    <a href="/">Already have an account? Login</a>
+  </div>
+</div>
+
+<script>
+  // Toggle password visibility
+  document.querySelectorAll('.toggle-password').forEach(function(toggle) {
+    toggle.addEventListener('click', function() {
+      const passwordField = this.previousElementSibling || this.parentElement.querySelector('input');
+      const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordField.setAttribute('type', type);
+      this.textContent = type === 'password' ? '👁' : '🔒';
+    });
+  });
+</script>

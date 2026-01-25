@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Secure Login Demo</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="logo-section">
+                <div class="logo">
+                    <div class="logo-icon">BM</div>
+                    <div>
+                        <div class="logo-text">BlueMind</div>
+                        <div class="logo-version">v5</div>
+                    </div>
+                </div>
+            </div>
+
+            <h1 class="form-title">Identification</h1>
+
+            <div id="error-message" class="error-message"></div>
+            <div id="success-message" class="success-message"></div>
+
+            <form id="login-form">
+                <div class="form-group">
+                    <label class="form-label" for="email">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                        Login
+                    </label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        class="form-input"
+                        placeholder="email@bluemind.net"
+                        required
+                    >
+                    <div class="field-error" id="email-error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="password">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                        </svg>
+                        Password
+                    </label>
+                    <div class="password-input-container">
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            class="form-input"
+                            placeholder="••••••••"
+                            required
+                        >
+                        <button type="button" class="password-toggle" id="password-toggle">
+                            <svg id="eye-closed" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"></path>
+                            </svg>
+                            <svg id="eye-open" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px; display: none;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="field-error" id="password-error"></div>
+                </div>
+
+                <div class="device-options">
+                    <div class="radio-option" data-option="private">
+                        <div class="radio-input checked" id="radio-private"></div>
+                        <label class="radio-label" for="radio-private">Private computer</label>
+                    </div>
+                    <div class="radio-option" data-option="public">
+                        <div class="radio-input" id="radio-public"></div>
+                        <label class="radio-label" for="radio-public">Public computer</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="connect-button" id="login-button">
+                    Connect
+                </button>
+            </form>
+
+            <div class="form-links">
+                <a href="/register" class="form-link">Create a new account</a>
+                <br><br>
+                <a href="/forgot-password" class="form-link">Forgot your password?</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/login.js"></script>
+</body>
+</html>

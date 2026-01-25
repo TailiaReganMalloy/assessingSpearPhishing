@@ -1,0 +1,45 @@
+<div class="compose-container">
+  <h2>Compose Message</h2>
+  
+  <form method="POST" action="/messages/send" class="compose-form">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    
+    <div class="form-group">
+      <label for="recipient">To:</label>
+      <select id="recipient" name="recipient" required>
+        <option value="">Select a recipient</option>
+        <% users.forEach(user => { %>
+          <option value="<%= user.email %>" 
+            <%= typeof formData !== 'undefined' && formData.recipient === user.email ? 'selected' : '' %>
+            <%= typeof reply !== 'undefined' && reply === user.email ? 'selected' : '' %>>
+            <%= user.email %>
+          </option>
+        <% }); %>
+      </select>
+    </div>
+    
+    <div class="form-group">
+      <label for="subject">Subject:</label>
+      <input type="text" id="subject" name="subject" 
+             value="<%= typeof formData !== 'undefined' ? formData.subject : '' %>" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="content">Message:</label>
+      <textarea id="content" name="content" rows="10" required><%= typeof formData !== 'undefined' ? formData.content : '' %></textarea>
+    </div>
+    
+    <% if (typeof errors !== 'undefined' && errors) { %>
+      <div class="error-messages">
+        <% errors.forEach(error => { %>
+          <div class="error"><%= error.msg %></div>
+        <% }); %>
+      </div>
+    <% } %>
+    
+    <div class="form-actions">
+      <button type="submit" class="btn-send">Send</button>
+      <a href="/messages" class="btn-cancel">Cancel</a>
+    </div>
+  </form>
+</div>

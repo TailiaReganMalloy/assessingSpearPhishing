@@ -1,0 +1,31 @@
+<%- include('partials/head', { title: 'Compose', bodyClass: 'dashboard-page' }) %>
+  <section class="compose">
+    <header class="section-header">
+      <div>
+        <h1>Send a secure message</h1>
+        <p>Signed in as <strong><%= user.display_name %></strong></p>
+      </div>
+      <div class="section-actions">
+        <a class="btn-secondary" href="/inbox">Back to inbox</a>
+      </div>
+    </header>
+
+    <form method="post" action="/messages" class="compose-form" novalidate>
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label class="form-label" for="recipientEmail">Recipient email</label>
+      <input id="recipientEmail" name="recipientEmail" type="email" class="form-control" placeholder="student.alex@example.edu" required>
+
+      <label class="form-label" for="subject">Subject</label>
+      <input id="subject" name="subject" type="text" class="form-control" maxlength="120" required>
+
+      <label class="form-label" for="body">Message</label>
+      <textarea id="body" name="body" class="form-control form-control--textarea" rows="6" required></textarea>
+
+      <% if (error) { %>
+      <p class="form-error" role="alert"><%= error %></p>
+      <% } %>
+
+      <button type="submit" class="btn-primary">Send securely</button>
+    </form>
+  </section>
+<%- include('partials/footer') %>

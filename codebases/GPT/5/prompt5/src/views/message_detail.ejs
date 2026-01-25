@@ -1,0 +1,10 @@
+<section class="center">
+  <div class="card">
+    <div class="card-title"><%= message.subject %></div>
+    <div class="meta">From <%= message.senderEmail %> to <%= message.recipientEmail %> — <%= new Date(message.createdAt).toLocaleString() %></div>
+    <pre class="body"><%= message.body %></pre>
+    <div class="actions">
+      <a class="btn btn-outline" href="/messages">Back to inbox</a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Secure Messaging</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="page active">
+        <div class="login-container">
+            <div class="login-box">
+                <div class="logo">
+                    <h1>BlueMind</h1>
+                    <p>v5</p>
+                </div>
+                
+                <div class="login-form-container">
+                    <h2>Identification</h2>
+                    
+                    <form id="loginForm" class="login-form">
+                        <div class="form-group">
+                            <label for="loginEmail">Login</label>
+                            <div class="input-wrapper">
+                                <span class="icon">✉️</span>
+                                <input 
+                                    type="email" 
+                                    id="loginEmail" 
+                                    name="email" 
+                                    placeholder="email@bluemind.net"
+                                    required
+                                >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <div class="input-wrapper">
+                                <span class="icon">🔒</span>
+                                <input 
+                                    type="password" 
+                                    id="loginPassword" 
+                                    name="password" 
+                                    placeholder="••••••••"
+                                    required
+                                >
+                                <button type="button" class="toggle-password" onclick="togglePassword('loginPassword')">👁️</button>
+                            </div>
+                        </div>
+
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="computerType" value="private" checked>
+                                <span>Private computer</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="computerType" value="public">
+                                <span>Public computer</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn-connect">Connect</button>
+
+                        <div id="loginError" class="error-message"></div>
+                        <div id="loginSuccess" class="success-message"></div>
+                    </form>
+
+                    <div class="login-footer">
+                        <p>Don't have an account? <a href="#" onclick="switchToRegister()">Create one</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Page -->
+    <div id="registerPage" class="page">
+        <div class="login-container">
+            <div class="login-box">
+                <div class="logo">
+                    <h1>BlueMind</h1>
+                    <p>v5</p>
+                </div>
+                
+                <div class="login-form-container">
+                    <h2>Create Account</h2>
+                    
+                    <form id="registerForm" class="login-form">
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <div class="input-wrapper">
+                                <span class="icon">👤</span>
+                                <input 
+                                    type="text" 
+                                    id="fullName" 
+                                    name="full_name" 
+                                    placeholder="Your full name"
+                                    required
+                                >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="registerEmail">Email</label>
+                            <div class="input-wrapper">
+                                <span class="icon">✉️</span>
+                                <input 
+                                    type="email" 
+                                    id="registerEmail" 
+                                    name="email" 
+                                    placeholder="your.email@bluemind.net"
+                                    required
+                                >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="registerPassword">Password</label>
+                            <div class="input-wrapper">
+                                <span class="icon">🔒</span>
+                                <input 
+                                    type="password" 
+                                    id="registerPassword" 
+                                    name="password" 
+                                    placeholder="Minimum 8 characters"
+                                    required
+                                    minlength="8"
+                                >
+                                <button type="button" class="toggle-password" onclick="togglePassword('registerPassword')">👁️</button>
+                            </div>
+                        </div>
+
+                        <small class="password-hint">Password must be at least 8 characters long for security</small>
+
+                        <button type="submit" class="btn-connect">Create Account</button>
+
+                        <div id="registerError" class="error-message"></div>
+                        <div id="registerSuccess" class="success-message"></div>
+                    </form>
+
+                    <div class="login-footer">
+                        <p>Already have an account? <a href="#" onclick="switchToLogin()">Login here</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application Page -->
+    <div id="appPage" class="page">
+        <div class="app-container">
+            <!-- Header -->
+            <header class="app-header">
+                <div class="header-content">
+                    <div class="logo-small">BlueMind</div>
+                    <div class="user-info">
+                        <span id="currentUserName"></span>
+                        <span id="currentUserEmail"></span>
+                    </div>
+                    <button id="logoutBtn" class="btn-logout">Logout</button>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <div class="app-content">
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <nav class="nav-menu">
+                        <button class="nav-item active" onclick="showSection('inbox')">
+                            📬 Inbox <span id="unreadBadge" class="badge" style="display:none;">0</span>
+                        </button>
+                        <button class="nav-item" onclick="showSection('compose')">
+                            ✏️ Compose Message
+                        </button>
+                        <button class="nav-item" onclick="showSection('sent')">
+                            📤 Sent Messages
+                        </button>
+                    </nav>
+                </aside>
+
+                <!-- Main Section -->
+                <main class="main-section">
+                    <!-- Inbox Section -->
+                    <section id="inboxSection" class="section active">
+                        <h2>Inbox</h2>
+                        <div id="messagesList" class="messages-list">
+                            <p class="loading">Loading messages...</p>
+                        </div>
+                    </section>
+
+                    <!-- Message Detail Section -->
+                    <section id="messageDetailSection" class="section">
+                        <div class="message-detail">
+                            <button class="btn-back" onclick="showSection('inbox')">← Back to Inbox</button>
+                            <div id="messageContent" class="message-content-area"></div>
+                        </div>
+                    </section>
+
+                    <!-- Compose Section -->
+                    <section id="composeSection" class="section">
+                        <h2>Compose New Message</h2>
+                        <form id="composeForm" class="compose-form">
+                            <div class="form-group">
+                                <label for="recipientSelect">To:</label>
+                                <select id="recipientSelect" name="recipient_id" required>
+                                    <option value="">Select a recipient...</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="messageSubject">Subject:</label>
+                                <input 
+                                    type="text" 
+                                    id="messageSubject" 
+                                    name="subject" 
+                                    placeholder="Message subject"
+                                >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="messageContent">Message:</label>
+                                <textarea 
+                                    id="messageContent" 
+                                    name="content" 
+                                    placeholder="Type your message here..."
+                                    rows="10"
+                                    required
+                                ></textarea>
+                            </div>
+
+                            <button type="submit" class="btn-send">Send Message</button>
+                            <div id="composeError" class="error-message"></div>
+                            <div id="composeSuccess" class="success-message"></div>
+                        </form>
+                    </section>
+
+                    <!-- Sent Messages Section -->
+                    <section id="sentSection" class="section">
+                        <h2>Sent Messages</h2>
+                        <div id="sentMessagesList" class="messages-list">
+                            <p class="loading">Loading messages...</p>
+                        </div>
+                    </section>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <script src="/app.js"></script>
+</body>
+</html>

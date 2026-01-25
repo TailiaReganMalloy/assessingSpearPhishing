@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Dashboard</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo-container">
+            <div class="hexagon-icon"></div>
+            <h1>BlueMind</h1>
+        </div>
+        <div class="user-info">
+            Welcome, <%= user.login %>!
+            <a href="/logout" class="logout-link">Logout</a>
+        </div>
+    </div>
+
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <h3>Navigation</h3>
+            <ul>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/send-message">Send Message</a></li>
+            </ul>
+        </div>
+        
+        <div class="main-content">
+            <h2>Dashboard</h2>
+            
+            <div class="messages-section">
+                <h3>Inbox</h3>
+                <% if (messages.length > 0) { %>
+                    <div class="messages-list">
+                        <% messages.forEach(function(message) { %>
+                            <div class="message-item">
+                                <strong>From:</strong> <%= message.from %><br>
+                                <strong>Subject:</strong> <%= message.subject %><br>
+                                <strong>Date:</strong> <%= message.timestamp.toLocaleString() %><br>
+                                <p><%= message.content.substring(0, 100) %>...</p>
+                            </div>
+                        <% }); %>
+                    </div>
+                <% } else { %>
+                    <p>No messages received yet.</p>
+                <% } %>
+            </div>
+            
+            <div class="actions">
+                <a href="/send-message" class="btn btn-primary">Send New Message</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

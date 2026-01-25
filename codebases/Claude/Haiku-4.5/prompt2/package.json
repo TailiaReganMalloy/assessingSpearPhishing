@@ -1,0 +1,29 @@
+{
+  "name": "secure-messaging-app",
+  "version": "1.0.0",
+  "description": "Educational web development project demonstrating secure authentication and encrypted password storage with messaging system",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "authentication",
+    "secure-password",
+    "messaging",
+    "education"
+  ],
+  "author": "Web Development Class",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "bcryptjs": "^2.4.3",
+    "sqlite3": "^5.1.6",
+    "express-session": "^1.17.3",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.0.0",
+    "express-validator": "^7.0.0",
+    "dotenv": "^16.0.3"
+  }
+}

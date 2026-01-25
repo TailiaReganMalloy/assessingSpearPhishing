@@ -1,0 +1,44 @@
+<%- include('partials/head', { title: 'Sign in', bodyClass: 'login-page' }) %>
+  <section class="login-card" aria-labelledby="login-heading">
+    <div class="login-card__logo">
+      <div class="logo-icon" aria-hidden="true"></div>
+      <h1 id="login-heading">Identification</h1>
+    </div>
+    <form method="post" action="/login" class="login-form" novalidate>
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label class="form-label" for="email">Login</label>
+      <input id="email" type="email" name="email" class="form-control" placeholder="email@bluemind.net" required autofocus>
+
+      <label class="form-label" for="password">Password</label>
+      <div class="password-row">
+        <input id="password" type="password" name="password" class="form-control" placeholder="Enter your password" required>
+      </div>
+
+      <fieldset class="device-choice">
+        <legend>Device</legend>
+        <label class="device-option">
+          <input type="radio" name="device" value="private" checked>
+          <span>Private computer</span>
+        </label>
+        <label class="device-option">
+          <input type="radio" name="device" value="public">
+          <span>Public computer</span>
+        </label>
+      </fieldset>
+
+      <% if (error) { %>
+      <p class="form-error" role="alert"><%= error %></p>
+      <% } %>
+
+      <button type="submit" class="btn-primary">Connect</button>
+    </form>
+    <div class="demo-hint">
+      <p>Demo accounts</p>
+      <ul>
+        <li>csinstructor@example.edu / TeachSecurely!1</li>
+        <li>student.alex@example.edu / LearningR0cks!</li>
+        <li>student.river@example.edu / BlueMindDemo#5</li>
+      </ul>
+    </div>
+  </section>
+<%- include('partials/footer') %>

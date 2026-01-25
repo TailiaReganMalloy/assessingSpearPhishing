@@ -1,0 +1,8 @@
+<%- include("partials/head", { title: "Error", bodyClass: "auth-bg" }) %>
+  <section class="card">
+    <div class="card-accent"></div>
+    <h1>Something went wrong</h1>
+    <p class="subtle"><%= message %></p>
+    <a class="secondary-button" href="/login">Back to login</a>
+  </section>
+<%- include("partials/footer") %>

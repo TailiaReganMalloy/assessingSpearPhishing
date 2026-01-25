@@ -1,0 +1,223 @@
+/* General Styles */
+body {
+  background-color: #003366; /* Dark blue background */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  min-height: 100vh;
+}
+
+/* Header */
+header {
+  background-color: #001122; /* Navy blue header */
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.hexagon {
+  width: 30px;
+  height: 26px;
+  background-color: white;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  margin-right: 10px;
+}
+
+/* Login Page */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px);
+  padding: 20px;
+}
+
+.login-panel {
+  background-color: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.login-panel h1 {
+  margin-bottom: 30px;
+  color: #333;
+  font-size: 28px;
+}
+
+.login-panel label {
+  display: block;
+  margin-bottom: 8px;
+  text-align: left;
+  font-weight: 500;
+  color: #555;
+}
+
+.login-panel input[type="text"],
+.login-panel input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.radio-group {
+  text-align: left;
+  margin-bottom: 30px;
+}
+
+.radio-group input[type="radio"] {
+  margin-right: 10px;
+}
+
+.radio-group label {
+  font-weight: normal;
+  color: #555;
+}
+
+button {
+  background-color: #007bff; /* Bright blue */
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  width: 100%;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.error {
+  color: #dc3545;
+  margin-top: 15px;
+  font-weight: 500;
+}
+
+/* Messages Page */
+.messages-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  color: #333;
+}
+
+.messages-container h1 {
+  text-align: center;
+  color: #003366;
+  margin-bottom: 30px;
+}
+
+.messages-container h2 {
+  color: #0056b3;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.message-list {
+  list-style: none;
+  padding: 0;
+}
+
+.message-item {
+  background-color: #f8f9fa;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border-left: 4px solid #007bff;
+}
+
+.message-item strong {
+  color: #007bff;
+}
+
+.message-item small {
+  color: #666;
+  font-size: 12px;
+  display: block;
+  margin-top: 5px;
+}
+
+.send-form {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+}
+
+.send-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #555;
+}
+
+.send-form input[type="text"],
+.send-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.send-form textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+.send-form button {
+  width: auto;
+  padding: 10px 20px;
+}
+
+.logout-form {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.logout-form button {
+  background-color: #6c757d;
+  width: auto;
+  padding: 10px 20px;
+}
+
+.logout-form button:hover {
+  background-color: #545b62;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .login-panel {
+    padding: 30px 20px;
+  }
+  
+  .messages-container {
+    margin: 20px;
+    padding: 15px;
+  }
+}

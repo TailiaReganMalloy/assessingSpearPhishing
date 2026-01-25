@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Header with BlueMind logo -->
+    <header class="header">
+        <div class="logo-container">
+            <div class="hexagon-logo"></div>
+            <h1 class="logo-text">BlueMind</h1>
+        </div>
+        <div class="user-greeting">Welcome, <%= currentUser %>!</div>
+        <a href="/auth/logout" class="logout-link">Logout</a>
+    </header>
+
+    <main class="main-content">
+        <div class="compose-form">
+            <h1 class="page-title">Compose Message</h1>
+            
+            <!-- Display error messages if any -->
+            <% if (typeof errorMessage !== 'undefined' && errorMessage.length > 0) { %>
+                <div class="alert alert-error">
+                    <%= errorMessage %>
+                </div>
+            <% } %>
+            
+            <!-- Display success messages if any -->
+            <% if (typeof successMessage !== 'undefined' && successMessage.length > 0) { %>
+                <div class="alert alert-success">
+                    <%= successMessage %>
+                </div>
+            <% } %>
+            
+            <form action="/messages/send" method="POST">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                
+                <div class="form-row">
+                    <label for="recipientId" class="form-label">Recipient</label>
+                    <select id="recipientId" name="recipientId" class="form-select" required>
+                        <option value="">Select a recipient</option>
+                        <% if (users && users.length > 0) { %>
+                            <% users.forEach(user => { %>
+                                <option value="<%= user.id %>"><%= user.username %></option>
+                            <% }); %>
+                        <% } else { %>
+                            <option value="">No users available</option>
+                        <% } %>
+                    </select>
+                </div>
+                
+                <div class="form-row">
+                    <label for="subject" class="form-label">Subject</label>
+                    <input 
+                        type="text" 
+                        id="subject" 
+                        name="subject" 
+                        class="form-input" 
+                        placeholder="Enter message subject"
+                        maxlength="100"
+                        required
+                    >
+                </div>
+                
+                <div class="form-row">
+                    <label for="content" class="form-label">Message Content</label>
+                    <textarea 
+                        id="content" 
+                        name="content" 
+                        class="form-input" 
+                        rows="6"
+                        placeholder="Enter your message here..."
+                        maxlength="1000"
+                        required
+                    ></textarea>
+                </div>
+                
+                <button type="submit" class="connect-button">Send Message</button>
+            </form>
+            
+            <div style="margin-top: 1rem;">
+                <a href="/messages" class="nav-link">Back to Inbox</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

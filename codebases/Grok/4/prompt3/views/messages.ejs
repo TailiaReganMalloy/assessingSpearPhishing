@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        h2 { color: #333; }
+        ul { list-style: none; padding: 0; }
+        li { background: #f9f9f9; margin: 10px 0; padding: 10px; border-radius: 5px; }
+        form { margin-top: 20px; }
+        select, textarea, button { display: block; margin: 10px 0; width: 100%; padding: 10px; }
+    </style>
+</head>
+<body>
+    <h2>Your Messages</h2>
+    <ul>
+        <% messages.forEach(message => { %>
+            <li>
+                <strong>From: <%= message.sender %></strong> - <%= message.timestamp %><br>
+                <%= message.content %>
+            </li>
+        <% }); %>
+    </ul>
+
+    <h2>Send Message</h2>
+    <form action="/send" method="POST">
+        <select name="receiver" required>
+            <option value="">Select recipient</option>
+            <% users.forEach(user => { %>
+                <option value="<%= user.id %>"><%= user.username %></option>
+            <% }); %>
+        </select>
+        <textarea name="content" placeholder="Message" required></textarea>
+        <button type="submit">Send</button>
+    </form>
+
+    <a href="/logout">Logout</a>
+</body>
+</html>

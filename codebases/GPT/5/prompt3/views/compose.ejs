@@ -1,0 +1,19 @@
+<% layout('layout') -%>
+<section class="card">
+  <h2>Compose Message</h2>
+  <form method="post" action="/messages">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+    <label for="recipientEmail">Recipient</label>
+    <select id="recipientEmail" name="recipientEmail" required>
+      <% (recipients || []).forEach(r => { %>
+        <option value="<%= r.email %>"><%= r.name %> &lt;<%= r.email %>&gt;</option>
+      <% }) %>
+    </select>
+
+    <label for="content">Message</label>
+    <textarea id="content" name="content" rows="6" placeholder="Type your message..." required></textarea>
+
+    <button class="btn primary" type="submit">Send</button>
+  </form>
+</section>

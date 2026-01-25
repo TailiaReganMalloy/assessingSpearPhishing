@@ -1,0 +1,21 @@
+<%- include("partials/head", { title: "Message", bodyClass: "auth-bg" }) %>
+  <section class="card">
+    <div class="card-accent"></div>
+    <% if (!message) { %>
+      <h1>Message not found</h1>
+      <p class="subtle">The requested message could not be found.</p>
+      <a class="secondary-button" href="/inbox">Back to inbox</a>
+    <% } else { %>
+      <div class="inbox-header">
+        <div>
+          <h1><%= message.subject %></h1>
+          <p class="subtle">From <strong><%= message.from %></strong> · <%= message.sentAt %></p>
+        </div>
+        <a class="secondary-button" href="/inbox">Back to inbox</a>
+      </div>
+      <div class="message-detail">
+        <p><%= message.body %></p>
+      </div>
+    <% } %>
+  </section>
+<%- include("partials/footer") %>

@@ -1,0 +1,34 @@
+[
+  {
+    "id": "m-101",
+    "senderId": "u-200",
+    "recipientId": "u-100",
+    "subject": "Quarterly review reminders",
+    "body": "Hi Amelia, I published the updated review checklist. Please confirm the schedule before Friday.",
+    "sentAt": "2026-01-15T09:00:00.000Z"
+  },
+  {
+    "id": "m-102",
+    "senderId": "u-300",
+    "recipientId": "u-100",
+    "subject": "Portal access for partners",
+    "body": "Could you enable the restricted mailbox for the civic partners? They only need read-only access.",
+    "sentAt": "2026-01-18T14:25:00.000Z"
+  },
+  {
+    "id": "m-103",
+    "senderId": "u-100",
+    "recipientId": "u-200",
+    "subject": "Incident recap",
+    "body": "David, thanks for containing the phishing attempt so quickly. I've uploaded the final notes to the drive.",
+    "sentAt": "2026-01-19T11:40:00.000Z"
+  },
+  {
+    "id": "m-104",
+    "senderId": "u-300",
+    "recipientId": "u-200",
+    "subject": "Training session",
+    "body": "I reserved the lab for next Tuesday. Please bring the new authentication slides.",
+    "sentAt": "2026-01-20T08:15:00.000Z"
+  }
+]

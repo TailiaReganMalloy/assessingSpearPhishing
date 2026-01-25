@@ -1,0 +1,21 @@
+<section class="login-wrapper">
+  <div class="login-card">
+    <h1>Create Account</h1>
+    <% if (error) { %>
+      <div class="error"><%= error %></div>
+    <% } %>
+    <form method="post" action="/register" class="login-form">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label class="field">
+        <span class="label">Email</span>
+        <input type="email" name="email" placeholder="email@example.com" required />
+      </label>
+      <label class="field">
+        <span class="label">Password</span>
+        <input type="password" name="password" required />
+      </label>
+      <button type="submit" class="primary">Register</button>
+    </form>
+    <p class="aux">Already registered? <a href="/login">Login</a></p>
+  </div>
+</section>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Secure Messaging</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="auth-card">
+            <div class="logo-section">
+                <div class="logo">
+                    <div class="logo-icon"></div>
+                    <span class="logo-text">BlueMind</span>
+                </div>
+                <div class="version">v5</div>
+            </div>
+            
+            <div class="form-section">
+                <h2 class="form-title">Identification</h2>
+                
+                <% if (error) { %>
+                    <div class="alert alert-error">
+                        <%= error %>
+                    </div>
+                <% } %>
+                
+                <% if (success) { %>
+                    <div class="alert alert-success">
+                        <%= success %>
+                    </div>
+                <% } %>
+                
+                <form action="/login" method="POST">
+                    <div class="form-group">
+                        <label class="form-label">📧 Login</label>
+                        <input type="email" name="email" class="form-input" 
+                               placeholder="email@bluemind.net" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">🔒 Password</label>
+                        <input type="password" name="password" class="form-input" 
+                               placeholder="********" required>
+                    </div>
+                    
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="computer_type" value="private" checked>
+                            <span>🔵 Private computer</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="computer_type" value="public">
+                            <span>🔴 Public computer</span>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Connect</button>
+                </form>
+                
+                <div class="auth-links">
+                    <a href="/register">Create new account</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Security: Clear form on page unload
+        window.addEventListener('beforeunload', function() {
+            const form = document.querySelector('form');
+            if (form) form.reset();
+        });
+        
+        // Enhanced security: Warn about public computers
+        document.querySelector('input[value="public"]').addEventListener('change', function() {
+            if (this.checked) {
+                alert('⚠️ Security Warning: You have selected "Public computer". Please ensure to logout completely when finished and avoid saving credentials.');
+            }
+        });
+    </script>
+</body>
+</html>

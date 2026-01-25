@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind - Compose</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="logo-container">
+        <div class="logo-text">
+            <span><i class="fas fa-cube"></i> BlueMind</span>
+        </div>
+    </div>
+
+    <div class="inbox-container">
+        <div class="inbox-header">
+            <div>
+                <h3>Compose Message</h3>
+            </div>
+            <div>
+                <a href="/inbox" style="text-decoration: none; color: #0088ff;">Back to Inbox</a>
+            </div>
+        </div>
+
+        <div style="padding: 20px;">
+            <% if (error) { %>
+                <div class="error-message"><%= error %></div>
+            <% } %>
+            <% if (success) { %>
+                <div style="color: green; margin-bottom: 10px;"><%= success %></div>
+            <% } %>
+
+            <form action="/compose" method="POST">
+                <div class="form-group">
+                    <label for="recipient" style="display:block; margin-bottom: 5px;">To:</label>
+                    <input type="email" id="recipient" name="recipient" required style="border: 1px solid #ccc; padding: 8px; border-radius: 4px;">
+                </div>
+
+                <div class="form-group">
+                    <label for="subject" style="display:block; margin-bottom: 5px;">Subject:</label>
+                    <input type="text" id="subject" name="subject" required style="border: 1px solid #ccc; padding: 8px; border-radius: 4px;">
+                </div>
+
+                <div class="form-group" style="display: block;">
+                    <label for="body" style="display:block; margin-bottom: 5px;">Message:</label>
+                    <textarea id="body" name="body" rows="10" required style="width: 100%; border: 1px solid #ccc; padding: 8px; border-radius: 4px; resize: none;"></textarea>
+                </div>
+
+                <button type="submit" class="btn-connect">Send</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

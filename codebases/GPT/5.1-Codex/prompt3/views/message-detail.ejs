@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Message · BlueMind</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body class="page page--dashboard">
+    <header class="dashboard-header">
+      <div class="site-brand">
+        <div class="site-logo" aria-hidden="true"></div>
+        <div>
+          <p class="site-name">BlueMind</p>
+          <span class="site-version">v5</span>
+        </div>
+      </div>
+      <% if (currentUser) { %>
+        <div class="user-chip" style="--chip-color:<%= currentUser.avatarColor %>">
+          <span class="user-avatar" aria-hidden="true"><%= currentUser.displayName.charAt(0) %></span>
+          <div>
+            <p class="user-name"><%= currentUser.displayName %></p>
+            <p class="user-role"><%= currentUser.role %></p>
+          </div>
+          <form method="post" action="/auth/logout">
+            <button type="submit" class="btn btn-link">Sign out</button>
+          </form>
+        </div>
+      <% } %>
+    </header>
+
+    <main class="dashboard">
+      <div class="panel">
+        <a href="/messages" class="btn btn-secondary">← Back to inbox</a>
+
+        <% if (error) { %>
+          <p class="empty-state"><%= error %></p>
+        <% } else if (message) { %>
+          <article class="message-detail">
+            <header>
+              <p class="eyebrow">From <%= message.sender.displayName %></p>
+              <h1><%= message.subject %></h1>
+              <p class="message-date"><%= message.friendlyDate %></p>
+            </header>
+            <p><%= message.body %></p>
+          </article>
+        <% } %>
+      </div>
+    </main>
+  </body>
+</html>

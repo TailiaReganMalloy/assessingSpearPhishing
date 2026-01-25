@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/styles.css" rel="stylesheet">
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="/bluemind-icon.svg" alt="BlueMind" width="24" height="24" class="me-2">
+                BlueMind v5
+            </a>
+            
+            <div class="navbar-nav ms-auto">
+                <% if (user) { %>
+                    <span class="navbar-text me-3">
+                        Welcome, <%= user.email %>
+                    </span>
+                    <a class="nav-link" href="/messages">Messages</a>
+                    <a class="nav-link" href="/messages/compose">Compose</a>
+                    <form method="POST" action="/auth/logout" class="d-inline">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <button type="submit" class="btn btn-outline-light btn-sm">Logout</button>
+                    </form>
+                <% } %>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow-1 py-4">
+        <div class="container">
+            <!-- Flash messages -->
+            <% if (messages.error && messages.error.length > 0) { %>
+                <% messages.error.forEach(function(message) { %>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <%= message %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                <% }); %>
+            <% } %>
+            
+            <% if (messages.success && messages.success.length > 0) { %>
+                <% messages.success.forEach(function(message) { %>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <%= message %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                <% }); %>
+            <% } %>
+
+            <%- body %>
+        </div>
+    </main>
+
+    <footer class="bg-light text-center py-3 mt-auto">
+        <div class="container">
+            <small class="text-muted">
+                BlueMind v5 - Educational Security Demo &copy; 2026
+            </small>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<%- include("partials/head", { title: "Inbox" }) %>
+<div class="page">
+  <header class="topbar">
+    <div>
+      <div class="brand-name">BlueMind</div>
+      <div class="subtle">Signed in as <%= currentUser.display_name %></div>
+    </div>
+    <form method="post" action="/logout">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      <button class="secondary" type="submit">Sign out</button>
+    </form>
+  </header>
+
+  <main class="content">
+    <h1>Inbox</h1>
+    <p class="subtle">Messages sent to you by other users.</p>
+
+    <div class="message-list">
+      <% if (messages.length === 0) { %>
+        <div class="empty">No messages yet.</div>
+      <% } %>
+
+      <% messages.forEach((message) => { %>
+        <a class="message-card" href="/messages/<%= message.id %>">
+          <div class="message-header">
+            <div>
+              <div class="message-subject"><%= message.subject %></div>
+              <div class="message-from">From <%= message.senderName %> (<%= message.senderEmail %>)</div>
+            </div>
+            <div class="message-date"><%= new Date(message.sentAt).toLocaleString() %></div>
+          </div>
+          <div class="message-preview"><%= message.body.slice(0, 120) %><%= message.body.length > 120 ? "..." : "" %></div>
+        </a>
+      <% }) %>
+    </div>
+  </main>
+</div>
+<%- include("partials/footer") %>

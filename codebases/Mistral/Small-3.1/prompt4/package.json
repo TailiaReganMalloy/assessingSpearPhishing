@@ -1,0 +1,23 @@
+{
+  "name": "secure-messaging-app",
+  "version": "1.0.0",
+  "description": "A secure messaging application for teaching software engineering students about secure login and messaging.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "install": "npm install express ejs bcryptjs mongoose dotenv express-session connect-flash"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
+    "dotenv": "^16.6.1",
+    "ejs": "^3.1.10",
+    "express": "^4.22.1",
+    "express-session": "^1.18.2",
+    "mongoose": "^8.21.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}

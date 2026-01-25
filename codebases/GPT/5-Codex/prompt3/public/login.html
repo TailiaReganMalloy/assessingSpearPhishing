@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Secure Mailbox Login</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="bg">
+  <main class="card">
+    <h1>Sign in</h1>
+    <form id="login-form" class="form">
+      <label>Email
+        <input type="email" name="email" required autocomplete="username">
+      </label>
+      <label>Password
+        <input type="password" name="password" required autocomplete="current-password">
+      </label>
+      <button type="submit">Connect</button>
+    </form>
+    <p id="login-error" class="error"></p>
+
+    <details>
+      <summary>Create an account</summary>
+      <form id="register-form" class="form">
+        <label>Email
+          <input type="email" name="email" required autocomplete="username">
+        </label>
+        <label>Display name
+          <input type="text" name="displayName" required>
+        </label>
+        <label>Password
+          <input type="password" name="password" required autocomplete="new-password" minlength="12">
+        </label>
+        <button type="submit">Register</button>
+      </form>
+      <p id="register-error" class="error"></p>
+    </details>
+  </main>
+  <script type="module">
+    async function submitForm(form, url, errorNode) {
+      const formData = new FormData(form);
+      const payload = Object.fromEntries(formData.entries());
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        errorNode.textContent = data.error || 'Action failed.';
+        return false;
+      }
+      errorNode.textContent = '';
+      window.location.href = '/inbox.html';
+      return true;
+    }
+
+    document.getElementById('login-form').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const errorNode = document.getElementById('login-error');
+      try {
+        await submitForm(event.target, '/auth/login', errorNode);
+      } catch (err) {
+        errorNode.textContent = 'Unable to sign in right now.';
+      }
+    });
+
+    document.getElementById('register-form').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const errorNode = document.getElementById('register-error');
+      try {
+        await submitForm(event.target, '/auth/register', errorNode);
+      } catch (err) {
+        errorNode.textContent = 'Unable to register right now.';
+      }
+    });
+  </script>
+</body>
+</html>

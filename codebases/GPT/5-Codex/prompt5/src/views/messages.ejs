@@ -1,0 +1,34 @@
+<section class="inbox">
+  <header class="inbox__header">
+    <div class="inbox__brand">
+      <img src="/images/logo.svg" alt="BlueMind" class="inbox__logo" />
+      <span class="inbox__version">v5</span>
+    </div>
+    <div class="inbox__user">
+      <span class="inbox__name"><%= currentUser.displayName %></span>
+      <form method="post" action="/logout">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <button type="submit" class="button button--secondary">Logout</button>
+      </form>
+    </div>
+  </header>
+
+  <h1 class="inbox__title">Inbox</h1>
+
+  <% if (!messages.length) { %>
+    <p class="inbox__empty">You have no messages yet.</p>
+  <% } %>
+
+  <ul class="message-list">
+    <% messages.forEach((message) => { %>
+      <li class="message">
+        <div class="message__meta">
+          <span class="message__sender"><%= message.sender_name %></span>
+          <time datetime="<%= message.created_at %>"><%= new Date(message.created_at).toLocaleString() %></time>
+        </div>
+        <h2 class="message__subject"><%= message.subject %></h2>
+        <p class="message__body"><%= message.body %></p>
+      </li>
+    <% }); %>
+  </ul>
+</section>

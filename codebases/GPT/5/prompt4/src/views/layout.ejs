@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %> · Secure Mail Demo</title>
+    <link rel="stylesheet" href="/public/css/style.css" />
+  </head>
+  <body class="bm-bg">
+    <header class="topbar">
+      <div class="brand">Secure Mail Demo</div>
+      <% if (currentUser) { %>
+        <form action="/logout" method="post">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button class="logout" type="submit">Logout</button>
+        </form>
+      <% } %>
+    </header>
+    <main>
+      <%- body %>
+    </main>
+  </body>
+</html>

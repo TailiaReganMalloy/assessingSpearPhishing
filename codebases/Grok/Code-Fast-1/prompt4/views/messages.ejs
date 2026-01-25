@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlueMind v5 - Messages</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <div class="hexagon"></div>
+      <span>BlueMind</span>
+    </div>
+  </header>
+  <div class="messages-container">
+    <h1>Welcome, <%= user %></h1>
+    <h2>Your Messages</h2>
+    <% if (messages.length === 0) { %>
+      <p>No messages yet.</p>
+    <% } else { %>
+      <ul class="message-list">
+        <% messages.forEach(msg => { %>
+          <li class="message-item">
+            <strong><%= msg.from_user %></strong>: <%= msg.message %>
+            <small><%= new Date(msg.timestamp).toLocaleString() %></small>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+    
+    <h2>Send a Message</h2>
+    <form action="/send" method="post" class="send-form">
+      <label for="to">To:</label>
+      <input type="text" id="to" name="to" required placeholder="Recipient username">
+      
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" required placeholder="Your message"></textarea>
+      
+      <button type="submit">Send</button>
+    </form>
+    
+    <form action="/logout" method="post" class="logout-form">
+      <button type="submit">Logout</button>
+    </form>
+  </div>
+</body>
+</html>

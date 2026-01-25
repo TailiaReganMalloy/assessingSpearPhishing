@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Mail - Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-primary">
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card shadow-lg border-0" style="max-width: 400px; width: 100%;">
+            <div class="card-body p-5">
+                <div class="text-center mb-4">
+                    <h2 class="text-white">Secure Mail</h2>
+                    <p class="text-white-50">Create your account</p>
+                </div>
+                <% if (typeof error !== 'undefined') { %>
+                    <div class="alert alert-danger"><%= error %></div>
+                <% } %>
+                <form method="POST" action="/register">
+                    <div class="mb-3">
+                        <label for="username" class="form-label text-white">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label text-white">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label text-white">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required minlength="6">
+                    </div>
+                    <button type="submit" class="btn btn-light btn-lg w-100">Register</button>
+                </form>
+                <div class="text-center mt-4">
+                    <p class="text-white-50">Already have an account? <a href="/login" class="text-light">Sign in</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
