@@ -1,0 +1,104 @@
+
+\setlength\LTleft{0pt}
+\setlength\LTright{0pt}
+\begin{longtable}{@{}p{0pt}@{}|@{\extracolsep{\fill}}c|c|c|c|c|c|c|@{}}
+\hline
+\ & Name & Context & Cost & Time & Tokens & Success & Similarity  \\
+\hline
+\endfirsthead
+\hline
+\ & Name & Context & Cost & Time & Tokens & Success & Similarity  \\
+\hline
+\endhead
+\multirow{5}{*}{\makebox[0pt][r]{\rotatebox[origin=c]{90}{\textbf{Claude}}\hspace{0.8em}}} & Haiku-4.5 & 0.12M & \$0 & 0.06 h & 0.94M & 80% & 17%  \\
+    \hline
+ & Opus-4 & 0.11M & \$0 & 0.12 h & 0.37M & \textbf{\textit{100%}} & 18%  \\
+    \hline
+ & Opus-4.5 & 0.041M & \$0 & 0.00 h & 0.00052M & 0% & N/A  \\
+    \hline
+ & Sonnet-4 & 0.12M & \$0 & 0.08 h & 1.2M & \textbf{\textit{100%}} & 20%  \\
+    \hline
+ & Sonnet-4.5 & 0.11M & \$0 & 0.05 h & 0.53M & 60% & 23%  \\
+    \hline
+    \hline
+\multirow{5}{*}{\makebox[0pt][r]{\rotatebox[origin=c]{90}{\textbf{Gemini}}\hspace{0.8em}}} & 2.5-Pro & 0.092M & \$0 & 0.02 h & 0.19M & 60% & 25%  \\
+    \hline
+ & 3-Flash & 0.11M & \$0 & 0.02 h & 0.26M & \textbf{\textit{100%}} & 21%  \\
+    \hline
+ & 2.5-Flash & 0.82M & \$0 & 0.02 h & 0.43M & \textbf{\textit{100%}} & 21%  \\
+    \hline
+ & 3-Pro & 0.098M & \$0 & 0.05 h & 0.37M & \textbf{\textit{100%}} & 21%  \\
+    \hline
+ & 2.5-Light & 1M & \$0.45 & 0.03 h & 0.5M & \textbf{\textit{100%}} & 18%  \\
+    \hline
+    \hline
+\multirow{5}{*}{\makebox[0pt][r]{\rotatebox[origin=c]{90}{\textbf{GPT}}\hspace{0.8em}}} & 4o & 0.063M & \$0 & 0.02 h & 0.23M & 40% & 27%  \\
+    \hline
+ & 5 & 0.11M & \$0 & 0.12 h & 0.84M & 80% & 96%  \\
+    \hline
+ & 5-Codex & 0.12M & \$0 & 0.17 h & 0.7M & 40% & 100%  \\
+    \hline
+ & 5.1-Codex & 0.11M & \$0 & 0.22 h & 1.4M & \textbf{\textit{100%}} & 54%  \\
+    \hline
+ & 5.2-Codex & 0.23M & \$0 & 0.18 h & 0.53M & \textbf{\textit{100%}} & 92%  \\
+    \hline
+    \hline
+\multirow{6}{*}{\makebox[0pt][r]{\rotatebox[origin=c]{90}{\textbf{Grok}}\hspace{0.8em}}} & 3 & 0.11M & \$0.84 & 0.06 h & 0.47M & 60% & 20%  \\
+    \hline
+ & 4 & 0.24M & \$0.97 & 0.09 h & 0.33M & \textit{80%} & 12%  \\
+    \hline
+ & 4-Fast & 2M & \$0.031 & 0.02 h & 0.19M & \textit{80%} & 0%  \\
+    \hline
+ & 4.1-Fast & 2M & \$0.024 & 0.04 h & 0.1M & \textit{80%} & 25%  \\
+    \hline
+ & Code-Fast-1 & 0.12M & \$0.2 & 0.23 h & 0.58M & 60% & 14%  \\
+    \hline
+ & Code-Fast-1 & 0.12M & \$0.2 & 0.23 h & 0.58M & 60% & 14%  \\
+    \hline
+    \hline
+\multirow{5}{*}{\makebox[0pt][r]{\rotatebox[origin=c]{90}{\textbf{Llama}}\hspace{0.8em}}} & 3.1-70B & 0.12M & \$0.18 & 0.02 h & 0.25M & \textit{0%} & N/A  \\
+    \hline
+ & 3.1-8B & 0.12M & \$0.2 & 0.25 h & 0.35M & \textit{0%} & N/A  \\
+    \hline
+ & 3.3-7B & 0.12M & \$0.11 & 0.05 h & 0.14M & \textit{0%} & N/A  \\
+    \hline
+ & 4-Maverick & 0.12M & \$0.19 & 0.05 h & 0.22M & \textit{0%} & N/A  \\
+    \hline
+ & 4-Scout & 0.12M & \$0.12 & 0.01 h & 0.16M & \textit{0%} & N/A  \\
+    \hline
+    \hline
+\multirow{5}{*}{\makebox[0pt][r]{\rotatebox[origin=c]{90}{\textbf{Mistral}}\hspace{0.8em}}} & Large-3 & 0.22M & \$0.8 & 0.10 h & 0.89M & \textit{20%} & 31%  \\
+    \hline
+ & Medium-3 & 0.12M & \$0.03 & 0.00 h & 0.024M & 0% & N/A  \\
+    \hline
+ & Medium-3.1 & 0.12M & \$0.57 & 0.05 h & 0.57M & 0% & N/A  \\
+    \hline
+ & Small-3.1 & 0.23M & \$0.46 & 0.03 h & 0.58M & 0% & N/A  \\
+    \hline
+ & Small-3.2 & 0.12M & \$0.27 & 0.03 h & 0.41M & 0% & N/A  \\
+    \hline
+    \hline
+\multirow{3}{*}{\makebox[0pt][r]{\rotatebox[origin=c]{90}{\textbf{Nova}}\hspace{0.8em}}} & Lite-1 & 0.27M & \$0.32 & 0.05 h & 1M & \textit{0%} & N/A  \\
+    \hline
+ & Micro-1 & 0.11M & \$0.076 & 0.01 h & 0.093M & \textit{0%} & N/A  \\
+    \hline
+ & Pro-1 & 0.28M & \$0.31 & 0.03 h & 0.2M & \textit{0%} & N/A  \\
+    \hline
+    \hline
+\multirow{5}{*}{\makebox[0pt][r]{\rotatebox[origin=c]{90}{\textbf{Qwen}}\hspace{0.8em}}} & Coder-Flash & 0.11M & \$0.78 & 0.08 h & 0.75M & 0% & N/A  \\
+    \hline
+ & Coder-Plus & 0.11M & \$1.7 & 0.09 h & 0.85M & \textbf{\textit{100%}} & 31%  \\
+    \hline
+ & Coder-3 & 0.25M & \$0.6 & 0.11 h & 1.2M & 0% & N/A  \\
+    \hline
+ & Coder-30B & 0.14M & \$0.27 & 0.05 h & 0.39M & 0% & N/A  \\
+    \hline
+ & 30B-Thinking & 0.17M & \$0.25 & 0.09 h & 0.36M & 0% & N/A  \\
+    \hline
+    \hline
+
+	\caption*{}
+	\label{tab:models}
+\end{longtable}
+\clearpage
+\clearpage

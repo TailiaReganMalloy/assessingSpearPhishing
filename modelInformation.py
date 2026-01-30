@@ -4,7 +4,7 @@ import pandas as pd
 import json
 
 
-folder = "/Users/tailia.malloy/codebases"
+folder = "./codebases"
 
 companies = [d for d in Path(folder).iterdir() if d.is_dir()]
 
@@ -166,9 +166,9 @@ for company in companies:
                 }], columns=chatColumns)
                 chats_df = pd.concat([chats_df, chats_d])
 
-"""chats_df.to_pickle("chats.pkl")
+chats_df.to_pickle("chats.pkl")
 prompts_df.to_pickle("prompts.pkl")
 logs_df.to_pickle("logs.pkl")
 metadata_df.to_pickle("metadata.pkl")
 requestMessages_df.to_pickle("requestMessages.pkl")
-responsesMessages_df.to_pickle("responsesMessages.pkl")"""
+responsesMessages_df.to_pickle("responsesMessages.pkl")
