@@ -1,0 +1,249 @@
+/* Additional styles for BlueMind v5 */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #001f3f;
+}
+
+.header {
+    background-color: #001122;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.logo-icon {
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+    background-color: #0074D9;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+.login-panel {
+    background-color: white;
+    width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    text-align: center;
+}
+
+.identification-title {
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+    outline: none;
+    border-color: #0074D9;
+    box-shadow: 0 0 0 2px rgba(0, 116, 217, 0.2);
+}
+
+.radio-group {
+    text-align: left;
+    margin: 25px 0;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 6px;
+}
+
+.radio-option {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.radio-option:last-child {
+    margin-bottom: 0;
+}
+
+.radio-option input {
+    margin-right: 12px;
+    width: 18px;
+    height: 18px;
+}
+
+.radio-option label {
+    margin-bottom: 0;
+    font-weight: normal;
+    color: #444;
+}
+
+.connect-button {
+    background-color: #0074D9;
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.connect-button:hover {
+    background-color: #005fa3;
+}
+
+.connect-button:active {
+    transform: translateY(1px);
+}
+
+.error-message {
+    color: #ff4136;
+    background-color: #fff5f5;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    border-left: 4px solid #ff4136;
+}
+
+/* Dashboard styles */
+.dashboard-header {
+    background-color: #001122;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    color: white;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.logout-btn {
+    background-color: #0074D9;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 15px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #005fa3;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.welcome-section {
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 25px;
+}
+
+.messages-section {
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.section-title {
+    color: #333;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 15px;
+    margin-top: 0;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.message-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.message-item {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.message-item:last-child {
+    border-bottom: none;
+}
+
+.message-sender {
+    font-weight: 600;
+    color: #0074D9;
+    font-size: 16px;
+}
+
+.message-subject {
+    font-weight: 600;
+    margin: 10px 0 5px;
+    font-size: 18px;
+    color: #333;
+}
+
+.message-content {
+    color: #555;
+    margin: 10px 0;
+    line-height: 1.5;
+    font-size: 16px;
+}
+
+.message-date {
+    font-size: 14px;
+    color: #999;
+}
+
+.no-messages {
+    text-align: center;
+    color: #999;
+    padding: 40px;
+    font-size: 18px;
+}

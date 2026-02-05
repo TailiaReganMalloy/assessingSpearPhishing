@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Login</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #001f3f; /* Dark blue background */
+        }
+        
+        .header {
+            background-color: #001122; /* Dark navy-blue */
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            margin-right: 10px;
+            width: 30px;
+            height: 30px;
+            background-color: #0074D9; /* Bright blue for hexagon */
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        }
+        
+        .login-panel {
+            background-color: white;
+            width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .identification-title {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: bold;
+        }
+        
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        .radio-group {
+            text-align: left;
+            margin: 20px 0;
+        }
+        
+        .radio-option {
+            margin-bottom: 10px;
+        }
+        
+        .radio-option input {
+            margin-right: 10px;
+        }
+        
+        .connect-button {
+            background-color: #0074D9; /* Bright blue */
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .connect-button:hover {
+            background-color: #005fa3;
+        }
+        
+        .error-message {
+            color: red;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header bar with BlueMind logo -->
+    <div class="header">
+        <div class="logo">
+            <div class="logo-icon"></div>
+            <span>BlueMind</span>
+        </div>
+    </div>
+    
+    <!-- Login panel -->
+    <div class="login-panel">
+        <h1 class="identification-title">Identification</h1>
+        
+        <% if (typeof error !== 'undefined' && error) { %>
+            <div class="error-message"><%= error %></div>
+        <% } %>
+        
+        <form action="/login" method="POST">
+            <div class="form-group">
+                <label for="login">Login</label>
+                <input type="text" id="login" name="login" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input type="radio" id="private" name="computerType" value="private" checked>
+                    <label for="private">Private computer</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="public" name="computerType" value="public">
+                    <label for="public">Public computer</label>
+                </div>
+            </div>
+            
+            <button type="submit" class="connect-button">Connect</button>
+        </form>
+    </div>
+</body>
+</html>

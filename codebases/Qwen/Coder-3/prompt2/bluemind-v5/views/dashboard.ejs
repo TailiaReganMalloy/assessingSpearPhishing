@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Dashboard</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <!-- Header bar -->
+    <div class="header">
+        <div class="logo">
+            <div class="logo-icon"></div>
+            <span>BlueMind</span>
+        </div>
+        <div class="user-info">
+            <span>Welcome, <%= user.login %>!</span>
+            <a href="/logout" class="logout-btn">Logout</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- Welcome section -->
+        <div class="welcome-section">
+            <h2 class="section-title">Welcome to BlueMind v5</h2>
+            <p>You are successfully logged in. Here you can view your messages from other users.</p>
+        </div>
+        
+        <!-- Messages section -->
+        <div class="messages-section">
+            <h2 class="section-title">Your Messages</h2>
+            <% if (typeof messages !== 'undefined' && messages.length > 0) { %>
+                <ul class="message-list">
+                    <% messages.forEach(message => { %>
+                        <li class="message-item">
+                            <div class="message-sender">From: <%= message.sender.login %></div>
+                            <div class="message-subject"><%= message.subject %></div>
+                            <div class="message-content"><%= message.content %></div>
+                            <div class="message-date"><%= new Date(message.createdAt).toLocaleString() %></div>
+                        </li>
+                    <% }); %>
+                </ul>
+            <% } else { %>
+                <div class="no-messages">
+                    <p>You have no messages yet.</p>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>

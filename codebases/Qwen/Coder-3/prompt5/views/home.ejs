@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Dashboard</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <div class="hexagon"></div>
+            <span>BlueMind</span>
+        </div>
+        <div class="user-info">
+            <span>Welcome, <%= user.login %>!</span>
+            <form method="POST" action="/logout" style="display: inline;">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <button type="submit" class="logout-btn">Logout</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="welcome">
+            <h1>Dashboard</h1>
+            <p>Welcome to BlueMind v5. Here you can view your messages and manage your account.</p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Your Messages</h2>
+            <% if (typeof messages !== 'undefined' && messages.length > 0) { %>
+                <ul class="messages-list">
+                    <% messages.forEach(message => { %>
+                        <li class="message-item">
+                            <div>
+                                <span class="message-from"><%= message.from %></span>
+                                <span class="message-date"><%= message.date %></span>
+                            </div>
+                            <div class="message-content">
+                                <%= message.content %>
+                            </div>
+                        </li>
+                    <% }); %>
+                </ul>
+            <% } else { %>
+                <p>You have no messages.</p>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>

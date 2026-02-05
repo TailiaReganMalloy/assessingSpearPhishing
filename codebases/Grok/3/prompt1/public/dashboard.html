@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlueMind v5 - Dashboard</title>
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <!-- Header with BlueMind Logo -->
+  <header class="bluemind-header">
+    <div class="header-content">
+      <div class="logo">
+        <svg class="hexagon-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="50,5 93,27 93,73 50,95 7,73 7,27" fill="none" stroke="white" stroke-width="2"/>
+          <circle cx="50" cy="50" r="8" fill="white"/>
+        </svg>
+        <span class="logo-text">BlueMind</span>
+      </div>
+      <div class="user-info">
+        <span id="username">User</span>
+        <a href="/auth/logout" class="logout-btn">Logout</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="dashboard-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <nav class="nav-menu">
+        <a href="#" class="nav-item active" data-tab="inbox">
+          <span class="nav-icon">📬</span>
+          <span>Inbox</span>
+        </a>
+        <a href="#" class="nav-item" data-tab="compose">
+          <span class="nav-icon">✍️</span>
+          <span>Compose</span>
+        </a>
+        <a href="#" class="nav-item" data-tab="settings">
+          <span class="nav-icon">⚙️</span>
+          <span>Settings</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Inbox Tab -->
+      <section id="inbox-tab" class="tab-content active">
+        <h2>Inbox</h2>
+        <div id="messagesList" class="messages-list">
+          <div class="loading">Loading messages...</div>
+        </div>
+      </section>
+
+      <!-- Compose Tab -->
+      <section id="compose-tab" class="tab-content">
+        <h2>Compose Message</h2>
+        <div class="compose-form-container">
+          <form id="composeForm" class="compose-form">
+            <div class="form-group">
+              <label for="recipientLogin">Recipient Login</label>
+              <input 
+                type="text" 
+                id="recipientLogin" 
+                name="recipientLogin"
+                placeholder="Enter recipient's login"
+                required
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="messageContent">Message</label>
+              <textarea 
+                id="messageContent" 
+                name="messageContent"
+                placeholder="Type your message here..."
+                rows="8"
+                required
+              ></textarea>
+            </div>
+
+            <div id="composeError" class="error-message" style="display: none;"></div>
+            <div id="composeSuccess" class="success-message" style="display: none;"></div>
+
+            <button type="submit" class="send-button">Send Message</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Settings Tab -->
+      <section id="settings-tab" class="tab-content">
+        <h2>Settings</h2>
+        <div class="settings-content">
+          <div class="setting-group">
+            <h3>Account Information</h3>
+            <p><strong>Username:</strong> <span id="settingsUsername">User</span></p>
+            <p><strong>Account Type:</strong> <span id="accountType">Private</span></p>
+          </div>
+
+          <div class="setting-group">
+            <h3>Security</h3>
+            <p>Your password is securely stored using bcrypt hashing.</p>
+            <button id="changePasswordBtn" class="settings-button">Change Password</button>
+          </div>
+
+          <div class="setting-group">
+            <h3>Session</h3>
+            <p>Your session will expire in 1 hour of inactivity.</p>
+            <a href="/auth/logout" class="settings-button danger">Logout</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Message Detail Modal -->
+  <div id="messageModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div id="messageDetail">
+        <!-- Message details will be populated here -->
+      </div>
+    </div>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMind v5 - Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        .header {
+            background-color: #001122;
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: white;
+        }
+        
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            margin-right: 10px;
+            width: 25px;
+            height: 25px;
+            background-color: #0074D9;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logout-btn {
+            background-color: #0074D9;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 15px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        
+        .welcome-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .messages-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            color: #333;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        .message-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .message-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .message-item:last-child {
+            border-bottom: none;
+        }
+        
+        .message-sender {
+            font-weight: bold;
+            color: #0074D9;
+        }
+        
+        .message-subject {
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        
+        .message-content {
+            color: #666;
+            margin: 5px 0;
+        }
+        
+        .message-date {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .no-messages {
+            text-align: center;
+            color: #999;
+            padding: 30px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header bar -->
+    <div class="header">
+        <div class="logo">
+            <div class="logo-icon"></div>
+            <span>BlueMind</span>
+        </div>
+        <div class="user-info">
+            <span>Welcome, <%= user.login %>!</span>
+            <a href="/logout" class="logout-btn">Logout</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- Welcome section -->
+        <div class="welcome-section">
+            <h2 class="section-title">Welcome to BlueMind v5</h2>
+            <p>You are successfully logged in. Here you can view your messages from other users.</p>
+        </div>
+        
+        <!-- Messages section -->
+        <div class="messages-section">
+            <h2 class="section-title">Your Messages</h2>
+            <% if (typeof messages !== 'undefined' && messages.length > 0) { %>
+                <ul class="message-list">
+                    <% messages.forEach(message => { %>
+                        <li class="message-item">
+                            <div class="message-sender">From: <%= message.sender.login %></div>
+                            <div class="message-subject"><%= message.subject %></div>
+                            <div class="message-content"><%= message.content %></div>
+                            <div class="message-date"><%= new Date(message.createdAt).toLocaleString() %></div>
+                        </li>
+                    <% }); %>
+                </ul>
+            <% } else { %>
+                <div class="no-messages">
+                    <p>You have no messages yet.</p>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>
