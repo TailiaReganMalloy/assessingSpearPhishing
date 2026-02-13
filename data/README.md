@@ -1,14 +1,4 @@
-# Prompt Dataset
-
-This directory contains datasets of prompts used to test language models for generating spear phishing training emails.
-
-## Files
-
-### prompts.json
-
-A curated collection of prompts designed to test LLM capabilities in generating realistic spear phishing scenarios for security awareness training.
-
-#### Structure
+## Structure
 
 Each prompt in the dataset contains:
 
@@ -18,7 +8,7 @@ Each prompt in the dataset contains:
 - `target_audience`: Intended recipient group
 - `difficulty`: Estimated difficulty level (easy, medium, hard)
 
-#### Categories
+## Categories
 
 The dataset includes various phishing attack categories:
 
@@ -33,7 +23,7 @@ The dataset includes various phishing attack categories:
 - **meeting_invitation**: Malicious meeting invitations
 - **job_opportunity**: Fraudulent recruitment lures
 
-#### Usage
+## Usage
 
 The prompts are loaded by `test_model.py` and used to test language models:
 
@@ -48,7 +38,7 @@ for prompt in prompts:
     # Use prompt['prompt'] to test your model
 ```
 
-#### Extending the Dataset
+## Extending the Dataset
 
 To add new prompts, follow the existing JSON structure:
 

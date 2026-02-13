@@ -7,12 +7,12 @@ import pingouin as pg
 import numpy as np
 from PIL import Image
 
-chats = pd.read_pickle("../data/chats.pkl")
-prompts = pd.read_pickle("../data/prompts.pkl")
-logs = pd.read_pickle("../data/logs.pkl")
-metadata = pd.read_pickle("../data/metadata.pkl")
-requestMessages_ = pd.read_pickle("../data/requestMessages.pkl")
-responsesMessages = pd.read_pickle("../data/responsesMessages.pkl")
+chats = pd.read_pickle("./data/chats.pkl")
+prompts = pd.read_pickle("./data/prompts.pkl")
+logs = pd.read_pickle("./data/logs.pkl")
+metadata = pd.read_pickle("./data/metadata.pkl")
+requestMessages_ = pd.read_pickle("./data/requestMessages.pkl")
+responsesMessages = pd.read_pickle("./data/responsesMessages.pkl")
 
 
 analyzed_models = { 
