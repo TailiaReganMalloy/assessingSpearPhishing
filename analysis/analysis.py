@@ -178,12 +178,12 @@ for (metric, xlabel, ylabel, name) in metrics:
     else:
         means = [np.mean(metric[m]) if len(metric[m]) > 0 else 0 for m in models]
         stds = [np.std(metric[m]) if len(metric[m]) > 0 else 0 for m in models]
-    fig, ax = plt.subplots(figsize=(14, 6))
+    fig, ax = plt.subplots(figsize=(12, 6))
     ax.bar(models, means, yerr=stds, color='steelblue', capsize=5)
-    ax.set_xlabel('Model', fontsize=12)
-    ax.set_ylabel(xlabel, fontsize=12)
-    ax.set_title(ylabel, fontsize=14, fontweight='bold')
-    plt.xticks(rotation=45, ha='right')
+    ax.set_xlabel('Model', fontsize=18)
+    ax.set_ylabel(xlabel, fontsize=18)
+    ax.set_title(ylabel, fontsize=20, fontweight='bold')
+    plt.xticks(rotation=45, ha='right', fontsize=14)
     plt.tight_layout()
     plt.savefig(name, dpi=300, bbox_inches='tight')
     #plt.show()
@@ -447,7 +447,7 @@ if len(df_sim) > 0:
     sim_results = sim_results[1:]
     print("Regression: predictors -> screenshot_similarity")
     print(sim_results)
-    plt.figure(figsize=(10, 5))
+    plt.figure(figsize=(9, 6))
     plt.bar(sim_results['names'], sim_results['coef'], yerr=sim_results['se'], capsize=4, color='slateblue')
     plt.xticks(rotation=45, ha='right')
     plt.ylabel('Coefficient')
@@ -463,7 +463,7 @@ if len(df_count) > 0:
     count_results = pg.linear_regression(df_count[predictors], df_count['screenshot_count'], add_intercept=True)
     print("Regression: predictors -> screenshot_count")
     print(count_results)
-    plt.figure(figsize=(10, 5))
+    plt.figure(figsize=(9, 6))
     plt.bar(count_results['names'], count_results['coef'], yerr=count_results['se'], capsize=4, color='seagreen')
     plt.xticks(rotation=45, ha='right')
     plt.ylabel('Coefficient')
@@ -492,16 +492,26 @@ for pred in predictors:
     else:
         r2_count_values.append(np.nan)
 
+
 if r2_labels:
     x = np.arange(len(r2_labels))
     width = 0.4
-    fig, ax = plt.subplots(figsize=(10, 5))
+    fig, ax = plt.subplots(figsize=(9, 6))
     ax.bar(x - width/2, r2_sim_values, width, label='Screenshot Similarity R2', color='steelblue')
     ax.bar(x + width/2, r2_count_values, width, label='Screenshot Count R2', color='darkorange')
     ax.set_xticks(x)
-    ax.set_xticklabels(r2_labels, rotation=45, ha='right')
-    ax.set_ylabel('R2')
-    ax.set_title('Univariate R2 by Predictor')
+    
+    # Format labels: split by underscore, capitalize, and use two lines for multi-word labels
+    formatted_labels = []
+    for label in r2_labels:
+        parts = label.split('_')
+        formatted_label = '\n'.join([part.capitalize() for part in parts])
+        formatted_labels.append(formatted_label)
+    
+    ax.set_xticklabels(formatted_labels, fontsize=14)
+    ax.set_xlabel('Predictor', fontsize=16)
+    ax.set_ylabel('R2', fontsize=16)
+    ax.set_title('Univariate R2 by Predictor', fontsize=18, fontweight='bold')
     ax.legend()
     plt.tight_layout()
     plt.savefig('plots/regression_r2_comparison.png', dpi=300, bbox_inches='tight')
